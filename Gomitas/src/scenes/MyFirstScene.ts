@@ -22,11 +22,18 @@ const createScene = (canvas) => {
 
   new HemisphericLight("light", Vector3.Up(), scene);
 
-  BABYLON.SceneLoader.Append("./", "CandyBox.gltf", scene);
+  BABYLON.SceneLoader.ImportMesh("CandyBox", "./", "CandyBox.gltf", scene, function (newMeshes, particleSystems, skeletons, animationGroups) {
+    const box = animationGroups[0];
+    box.play(false);
+
+});
+
   // const box = MeshBuilder.CreateBox("box", { size: 2 }, scene);
   /* const material = new StandardMaterial("box-material", scene);
   material.diffuseColor = Color3.Blue();
   box.material = material; */
+  //console.log(box.currentFrame);
+  //box.play();
 
   engine.runRenderLoop(() => {
     scene.render();
