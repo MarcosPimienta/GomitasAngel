@@ -11,6 +11,7 @@ import {
   SceneLoader
 } from "@babylonjs/core";
 import * as BABYLON from 'babylonjs';
+import { AnimationGroup } from "babylonjs";
 import 'babylonjs-loaders';
 const createScene = (canvas) => {
   const engine = new Engine(canvas);
@@ -26,11 +27,11 @@ const createScene = (canvas) => {
     const box = animationGroups[0];
     box.play(false);
 });
-  BABYLON.SceneLoader.ImportMesh("LifeSaver000", "./", "LifeSaversAnimation.gltf", scene , function (newMeshes, particleSystems, skeletons, animationGroups) {
+  BABYLON.SceneLoader.ImportMesh("", "./", "LifeSaversAnimation.glb", scene , function (newMeshes, particleSystems, skeletons, animationGroups) {
     const ls = newMeshes[0];
     const lifesaver = animationGroups[0];
     lifesaver.play(false);
-    ls.translate(new BABYLON.Vector3(-1.57, 4.45, 0), 1, BABYLON.Space.WORLD);
+    ls.translate(new BABYLON.Vector3(-1.57, 0, -0.95), 1, BABYLON.Space.WORLD);
 });
 
   // const box = MeshBuilder.CreateBox("box", { size: 2 }, scene);
