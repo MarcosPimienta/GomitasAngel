@@ -27,8 +27,10 @@ const createScene = (canvas) => {
     box.play(false);
 });
   BABYLON.SceneLoader.ImportMesh("LifeSaver000", "./", "LifeSaversAnimation.gltf", scene , function (newMeshes, particleSystems, skeletons, animationGroups) {
+    const ls = newMeshes[0];
     const lifesaver = animationGroups[0];
-    lifesaver.play(true);
+    lifesaver.play(false);
+    ls.translate(new BABYLON.Vector3(-1.57, 4.45, 0), 1, BABYLON.Space.WORLD);
 });
 
   // const box = MeshBuilder.CreateBox("box", { size: 2 }, scene);
