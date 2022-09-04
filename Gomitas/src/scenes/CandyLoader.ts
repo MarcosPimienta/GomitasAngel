@@ -11,7 +11,7 @@ function boxController(meshNames:string[], meshPath:string, meshFile:string, sce
     });
 }
 
-function candiesLoader(meshNames:string[], meshPath:string, meshFile:string, scene:BABYLON.Scene){
+function candiesLoader(meshNames:string[], meshPath:string, meshFile:string, scene:BABYLON.Scene, ilePos:BABYLON.Vector3){
   BABYLON.SceneLoader.ImportMesh(meshNames, meshPath, meshFile, scene, function (newMeshes, particleSystems, skeletons, animationGroups) {
     //Animation groups that comes from a .glb file
     const ChocoMellows = animationGroups[0];
@@ -21,7 +21,7 @@ function candiesLoader(meshNames:string[], meshPath:string, meshFile:string, sce
     const Strawberries = animationGroups[4];
     const Worms = animationGroups[5];
     const candyParent = newMeshes[0];
-    candyParent.translate(new BABYLON.Vector3(-1.56, 0, 0), 1, BABYLON.Space.WORLD);
+    candyParent.translate(ilePos, 1, BABYLON.Space.WORLD);
     ChocoMellows.play(false);
   });
 }
