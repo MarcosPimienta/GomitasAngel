@@ -12,7 +12,7 @@ import {
 } from "@babylonjs/core";
 import * as BABYLON from 'babylonjs';
 import 'babylonjs-loaders';
-import { boxController, candiesLoader } from "./CandyLoader";
+import { boxController, candiesLoader} from "./CandyLoader";
 
 const createScene = (canvas) => {
   const engine = new Engine(canvas);
@@ -24,8 +24,17 @@ const createScene = (canvas) => {
 
   new HemisphericLight("light", Vector3.Up(), scene);
 
+  function candiesPosition(xPosition:number, yPosition:number, zPosition:number){
+    return new BABYLON.Vector3(xPosition, yPosition, zPosition);
+  }
+
   boxController(["CandyBox"], "./", "CandyBox.gltf", scene);
-  candiesLoader(["LifeSavers" , "ChocoMellows", "Oranges", "Ribbons", "Strawberries", "Worms"], "./", "Candies.glb", scene);
+  let candyIle0 = candiesLoader(["LifeSavers" , "ChocoMellows", "Oranges", "Ribbons", "Strawberries", "Worms"], "./", "Candies.glb", scene, candiesPosition(-1.56, 0, 0));
+  let candyIle1 = candiesLoader(["LifeSavers" , "ChocoMellows", "Oranges", "Ribbons", "Strawberries", "Worms"], "./", "Candies.glb", scene, candiesPosition(-0.93, 0, 0));
+  let candyIle2 = candiesLoader(["LifeSavers" , "ChocoMellows", "Oranges", "Ribbons", "Strawberries", "Worms"], "./", "Candies.glb", scene, candiesPosition(-0.31, 0, 0));
+  let candyIle3 = candiesLoader(["LifeSavers" , "ChocoMellows", "Oranges", "Ribbons", "Strawberries", "Worms"], "./", "Candies.glb", scene, candiesPosition(0.31, 0, 0));
+  let candyIle4 = candiesLoader(["LifeSavers" , "ChocoMellows", "Oranges", "Ribbons", "Strawberries", "Worms"], "./", "Candies.glb", scene, candiesPosition(0.93, 0, 0));
+  let candyIle5 = candiesLoader(["LifeSavers" , "ChocoMellows", "Oranges", "Ribbons", "Strawberries", "Worms"], "./", "Candies.glb", scene, candiesPosition(1.56, 0, 0));
 
   engine.runRenderLoop(() => {
     scene.render();
