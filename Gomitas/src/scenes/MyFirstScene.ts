@@ -16,6 +16,28 @@ import { boxController, candiesLoader } from "./CandyLoader";
 const createScene = (canvas) => {
   const engine = new Engine(canvas);
   const scene = new BABYLON.Scene(engine);
+  let ileSelector:number = 0;
+
+  scene.onKeyboardObservable.add((kbInfo) => {
+    switch (kbInfo.type) {
+      case BABYLON.KeyboardEventTypes.KEYDOWN:
+        if(kbInfo.event.key == "ArrowLeft"){
+          if(ileSelector > 0){
+            ileSelector--;
+          }
+          console.log(ileSelector);
+          console.log("KEY DOWN: ", kbInfo.event.key);
+        }
+        else if(kbInfo.event.key == "ArrowRight"){
+          if(ileSelector < 6 ){
+            ileSelector++;
+          }
+          console.log(ileSelector);
+          console.log("KEY DOWN: ", kbInfo.event.key);
+        }
+        break;
+    }
+  });
 
   const camera = new ArcRotateCamera(
     "camera1",
