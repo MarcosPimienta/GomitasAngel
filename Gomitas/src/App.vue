@@ -1,14 +1,14 @@
 <template>
-  <BabylonScene/>
+  <BabylonScene />
 </template>
 
 <script lang="ts">
-import BabylonScene from "./components/BabylonScene.vue"
+import BabylonScene from "./components/BabylonScene.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    BabylonScene
-  }
+    BabylonScene,
+  },
 };
 </script>
