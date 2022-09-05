@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { ref, onMounted } from "@vue/runtime-core";
+import { ref, onMounted } from "vue";
 import { createScene } from "../scenes/MyFirstScene";
 
 export default {
