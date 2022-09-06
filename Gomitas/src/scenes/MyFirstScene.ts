@@ -12,10 +12,12 @@ import {
 import * as BABYLON from "babylonjs";
 import "babylonjs-loaders";
 import { boxController, candiesLoader } from "./CandyLoader";
+import { switcherOp } from "./IleController";
 
 const createScene = (canvas) => {
   const engine = new Engine(canvas);
   const scene = new BABYLON.Scene(engine);
+  let ileState:boolean[] = [false, false, false, false, false, false];
   let ileSelector:number = 0;
 
   scene.onKeyboardObservable.add((kbInfo) => {
@@ -25,16 +27,15 @@ const createScene = (canvas) => {
           if(ileSelector > 0){
             ileSelector--;
           }
-          console.log(ileSelector);
           console.log("KEY DOWN: ", kbInfo.event.key);
         }
         else if(kbInfo.event.key == "ArrowRight"){
-          if(ileSelector < 6 ){
+          if(ileSelector < ileState.length - 1 ){
             ileSelector++;
           }
-          console.log(ileSelector);
           console.log("KEY DOWN: ", kbInfo.event.key);
         }
+        switcherOp(ileState, ileSelector);
         break;
     }
   });
