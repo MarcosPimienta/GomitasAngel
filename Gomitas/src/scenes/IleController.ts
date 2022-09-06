@@ -2,8 +2,6 @@ import * as BABYLON from "babylonjs";
 import "babylonjs-loaders";
 import { candiesLoader } from "./CandyLoader";
 
-let ileState:boolean[] = [false, false, false, false, false, false];
-
   function candiesPosition(
     xPosition: number,
     yPosition: number,
@@ -12,28 +10,14 @@ let ileState:boolean[] = [false, false, false, false, false, false];
     return new BABYLON.Vector3(xPosition, yPosition, zPosition);
   }
 
-  function switcher(ileState:boolean[], ileSelector: number){
-    if (ileSelector == 0){
-      ileState[ileSelector] = true;
+  function switcherOp(ileState:boolean[], ileSelector: number){
+    for (let i = 0; i < ileState.length; i++){
+      ileState[i] = i == ileSelector;
     }
-    if (ileSelector == 1){
-      ileState[ileSelector] = true;
-    }
-    if (ileSelector == 2){
-      ileState[ileSelector] = true;
-    }
-    if (ileSelector == 3){
-      ileState[ileSelector] = true;
-    }
-    if (ileSelector == 4){
-      ileState[ileSelector] = true;
-    }
-    if (ileSelector == 5){
-      ileState[ileSelector] = true;
-    }
+    console.log(ileState);
   }
 
-  function ileController(scene:BABYLON.Scene) {
+  function ileController(scene:BABYLON.Scene, candyState:boolean) {
     const candyIle0 = candiesLoader(
       [
         "LifeSavers",
@@ -120,4 +104,4 @@ let ileState:boolean[] = [false, false, false, false, false, false];
     );
   }
 
-export { ileController };
+export { ileController, switcher, switcherOp };
