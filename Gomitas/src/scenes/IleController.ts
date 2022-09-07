@@ -10,98 +10,71 @@ import { candiesLoader } from "./CandyLoader";
     return new BABYLON.Vector3(xPosition, yPosition, zPosition);
   }
 
-  function switcherOp(ileState:boolean[], ileSelector: number){
+  function switcherOp(ileState:boolean[], ileSelector: number, scene:BABYLON.Scene){
     for (let i = 0; i < ileState.length; i++){
       ileState[i] = i == ileSelector;
+      switch (i) {
+        case 0: candiesLoader(
+          "",
+          "./",
+          "Candies.glb",
+          scene,
+          candiesPosition(-1.56, 0, 0),
+          ileState[i]
+        );
+            break;
+        case 1: candiesLoader(
+          "",
+          "./",
+          "Candies.glb",
+          scene,
+          candiesPosition(-0.93, 0, 0),
+          ileState[i]
+        );
+            break;
+        case 2: candiesLoader(
+          "",
+          "./",
+          "Candies.glb",
+          scene,
+          candiesPosition(-0.31, 0, 0),
+          ileState[i]
+        );
+            break;
+        case 3: candiesLoader(
+          "",
+          "./",
+          "Candies.glb",
+          scene,
+          candiesPosition(0.31, 0, 0),
+          ileState[i]
+        );
+            break;
+        case 4: candiesLoader(
+          "",
+          "./",
+          "Candies.glb",
+          scene,
+          candiesPosition(0.93, 0, 0),
+          ileState[i]
+        );
+            break;
+        case 5: candiesLoader(
+          "",
+          "./",
+          "Candies.glb",
+          scene,
+          candiesPosition(1.56, 0, 0),
+          ileState[i]
+        );
+        default:
+            //default block statement;
+      }
     }
     console.log(ileState);
   }
 
-  function ileController(scene:BABYLON.Scene, candyState:boolean) {
-    const candyIle0 = candiesLoader(
-      [
-        "LifeSavers",
-        "ChocoMellows",
-        "Oranges",
-        "Ribbons",
-        "Strawberries",
-        "Worms",
-      ],
-      "./",
-      "Candies.glb",
-      scene,
-      candiesPosition(-1.56, 0, 0)
-    );
-    const candyIle1 = candiesLoader(
-      [
-        "LifeSavers",
-        "ChocoMellows",
-        "Oranges",
-        "Ribbons",
-        "Strawberries",
-        "Worms",
-      ],
-      "./",
-      "Candies.glb",
-      scene,
-      candiesPosition(-0.93, 0, 0)
-    );
-    const candyIle2 = candiesLoader(
-      [
-        "LifeSavers",
-        "ChocoMellows",
-        "Oranges",
-        "Ribbons",
-        "Strawberries",
-        "Worms",
-      ],
-      "./",
-      "Candies.glb",
-      scene,
-      candiesPosition(-0.31, 0, 0)
-    );
-    const candyIle3 = candiesLoader(
-      [
-        "LifeSavers",
-        "ChocoMellows",
-        "Oranges",
-        "Ribbons",
-        "Strawberries",
-        "Worms",
-      ],
-      "./",
-      "Candies.glb",
-      scene,
-      candiesPosition(0.31, 0, 0)
-    );
-    const candyIle4 = candiesLoader(
-      [
-        "LifeSavers",
-        "ChocoMellows",
-        "Oranges",
-        "Ribbons",
-        "Strawberries",
-        "Worms",
-      ],
-      "./",
-      "Candies.glb",
-      scene,
-      candiesPosition(0.93, 0, 0)
-    );
-    const candyIle5 = candiesLoader(
-      [
-        "LifeSavers",
-        "ChocoMellows",
-        "Oranges",
-        "Ribbons",
-        "Strawberries",
-        "Worms",
-      ],
-      "./",
-      "Candies.glb",
-      scene,
-      candiesPosition(1.56, 0, 0)
-    );
-  }
+  /* function ileController(scene:BABYLON.Scene, candyState:boolean) {
+  } */
 
-export { ileController, switcher, switcherOp };
+export { switcherOp };
