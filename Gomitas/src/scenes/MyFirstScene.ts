@@ -35,7 +35,7 @@ const createScene = (canvas) => {
           }
           console.log("KEY DOWN: ", kbInfo.event.key);
         }
-        switcherOp(ileState, ileSelector);
+        switcherOp(ileState, ileSelector, scene);
         break;
     }
   });
@@ -62,90 +62,6 @@ const createScene = (canvas) => {
   }
 
   boxController(["CandyBox"], "./", "CandyBox.gltf", scene);
-  const candyIle0 = candiesLoader(
-    [
-      "LifeSavers",
-      "ChocoMellows",
-      "Oranges",
-      "Ribbons",
-      "Strawberries",
-      "Worms",
-    ],
-    "./",
-    "Candies.glb",
-    scene,
-    candiesPosition(-1.56, 0, 0)
-  );
-  const candyIle1 = candiesLoader(
-    [
-      "LifeSavers",
-      "ChocoMellows",
-      "Oranges",
-      "Ribbons",
-      "Strawberries",
-      "Worms",
-    ],
-    "./",
-    "Candies.glb",
-    scene,
-    candiesPosition(-0.93, 0, 0)
-  );
-  const candyIle2 = candiesLoader(
-    [
-      "LifeSavers",
-      "ChocoMellows",
-      "Oranges",
-      "Ribbons",
-      "Strawberries",
-      "Worms",
-    ],
-    "./",
-    "Candies.glb",
-    scene,
-    candiesPosition(-0.31, 0, 0)
-  );
-  const candyIle3 = candiesLoader(
-    [
-      "LifeSavers",
-      "ChocoMellows",
-      "Oranges",
-      "Ribbons",
-      "Strawberries",
-      "Worms",
-    ],
-    "./",
-    "Candies.glb",
-    scene,
-    candiesPosition(0.31, 0, 0)
-  );
-  const candyIle4 = candiesLoader(
-    [
-      "LifeSavers",
-      "ChocoMellows",
-      "Oranges",
-      "Ribbons",
-      "Strawberries",
-      "Worms",
-    ],
-    "./",
-    "Candies.glb",
-    scene,
-    candiesPosition(0.93, 0, 0)
-  );
-  const candyIle5 = candiesLoader(
-    [
-      "LifeSavers",
-      "ChocoMellows",
-      "Oranges",
-      "Ribbons",
-      "Strawberries",
-      "Worms",
-    ],
-    "./",
-    "Candies.glb",
-    scene,
-    candiesPosition(1.56, 0, 0)
-  );
 
   engine.runRenderLoop(() => {
     scene.render();
