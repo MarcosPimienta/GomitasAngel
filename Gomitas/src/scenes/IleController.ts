@@ -2,19 +2,24 @@ import * as BABYLON from "babylonjs";
 import "babylonjs-loaders";
 import { candiesLoader } from "./CandyLoader";
 
-  function candiesPosition(
-    xPosition: number,
-    yPosition: number,
-    zPosition: number
-  ) {
-    return new BABYLON.Vector3(xPosition, yPosition, zPosition);
-  }
+function candiesPosition(
+  xPosition: number,
+  yPosition: number,
+  zPosition: number
+) {
+  return new BABYLON.Vector3(xPosition, yPosition, zPosition);
+}
 
-  function switcherOp(ileState:boolean[], ileSelector: number, scene:BABYLON.Scene){
-    for (let i = 0; i < ileState.length; i++){
-      ileState[i] = i == ileSelector;
-      switch (i) {
-        case 0: candiesLoader(
+function switcherOp(
+  ileState: any,
+  ileSelector: number,
+  scene: BABYLON.Scene
+) {
+  for (let i = 0; i < ileState.length; i++) {
+    ileState[i].state = i == ileSelector;
+    switch (i) {
+      case 0:
+        candiesLoader(
           "",
           "./",
           "Candies.glb",
@@ -22,8 +27,9 @@ import { candiesLoader } from "./CandyLoader";
           candiesPosition(-1.56, 0, 0),
           ileState[i]
         );
-            break;
-        case 1: candiesLoader(
+        break;
+      case 1:
+        candiesLoader(
           "",
           "./",
           "Candies.glb",
@@ -31,8 +37,9 @@ import { candiesLoader } from "./CandyLoader";
           candiesPosition(-0.93, 0, 0),
           ileState[i]
         );
-            break;
-        case 2: candiesLoader(
+        break;
+      case 2:
+        candiesLoader(
           "",
           "./",
           "Candies.glb",
@@ -40,8 +47,9 @@ import { candiesLoader } from "./CandyLoader";
           candiesPosition(-0.31, 0, 0),
           ileState[i]
         );
-            break;
-        case 3: candiesLoader(
+        break;
+      case 3:
+        candiesLoader(
           "",
           "./",
           "Candies.glb",
@@ -49,8 +57,9 @@ import { candiesLoader } from "./CandyLoader";
           candiesPosition(0.31, 0, 0),
           ileState[i]
         );
-            break;
-        case 4: candiesLoader(
+        break;
+      case 4:
+        candiesLoader(
           "",
           "./",
           "Candies.glb",
@@ -58,8 +67,9 @@ import { candiesLoader } from "./CandyLoader";
           candiesPosition(0.93, 0, 0),
           ileState[i]
         );
-            break;
-        case 5: candiesLoader(
+        break;
+      case 5:
+        candiesLoader(
           "",
           "./",
           "Candies.glb",
@@ -67,14 +77,12 @@ import { candiesLoader } from "./CandyLoader";
           candiesPosition(1.56, 0, 0),
           ileState[i]
         );
-        default:
-            //default block statement;
-      }
+      default:
+      //default block statement;
     }
-    console.log(ileState);
   }
+  console.log(ileState);
+}
 
-  /* function ileController(scene:BABYLON.Scene, candyState:boolean) {
-  } */
 
 export { switcherOp };
