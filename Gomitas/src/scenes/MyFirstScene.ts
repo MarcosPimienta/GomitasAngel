@@ -17,7 +17,7 @@ import { switcherOp } from "./IleController";
 const createScene = (canvas) => {
   const engine = new Engine(canvas);
   const scene = new BABYLON.Scene(engine);
-  let ileState:boolean[] = [false, false, false, false, false, false];
+  let ileState:any = [{state: false, empty: true}, {state: false, empty: true}, {state: false, empty: true}, {state: false, empty: true}, {state: false, empty: true}, {state: false, empty: true}];
   let ileSelector:number = 0;
 
   scene.onKeyboardObservable.add((kbInfo) => {
@@ -36,6 +36,7 @@ const createScene = (canvas) => {
           console.log("KEY DOWN: ", kbInfo.event.key);
         }
         switcherOp(ileState, ileSelector, scene);
+        console.log(scene);
         break;
     }
   });
@@ -50,6 +51,7 @@ const createScene = (canvas) => {
   );
   camera.setTarget(Vector3.Zero());
   camera.attachControl(canvas, true);
+  camera.inputs.remove(camera.inputs.attached.keyboard);
 
   new HemisphericLight("light", Vector3.Up(), scene);
 
@@ -62,6 +64,7 @@ const createScene = (canvas) => {
   }
 
   boxController(["CandyBox"], "./", "CandyBox.gltf", scene);
+  switcherOp(ileState, ileSelector, scene);
 
   engine.runRenderLoop(() => {
     scene.render();
