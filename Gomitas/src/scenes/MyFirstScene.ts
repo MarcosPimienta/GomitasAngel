@@ -1,36 +1,37 @@
 import {
   Engine,
-  Scene,
   ArcRotateCamera,
   Vector3,
-  MeshBuilder,
-  StandardMaterial,
-  Color3,
   HemisphericLight,
-  SceneLoader,
 } from "@babylonjs/core";
 import * as BABYLON from "babylonjs";
 import "babylonjs-loaders";
-import { boxController, candiesLoader } from "./CandyLoader";
+import { boxController } from "./CandyLoader";
 import { switcherOp } from "./IleController";
 
 const createScene = (canvas) => {
   const engine = new Engine(canvas);
   const scene = new BABYLON.Scene(engine);
-  let ileState:any = [{state: false, empty: true}, {state: false, empty: true}, {state: false, empty: true}, {state: false, empty: true}, {state: false, empty: true}, {state: false, empty: true}];
-  let ileSelector:number = 0;
+  const ileState: any = [
+    { state: false, empty: true },
+    { state: false, empty: true },
+    { state: false, empty: true },
+    { state: false, empty: true },
+    { state: false, empty: true },
+    { state: false, empty: true },
+  ];
+  let ileSelector = 0;
 
   scene.onKeyboardObservable.add((kbInfo) => {
     switch (kbInfo.type) {
       case BABYLON.KeyboardEventTypes.KEYDOWN:
-        if(kbInfo.event.key == "ArrowLeft"){
-          if(ileSelector > 0){
+        if (kbInfo.event.key == "ArrowLeft") {
+          if (ileSelector > 0) {
             ileSelector--;
           }
           console.log("KEY DOWN: ", kbInfo.event.key);
-        }
-        else if(kbInfo.event.key == "ArrowRight"){
-          if(ileSelector < ileState.length - 1 ){
+        } else if (kbInfo.event.key == "ArrowRight") {
+          if (ileSelector < ileState.length - 1) {
             ileSelector++;
           }
           console.log("KEY DOWN: ", kbInfo.event.key);
@@ -54,14 +55,6 @@ const createScene = (canvas) => {
   camera.inputs.remove(camera.inputs.attached.keyboard);
 
   new HemisphericLight("light", Vector3.Up(), scene);
-
-  function candiesPosition(
-    xPosition: number,
-    yPosition: number,
-    zPosition: number
-  ) {
-    return new BABYLON.Vector3(xPosition, yPosition, zPosition);
-  }
 
   boxController(["CandyBox"], "./", "CandyBox.gltf", scene);
   switcherOp(ileState, ileSelector, scene);

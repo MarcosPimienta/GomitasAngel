@@ -10,11 +10,7 @@ function candiesPosition(
   return new BABYLON.Vector3(xPosition, yPosition, zPosition);
 }
 
-function switcherOp(
-  ileState: any,
-  ileSelector: number,
-  scene: BABYLON.Scene
-) {
+function switcherOp(ileState: any, ileSelector: number, scene: BABYLON.Scene) {
   for (let i = 0; i < ileState.length; i++) {
     ileState[i].state = i == ileSelector;
     switch (i) {
@@ -77,12 +73,12 @@ function switcherOp(
           candiesPosition(1.56, 0, 0),
           ileState[i]
         );
+        break;
       default:
       //default block statement;
     }
   }
   console.log(ileState);
 }
-
 
 export { switcherOp };
