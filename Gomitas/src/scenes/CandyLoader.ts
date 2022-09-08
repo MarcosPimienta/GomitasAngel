@@ -27,24 +27,25 @@ async function candiesLoader(
   meshFile: string,
   scene: BABYLON.Scene,
   ilePos: BABYLON.Vector3,
-  animGate: any,
+  animGate: any
 ) {
-  if (animGate.state){
-    if (animGate.empty){
-      let meshGroups: BABYLON.ISceneLoaderAsyncResult = await BABYLON.SceneLoader.ImportMeshAsync(
-      meshNames,
-      meshPath,
-      meshFile,
-      scene,
-    );
-    const candyParent = meshGroups.meshes[0];
-    const [ChocoMellows, LifeSavers, Oranges, Ribbons, Strawberries, Worms] = meshGroups.animationGroups;
-    candyParent.translate(ilePos, 1, BABYLON.Space.WORLD);
-    ChocoMellows.play(false);
-    animGate.empty = false;
+  if (animGate.state) {
+    if (animGate.empty) {
+      const meshGroups: BABYLON.ISceneLoaderAsyncResult =
+        await BABYLON.SceneLoader.ImportMeshAsync(
+          meshNames,
+          meshPath,
+          meshFile,
+          scene
+        );
+      const candyParent = meshGroups.meshes[0];
+      const [ChocoMellows, LifeSavers, Oranges, Ribbons, Strawberries, Worms] =
+        meshGroups.animationGroups;
+      candyParent.translate(ilePos, 1, BABYLON.Space.WORLD);
+      ChocoMellows.play(false);
+      animGate.empty = false;
     }
   }
 }
-
 
 export { boxController, candiesLoader };
