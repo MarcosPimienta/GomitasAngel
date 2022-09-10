@@ -20,11 +20,23 @@ const createScene = (canvas) => {
     { state: false, empty: true },
     { state: false, empty: true },
   ];
-  let ileSelector = 0;
+  let ileSelector:number = 0;
+  let animSelector:number = 0;
 
   scene.onKeyboardObservable.add((kbInfo) => {
     switch (kbInfo.type) {
       case BABYLON.KeyboardEventTypes.KEYDOWN:
+        if (kbInfo.event.key == "ArrowUp") {
+          if (animSelector > 0) {
+            animSelector--;
+          }
+          console.log("KEY DOWN: ", kbInfo.event.key);
+        } else if (kbInfo.event.key == "ArrowDown") {
+          if (animSelector < 6) {
+            animSelector++;
+          }
+          console.log("KEY DOWN: ", kbInfo.event.key);
+        }
         if (kbInfo.event.key == "ArrowLeft") {
           if (ileSelector > 0) {
             ileSelector--;
@@ -36,7 +48,7 @@ const createScene = (canvas) => {
           }
           console.log("KEY DOWN: ", kbInfo.event.key);
         }
-        switcherOp(ileState, ileSelector, scene);
+        switcherOp(ileState, ileSelector, animSelector, scene);
         console.log(scene);
         break;
     }
@@ -57,7 +69,7 @@ const createScene = (canvas) => {
   new HemisphericLight("light", Vector3.Up(), scene);
 
   boxController(["CandyBox"], "./", "CandyBox.gltf", scene);
-  switcherOp(ileState, ileSelector, scene);
+  switcherOp(ileState, ileSelector, animSelector, scene);
 
   engine.runRenderLoop(() => {
     scene.render();
