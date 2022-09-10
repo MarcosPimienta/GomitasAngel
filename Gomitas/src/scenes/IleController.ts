@@ -10,7 +10,7 @@ function candiesPosition(
   return new BABYLON.Vector3(xPosition, yPosition, zPosition);
 }
 
-function switcherOp(ileState: any, ileSelector: number, scene: BABYLON.Scene) {
+function switcherOp(ileState: any, ileSelector: number, animSelector: number, scene: BABYLON.Scene) {
   for (let i = 0; i < ileState.length; i++) {
     ileState[i].state = i == ileSelector;
     switch (i) {
@@ -21,7 +21,8 @@ function switcherOp(ileState: any, ileSelector: number, scene: BABYLON.Scene) {
           "Candies.glb",
           scene,
           candiesPosition(-1.56, 0, 0),
-          ileState[i]
+          ileState[i],
+          animSelector
         );
         break;
       case 1:
@@ -31,7 +32,8 @@ function switcherOp(ileState: any, ileSelector: number, scene: BABYLON.Scene) {
           "Candies.glb",
           scene,
           candiesPosition(-0.93, 0, 0),
-          ileState[i]
+          ileState[i],
+          animSelector
         );
         break;
       case 2:
@@ -41,7 +43,8 @@ function switcherOp(ileState: any, ileSelector: number, scene: BABYLON.Scene) {
           "Candies.glb",
           scene,
           candiesPosition(-0.31, 0, 0),
-          ileState[i]
+          ileState[i],
+          animSelector
         );
         break;
       case 3:
@@ -51,7 +54,8 @@ function switcherOp(ileState: any, ileSelector: number, scene: BABYLON.Scene) {
           "Candies.glb",
           scene,
           candiesPosition(0.31, 0, 0),
-          ileState[i]
+          ileState[i],
+          animSelector
         );
         break;
       case 4:
@@ -61,7 +65,8 @@ function switcherOp(ileState: any, ileSelector: number, scene: BABYLON.Scene) {
           "Candies.glb",
           scene,
           candiesPosition(0.93, 0, 0),
-          ileState[i]
+          ileState[i],
+          animSelector
         );
         break;
       case 5:
@@ -71,7 +76,8 @@ function switcherOp(ileState: any, ileSelector: number, scene: BABYLON.Scene) {
           "Candies.glb",
           scene,
           candiesPosition(1.56, 0, 0),
-          ileState[i]
+          ileState[i],
+          animSelector
         );
         break;
       default:
@@ -79,6 +85,7 @@ function switcherOp(ileState: any, ileSelector: number, scene: BABYLON.Scene) {
     }
   }
   console.log(ileState);
+  console.log(animSelector);
 }
 
 export { switcherOp };

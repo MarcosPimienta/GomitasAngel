@@ -27,7 +27,8 @@ async function candiesLoader(
   meshFile: string,
   scene: BABYLON.Scene,
   ilePos: BABYLON.Vector3,
-  animGate: any
+  animGate: any,
+  animSelector: number
 ) {
   if (animGate.state) {
     if (animGate.empty) {
@@ -42,7 +43,28 @@ async function candiesLoader(
       const [ChocoMellows, LifeSavers, Oranges, Ribbons, Strawberries, Worms] =
         meshGroups.animationGroups;
       candyParent.translate(ilePos, 1, BABYLON.Space.WORLD);
-      ChocoMellows.play(false);
+      ChocoMellows.stop();
+      if(animSelector == 0){
+        ChocoMellows.stop();
+        ChocoMellows.reset();
+        ChocoMellows.start(false, 1, 1, 30);
+      }
+      if(animSelector == 1){
+        LifeSavers.stop();
+        LifeSavers.reset();
+        LifeSavers.start(false, 1, 1, 30);
+      }
+      if(animSelector == 2){
+        Oranges.stop();
+        Oranges.reset();
+        Oranges.start(false, 1, 1, 30);
+      }
+      console.log(ChocoMellows);
+      /* LifeSavers.play(false);
+      Oranges.play(false);
+      Ribbons.play(false);
+      Strawberries.play(false);
+      Worms.play(false); */
       animGate.empty = false;
     }
   }
