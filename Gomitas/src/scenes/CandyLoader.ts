@@ -32,6 +32,7 @@ async function candiesLoader(
 ) {
   if (animGate.state) {
     if (animGate.empty) {
+
       const meshGroups: BABYLON.ISceneLoaderAsyncResult =
         await BABYLON.SceneLoader.ImportMeshAsync(
           meshNames,
@@ -40,28 +41,15 @@ async function candiesLoader(
           scene
         );
       const candyParent = meshGroups.meshes[0];
-      let Animations/* [ChocoMellows, LifeSavers, Oranges, Ribbons, Strawberries, Worms] */ =
+      let [ChocoMellows, LifeSavers, Oranges, Ribbons, Strawberries, Worms] =
         meshGroups.animationGroups;
-      candyParent.translate(ilePos, 1, BABYLON.Space.WORLD);
-        Animations[0].stop();
-        Animations[0].reset();
-        Animations[0].start(false, 1, 0);
-      if(animSelector == 1){
-        Animations[1].stop();
-        Animations[1].reset();
-        Animations[1].start(false, 1, 0);
-      }
-      if(animSelector == 2){
-        Animations[2].stop();
-        Animations[2].reset();
-        Animations[2].start(false, 1, 0);
-      }
-      console.log(Animations);
-      /* LifeSavers.play(false);
-      Oranges.play(false);
-      Ribbons.play(false);
-      Strawberries.play(false);
-      Worms.play(false); */
+        candyParent.translate(ilePos, 1, BABYLON.Space.WORLD);
+        ChocoMellows.stop();
+        LifeSavers.stop();
+        Oranges.stop();
+        Ribbons.stop();
+        Strawberries.stop();
+        Worms.stop();
     }
   }
 }
