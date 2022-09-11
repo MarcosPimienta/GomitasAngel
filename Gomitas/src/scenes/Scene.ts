@@ -4,12 +4,13 @@ import {
   Vector3,
   HemisphericLight,
 } from "@babylonjs/core";
+import "@babylonjs/inspector";
 import * as BABYLON from "babylonjs";
 import "babylonjs-loaders";
 import { boxController } from "./CandyLoader";
 import { switcherOp } from "./IleController";
 
-const createScene = (canvas) => {
+const createScene = function (canvas){
   const engine = new Engine(canvas);
   const scene = new BABYLON.Scene(engine);
   const ileState: any = [
@@ -70,7 +71,9 @@ const createScene = (canvas) => {
 
   boxController(["CandyBox"], "./", "CandyBox.gltf", scene);
   switcherOp(ileState, ileSelector, animSelector, scene);
-
+  scene.debugLayer.show({
+    embedMode: true,
+  });
   engine.runRenderLoop(() => {
     scene.render();
   });
