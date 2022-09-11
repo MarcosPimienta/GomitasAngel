@@ -40,32 +40,28 @@ async function candiesLoader(
           scene
         );
       const candyParent = meshGroups.meshes[0];
-      const [ChocoMellows, LifeSavers, Oranges, Ribbons, Strawberries, Worms] =
+      let Animations/* [ChocoMellows, LifeSavers, Oranges, Ribbons, Strawberries, Worms] */ =
         meshGroups.animationGroups;
       candyParent.translate(ilePos, 1, BABYLON.Space.WORLD);
-      ChocoMellows.stop();
-      if(animSelector == 0){
-        ChocoMellows.stop();
-        ChocoMellows.reset();
-        ChocoMellows.start(false, 1, 1, 30);
-      }
+        Animations[0].stop();
+        Animations[0].reset();
+        Animations[0].start(false, 1, 0);
       if(animSelector == 1){
-        LifeSavers.stop();
-        LifeSavers.reset();
-        LifeSavers.start(false, 1, 1, 30);
+        Animations[1].stop();
+        Animations[1].reset();
+        Animations[1].start(false, 1, 0);
       }
       if(animSelector == 2){
-        Oranges.stop();
-        Oranges.reset();
-        Oranges.start(false, 1, 1, 30);
+        Animations[2].stop();
+        Animations[2].reset();
+        Animations[2].start(false, 1, 0);
       }
-      console.log(ChocoMellows);
+      console.log(Animations);
       /* LifeSavers.play(false);
       Oranges.play(false);
       Ribbons.play(false);
       Strawberries.play(false);
       Worms.play(false); */
-      animGate.empty = false;
     }
   }
 }
