@@ -1,6 +1,6 @@
 <template>
   <div>
-    <canvas ref="bjsCanvas" />
+    <canvas  class="bjsCanvas" ref="bjsCanvas"/>
   </div>
 </template>
 
@@ -24,3 +24,10 @@ export default {
   },
 };
 </script>
+<style>
+  .bjsCanvas {
+    display: flex;
+    width: 100%;
+    height: 100%;
+  }
+</style>
