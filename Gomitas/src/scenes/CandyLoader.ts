@@ -66,7 +66,6 @@ function candiesLoader(scene: Scene, position: Vector3){
     candy.object.meshes[0].translate(candy.ilePos, 1, Space.WORLD);
   })
   })
-  console.log("HI");
 }
 
 // const path = `static/models/${candy.name}.glb`;
