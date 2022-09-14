@@ -3,16 +3,18 @@ import {
   ArcRotateCamera,
   Vector3,
   HemisphericLight,
+  AnimationGroup,
+  Scene
 } from "@babylonjs/core";
 import "@babylonjs/inspector";
 import * as BABYLON from "babylonjs";
 import "babylonjs-loaders";
-import { boxController } from "./CandyLoader";
+import { boxController, candiesLoader } from "./CandyLoader";
 import { switcherOp } from "./IleController";
 
-const createScene = function (canvas){
+const createScene = function (canvas:HTMLCanvasElement){
   const engine = new Engine(canvas);
-  const scene = new BABYLON.Scene(engine);
+  const scene = new Scene(engine);
   const ileState: any = [
     { state: false, empty: true },
     { state: false, empty: true },
@@ -24,6 +26,7 @@ const createScene = function (canvas){
   let ileSelector:number = 0;
   let animSelector:number = 0;
 
+  candiesLoader(scene, new Vector3(-1.56, 0, 0));
   scene.onKeyboardObservable.add((kbInfo) => {
     switch (kbInfo.type) {
       case BABYLON.KeyboardEventTypes.KEYDOWN:
@@ -49,7 +52,7 @@ const createScene = function (canvas){
           }
           console.log("KEY DOWN: ", kbInfo.event.key);
         }
-        switcherOp(ileState, ileSelector, animSelector, scene);
+        //switcherOp(ileState, ileSelector, animSelector, scene);
         console.log(scene);
         break;
     }
@@ -70,7 +73,7 @@ const createScene = function (canvas){
   new HemisphericLight("light", Vector3.Up(), scene);
 
   boxController(["CandyBox"], "./", "CandyBox.gltf", scene);
-  switcherOp(ileState, ileSelector, animSelector, scene);
+  /* switcherOp(ileState, ileSelector, animSelector, scene); */
   scene.debugLayer.show({
     embedMode: true,
   });
