@@ -15,7 +15,7 @@ function switcherOp(ileState: any, ileSelector: number, animSelector: number, sc
     ileState[i].state = i == ileSelector;
     switch (i) {
       case 0:
-        candiesLoader(
+        /* candiesLoader(
           "",
           "./",
           "Candies.glb",
@@ -23,10 +23,10 @@ function switcherOp(ileState: any, ileSelector: number, animSelector: number, sc
           candiesPosition(-1.56, 0, 0),
           ileState[i],
           animSelector
-        );
+        ); */
         break;
       case 1:
-        candiesLoader(
+        /* candiesLoader(
           "",
           "./",
           "Candies.glb",
@@ -34,10 +34,10 @@ function switcherOp(ileState: any, ileSelector: number, animSelector: number, sc
           candiesPosition(-0.93, 0, 0),
           ileState[i],
           animSelector
-        );
+        ); */
         break;
       case 2:
-        candiesLoader(
+        /* candiesLoader(
           "",
           "./",
           "Candies.glb",
@@ -45,10 +45,10 @@ function switcherOp(ileState: any, ileSelector: number, animSelector: number, sc
           candiesPosition(-0.31, 0, 0),
           ileState[i],
           animSelector
-        );
+        ); */
         break;
       case 3:
-        candiesLoader(
+        /* candiesLoader(
           "",
           "./",
           "Candies.glb",
@@ -56,10 +56,10 @@ function switcherOp(ileState: any, ileSelector: number, animSelector: number, sc
           candiesPosition(0.31, 0, 0),
           ileState[i],
           animSelector
-        );
+        ); */
         break;
       case 4:
-        candiesLoader(
+        /* candiesLoader(
           "",
           "./",
           "Candies.glb",
@@ -67,10 +67,10 @@ function switcherOp(ileState: any, ileSelector: number, animSelector: number, sc
           candiesPosition(0.93, 0, 0),
           ileState[i],
           animSelector
-        );
+        ); */
         break;
       case 5:
-        candiesLoader(
+        /* candiesLoader(
           "",
           "./",
           "Candies.glb",
@@ -78,7 +78,7 @@ function switcherOp(ileState: any, ileSelector: number, animSelector: number, sc
           candiesPosition(1.56, 0, 0),
           ileState[i],
           animSelector
-        );
+        ); */
         break;
       default:
       //default block statement;
