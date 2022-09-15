@@ -1,7 +1,7 @@
 import { AnimationGroup, SceneLoader, Vector3, Space, type ISceneLoaderAsyncResult, Scene } from "@babylonjs/core";
 import { objectToString } from "@vue/shared";
 
-
+//This will handle the instance to be imported
 interface Candy {
   id: number | string;
   name: string;
@@ -12,6 +12,7 @@ interface Candy {
   ilePos: Vector3;
 }
 
+//This handles the configuration of the imported Candy above and its values inside the scene
 interface CandyConfig {
   id: number;
   name: string;
@@ -32,7 +33,18 @@ const candies: Candy[] = [
   // },
 ]
 
-let POSITION: Vector3 = new Vector3(0, 0, 0);
+//let POSITION: Vector3 = new Vector3(0, 0, 0);
+
+interface CandyObject {
+  id: number;
+  name: string;
+  visible: boolean;
+  position: Vector3;
+  rotation?: Vector3;
+  scale?: Vector3;
+  material?: string;
+  animation?: AnimationGroup;
+}
 
 const config: CandyConfig[] = [{
   id: 0,
@@ -42,9 +54,27 @@ const config: CandyConfig[] = [{
   row_position: new Vector3(0, 0, 0),
 }]
 
-const candiesInstances: Candy[] = [];
+function cloneCandies(scene: Scene, position: Vector3, candiesInstances: Candy[]) {
+  const candies: Candy[] = candiesInstances;
+  console.log(candiesInstances);
+  candies.forEach((candy) => {
+    console.log(candy);
+    let cloneParent = candy.object.meshes[0]
+    cloneParent.isVisible = true;
+    const clone = cloneParent.clone(
+      candy.name,
+      cloneParent.parent
+    );
+    console.log(clone);
+    if (clone) {
+      clone.translate(position, 1, Space.WORLD);
+      clone.isVisible = true;
+    }
+  });
+}
 
 function candiesLoader(scene: Scene, position: Vector3){
+  const candiesInstances: Candy[] = [];
   config.forEach(async (candy) => {
   try {
         candiesInstances.push({
@@ -59,13 +89,22 @@ function candiesLoader(scene: Scene, position: Vector3){
         mesh: "",
         ilePos: position,
       })
+      cloneCandies(scene, new Vector3(-0.93, 0, 0), candiesInstances);
+      cloneCandies(scene, new Vector3(-0.31, 0, 0), candiesInstances);
+      cloneCandies(scene, new Vector3(0.31, 0, 0), candiesInstances);
+      cloneCandies(scene, new Vector3(0.93, 0, 0), candiesInstances);
+      cloneCandies(scene, new Vector3(1.56, 0, 0), candiesInstances);
     } catch (error) {
 
   }
   candiesInstances.forEach((candy) => {
-    candy.object.meshes[0].translate(candy.ilePos, 1, Space.WORLD);
+    let candyParent = candy.object.meshes[0];
+    candyParent.translate(candy.ilePos, 1, Space.WORLD);
+    let candyAnimations = candy.object.animationGroups[0]
+    candyAnimations.play(false);
   })
   })
+  return candiesInstances
 }
 
 // const path = `static/models/${candy.name}.glb`;
@@ -122,4 +161,4 @@ function boxController(
   }
 } */
 
-export { boxController, candiesLoader };
+export { boxController, cloneCandies, candiesLoader };

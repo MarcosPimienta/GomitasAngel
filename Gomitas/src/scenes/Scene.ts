@@ -9,7 +9,7 @@ import {
 import "@babylonjs/inspector";
 import * as BABYLON from "babylonjs";
 import "babylonjs-loaders";
-import { boxController, candiesLoader } from "./CandyLoader";
+import { boxController, candiesLoader, cloneCandies } from "./CandyLoader";
 import { switcherOp } from "./IleController";
 
 const createScene = function (canvas:HTMLCanvasElement){
@@ -27,6 +27,8 @@ const createScene = function (canvas:HTMLCanvasElement){
   let animSelector:number = 0;
 
   candiesLoader(scene, new Vector3(-1.56, 0, 0));
+  //cloneCandies(scene, new Vector3(-1.56, 0, 0));
+
   scene.onKeyboardObservable.add((kbInfo) => {
     switch (kbInfo.type) {
       case BABYLON.KeyboardEventTypes.KEYDOWN:
