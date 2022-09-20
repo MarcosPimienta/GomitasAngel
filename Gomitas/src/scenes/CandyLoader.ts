@@ -73,6 +73,16 @@ function cloneCandies(scene: Scene, position: Vector3, candiesInstances: Candy[]
   });
 }
 
+function candiesPlay(index: number, candiesMesh: Candy, scene: Scene){
+    let candyParent = candiesMesh.object.meshes[0];
+    candyParent.translate(candiesMesh.ilePos, 1, Space.WORLD);
+    const animations = candiesMesh.object.animationGroups;
+
+    scene.stopAllAnimations();
+    scene.animationGroups[0].play(false);
+    animations[index].play(false);
+}
+
 function candiesLoader(scene: Scene, position: Vector3){
   const candiesInstances: Candy[] = [];
   config.forEach(async (candy) => {
@@ -97,13 +107,8 @@ function candiesLoader(scene: Scene, position: Vector3){
     } catch (error) {
 
   }
-  candiesInstances.forEach((candy) => {
-    let candyParent = candy.object.meshes[0];
-    candyParent.translate(candy.ilePos, 1, Space.WORLD);
-    let candyAnimations = candy.object.animationGroups[0]
-    candyAnimations.play(false);
-  })
-  })
+    candiesPlay( 1, candiesInstances[0], scene);
+})
   return candiesInstances
 }
 
