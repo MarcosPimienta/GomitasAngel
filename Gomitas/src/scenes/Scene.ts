@@ -9,24 +9,32 @@ import {
 import "@babylonjs/inspector";
 import * as BABYLON from "babylonjs";
 import "babylonjs-loaders";
-import { boxController, candiesLoader, cloneCandies } from "./CandyLoader";
+import * as CandyLoader from "./CandyLoader";
 import { switcherOp } from "./IleController";
 
 const createScene = function (canvas:HTMLCanvasElement){
   const engine = new Engine(canvas);
   const scene = new Scene(engine);
   const ileState: any = [
-    { state: false, empty: true },
-    { state: false, empty: true },
-    { state: false, empty: true },
-    { state: false, empty: true },
-    { state: false, empty: true },
-    { state: false, empty: true },
+    { state: false, empty: true, anim: 1 },
+    { state: false, empty: true, anim: 1  },
+    { state: false, empty: true, anim: 1  },
+    { state: false, empty: true, anim: 1  },
+    { state: false, empty: true, anim: 1  },
+    { state: false, empty: true, anim: 1  },
+  ];
+  const animState: any = [
+    { state: false },
+    { state: false },
+    { state: false },
+    { state: false },
+    { state: false },
+    { state: false },
   ];
   let ileSelector:number = 0;
   let animSelector:number = 0;
 
-  candiesLoader(scene, new Vector3(-1.56, 0, 0));
+  let candiesInstances: CandyLoader.Candy[] = CandyLoader.candiesLoader(scene, new Vector3(-1.56, 0, 0));
   //cloneCandies(scene, new Vector3(-1.56, 0, 0));
 
   scene.onKeyboardObservable.add((kbInfo) => {
@@ -40,6 +48,7 @@ const createScene = function (canvas:HTMLCanvasElement){
         } else if (kbInfo.event.key == "ArrowDown") {
           if (animSelector < 6) {
             animSelector++;
+
           }
           console.log("KEY DOWN: ", kbInfo.event.key);
         }
@@ -58,6 +67,7 @@ const createScene = function (canvas:HTMLCanvasElement){
         console.log(scene);
         break;
     }
+    CandyLoader.candiesPlay(animState[animSelector].state, animSelector, candiesInstances[0], scene);
   });
 
   const camera = new ArcRotateCamera(
@@ -74,7 +84,7 @@ const createScene = function (canvas:HTMLCanvasElement){
 
   new HemisphericLight("light", Vector3.Up(), scene);
 
-  boxController(["CandyBox"], "./", "CandyBox.gltf", scene);
+  CandyLoader.boxController(["CandyBox"], "./", "CandyBox.gltf", scene);
   /* switcherOp(ileState, ileSelector, animSelector, scene); */
   scene.debugLayer.show({
     embedMode: true,

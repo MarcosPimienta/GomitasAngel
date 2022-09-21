@@ -73,13 +73,13 @@ function cloneCandies(scene: Scene, position: Vector3, candiesInstances: Candy[]
   });
 }
 
-function candiesPlay(index: number, candiesMesh: Candy, scene: Scene){
-    let candyParent = candiesMesh.object.meshes[0];
-    candyParent.translate(candiesMesh.ilePos, 1, Space.WORLD);
+function candiesPlay(animState: boolean, index: number, candiesMesh: Candy, scene: Scene){
     const animations = candiesMesh.object.animationGroups;
-
+    let previndex = index - 1;
     scene.stopAllAnimations();
-    scene.animationGroups[0].play(false);
+    //scene.resetLastAnimationTimeFrame();
+    //scene.animationGroups[prev].stop;
+    animations[previndex].reset();
     animations[index].play(false);
 }
 
@@ -105,9 +105,7 @@ function candiesLoader(scene: Scene, position: Vector3){
       cloneCandies(scene, new Vector3(0.93, 0, 0), candiesInstances);
       cloneCandies(scene, new Vector3(1.56, 0, 0), candiesInstances);
     } catch (error) {
-
   }
-    candiesPlay( 1, candiesInstances[0], scene);
 })
   return candiesInstances
 }
@@ -165,5 +163,5 @@ function boxController(
     }
   }
 } */
+export { boxController, cloneCandies, candiesLoader, candiesPlay };  export type { Candy };
 
-export { boxController, cloneCandies, candiesLoader };
