@@ -15,6 +15,7 @@ import { switcherOp } from "./IleController";
 const createScene = function (canvas:HTMLCanvasElement){
   const engine = new Engine(canvas);
   const scene = new Scene(engine);
+  let animFwd : boolean = true;
   const ileState: any = [
     { state: false, empty: true, anim: 1 },
     { state: false, empty: true, anim: 1  },
@@ -41,14 +42,15 @@ const createScene = function (canvas:HTMLCanvasElement){
     switch (kbInfo.type) {
       case BABYLON.KeyboardEventTypes.KEYDOWN:
         if (kbInfo.event.key == "ArrowUp") {
+          animFwd!;
           if (animSelector > 0) {
             animSelector--;
           }
           console.log("KEY DOWN: ", kbInfo.event.key);
         } else if (kbInfo.event.key == "ArrowDown") {
+          animFwd;
           if (animSelector < 6) {
             animSelector++;
-
           }
           console.log("KEY DOWN: ", kbInfo.event.key);
         }
@@ -67,7 +69,7 @@ const createScene = function (canvas:HTMLCanvasElement){
         console.log(scene);
         break;
     }
-    CandyLoader.candiesPlay(animState[animSelector].state, animSelector, candiesInstances[0], scene);
+    CandyLoader.candiesPlay(animFwd, animSelector, candiesInstances[0], scene);
   });
 
   const camera = new ArcRotateCamera(

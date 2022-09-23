@@ -73,14 +73,18 @@ function cloneCandies(scene: Scene, position: Vector3, candiesInstances: Candy[]
   });
 }
 
-function candiesPlay(animState: boolean, index: number, candiesMesh: Candy, scene: Scene){
+function candiesPlay(animFwd: boolean, index: number, candiesMesh: Candy, scene: Scene){
     const animations = candiesMesh.object.animationGroups;
-    let previndex = index - 1;
-    scene.stopAllAnimations();
-    //scene.resetLastAnimationTimeFrame();
-    //scene.animationGroups[prev].stop;
-    animations[previndex].reset();
-    animations[index].play(false);
+    index = index -1;
+    if(animFwd){
+      animations[index - 1].reset();
+      animations[index].play(false);
+    }
+    else if(animFwd!){
+      animations[index].play(false);
+      animations[index + 1].reset();
+      debugger
+    }
 }
 
 function candiesLoader(scene: Scene, position: Vector3){
@@ -99,6 +103,8 @@ function candiesLoader(scene: Scene, position: Vector3){
         mesh: "",
         ilePos: position,
       })
+      scene.stopAllAnimations();
+      scene.animationGroups[0].play(false);
       cloneCandies(scene, new Vector3(-0.93, 0, 0), candiesInstances);
       cloneCandies(scene, new Vector3(-0.31, 0, 0), candiesInstances);
       cloneCandies(scene, new Vector3(0.31, 0, 0), candiesInstances);
