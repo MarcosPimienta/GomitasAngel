@@ -33,22 +33,23 @@ const createScene = function (canvas:HTMLCanvasElement){
     { state: false },
   ];
   let ileSelector:number = 0;
+  let sceneAnim:number = 0;
   let animSelector:number = 0;
 
-  let candiesInstances: CandyLoader.Candy[] = CandyLoader.candiesLoader(scene, new Vector3(-1.56, 0, 0));
+  let candiesInstances: CandyLoader.Candy[] = CandyLoader.candiesLoader(scene, new Vector3(-1.56, 0, 0),animFwd, animSelector);
   //cloneCandies(scene, new Vector3(-1.56, 0, 0));
 
   scene.onKeyboardObservable.add((kbInfo) => {
     switch (kbInfo.type) {
       case BABYLON.KeyboardEventTypes.KEYDOWN:
         if (kbInfo.event.key == "ArrowUp") {
-          animFwd!;
+          animFwd = false;
           if (animSelector > 0) {
             animSelector--;
           }
           console.log("KEY DOWN: ", kbInfo.event.key);
         } else if (kbInfo.event.key == "ArrowDown") {
-          animFwd;
+          animFwd = true;
           if (animSelector < 6) {
             animSelector++;
           }
@@ -69,7 +70,8 @@ const createScene = function (canvas:HTMLCanvasElement){
         console.log(scene);
         break;
     }
-    CandyLoader.candiesPlay(animFwd, animSelector, candiesInstances[0], scene);
+    CandyLoader.candiesLoader(scene, new Vector3(-1.56, 0, 0),animFwd, animSelector);
+    //CandyLoader.candiesPlay(animFwd, animSelector, candiesInstances[0], scene);
   });
 
   const camera = new ArcRotateCamera(
