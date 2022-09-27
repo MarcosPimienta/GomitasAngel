@@ -74,20 +74,24 @@ function cloneCandies(scene: Scene, position: Vector3, candiesInstances: Candy[]
 }
 
 function candiesPlay(animFwd: boolean, index: number, candiesMesh: Candy, scene: Scene){
-    const animations = candiesMesh.object.animationGroups;
-    index = index -1;
-    if(animFwd){
-      animations[index - 1].reset();
+    //const animations = candiesMesh.object.animationGroups;
+    const animations = scene.animationGroups;
+    scene.stopAllAnimations();
+    if(animFwd == true){
+      if (index > 0){
+        animations[index - 1].reset();
+      }
       animations[index].play(false);
+      //debugger
     }
-    else if(animFwd!){
-      animations[index].play(false);
+    else if(animFwd == false){
       animations[index + 1].reset();
-      debugger
+      animations[index].play(false);
+      //debugger
     }
 }
 
-function candiesLoader(scene: Scene, position: Vector3){
+function candiesLoader(scene: Scene, position: Vector3, animFwd: boolean, index: number){
   const candiesInstances: Candy[] = [];
   config.forEach(async (candy) => {
   try {
@@ -103,8 +107,7 @@ function candiesLoader(scene: Scene, position: Vector3){
         mesh: "",
         ilePos: position,
       })
-      scene.stopAllAnimations();
-      scene.animationGroups[0].play(false);
+      candiesPlay(animFwd, index, candiesInstances[0], scene);
       cloneCandies(scene, new Vector3(-0.93, 0, 0), candiesInstances);
       cloneCandies(scene, new Vector3(-0.31, 0, 0), candiesInstances);
       cloneCandies(scene, new Vector3(0.31, 0, 0), candiesInstances);
