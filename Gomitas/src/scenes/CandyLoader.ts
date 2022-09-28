@@ -74,18 +74,18 @@ function cloneCandies(scene: Scene, position: Vector3, candiesInstances: Candy[]
 }
 
 function candiesPlay(animFwd: boolean, index: number, candiesMesh: Candy, scene: Scene){
-    //const animations = candiesMesh.object.animationGroups;
-    const animations = scene.animationGroups;
-    scene.stopAllAnimations();
+    const animations = candiesMesh.object.animationGroups;
     if(animFwd == true){
       if (index > 0){
         animations[index - 1].reset();
       }
       animations[index].play(false);
-      //debugger
+      debugger
     }
     else if(animFwd == false){
-      animations[index + 1].reset();
+      if(index <= 5){
+        animations[index + 1].reset();
+      }
       animations[index].play(false);
       //debugger
     }
@@ -137,6 +137,7 @@ function boxController(
       const ls = newMeshes[0];
       ls.translate(new BABYLON.Vector3(0, 0, 0), 1, BABYLON.Space.WORLD);
       box.play(false);
+      console.log(box);
     }
   );
 }

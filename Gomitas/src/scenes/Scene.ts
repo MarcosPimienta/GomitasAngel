@@ -70,8 +70,8 @@ const createScene = function (canvas:HTMLCanvasElement){
         console.log(scene);
         break;
     }
-    CandyLoader.candiesLoader(scene, new Vector3(-1.56, 0, 0),animFwd, animSelector);
-    //CandyLoader.candiesPlay(animFwd, animSelector, candiesInstances[0], scene);
+    //CandyLoader.candiesLoader(scene, new Vector3(-1.56, 0, 0),animFwd, animSelector);
+    CandyLoader.candiesPlay(animFwd, animSelector, candiesInstances[0], scene);
   });
 
   const camera = new ArcRotateCamera(
@@ -89,7 +89,7 @@ const createScene = function (canvas:HTMLCanvasElement){
   new HemisphericLight("light", Vector3.Up(), scene);
 
   CandyLoader.boxController(["CandyBox"], "./", "CandyBox.gltf", scene);
-  /* switcherOp(ileState, ileSelector, animSelector, scene); */
+   /*switcherOp(ileState, ileSelector, animSelector, scene); */
   scene.debugLayer.show({
     embedMode: true,
   });
