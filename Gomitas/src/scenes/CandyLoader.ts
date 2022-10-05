@@ -80,7 +80,7 @@ function candiesPlay(animFwd: boolean, index: number, candiesMesh: Candy, scene:
         animations[index - 1].reset();
       }
       animations[index].play(false);
-      debugger
+      //debugger
     }
     else if(animFwd == false){
       if(index <= 5){
