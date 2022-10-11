@@ -1,12 +1,11 @@
 <template>
   <div class="btn-holder">
     <div v-for="item in animState" :key="item.id">
-      <input class="radio-btn"
+      <input class="radio-btn" v-model="tutorials"
         type="radio"
-        value="{{item.name}}"
-        name="ds"
-        @click="animSwitch(item.id)" />
-      <label class="label-text" for="ds">{{item.name}}</label>
+        value="ChocoMellows"
+        name="ds" />
+      <label class="label-text" for="ds">ChocoMellows</label>
     </div>
   </div>
 </template>
