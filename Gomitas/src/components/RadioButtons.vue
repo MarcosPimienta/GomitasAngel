@@ -1,20 +1,13 @@
 <template>
   <div class="btn-holder">
-    <input class="radio-btn" v-model="tutorials"
-      type="radio"
-      value="ChocoMellows"
-      name="ds" />
-    <label class="label-text" for="ds">ChocoMellows</label>
-        <input class="radio-btn" v-model="tutorials"
-          type="radio"
-          value="LifeSavers"
-          name="ds" />
-    <label class="label-text" for="ds">LifeSavers</label>
-        <input class="radio-btn" v-model="tutorials"
-          type="radio"
-          value="Oranges"
-          name="ds" />
-    <label class="label-text" for="ds">Oranges</label>
+    <div v-for="item in animState" :key="item.id">
+      <input class="radio-btn"
+        type="radio"
+        value="{{item.name}}"
+        name="ds"
+        @click="animSwitch(item.id)" />
+      <label class="label-text" for="ds">{{item.name}}</label>
+    </div>
   </div>
 </template>
 <script>
@@ -24,7 +17,21 @@ export default {
   name: "RadioButtons",
 
   setup() {
+
+    const animState = [
+    { id: 0, name:"ChocoMellow", state: false },
+    { id: 1, name:"LifeSavers", state: false },
+    { id: 2, name:"Oranges", state: false },
+  ];
+
     const candyButtons = ref(["ChocoMellows", "LifeSavers", "Oranges"]);
+
+    function animSwitch(event){
+      if (event.target.value == animState.name){
+        animState.Oranges = true;
+        console.log(anims.Oranges);
+      }
+    };
 
     return {
       candyButtons,
