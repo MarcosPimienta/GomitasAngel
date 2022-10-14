@@ -4,8 +4,9 @@
       <input class="radio-btn" v-model="tutorials"
         type="radio"
         value="ChocoMellows"
-        name="ds" />
-      <label class="label-text" for="ds">ChocoMellows</label>
+        name="ds"
+        @click="animSwitch()" />
+      <label class="label-text" for="ds">{{ item.name }}</label>
     </div>
   </div>
 </template>
@@ -15,7 +16,7 @@ import { ref, onMounted } from "vue";
 export default {
   name: "RadioButtons",
 
-  setup() {
+  setup(attrs,) {
 
     const animState = [
     { id: 0, name:"ChocoMellow", state: false },
@@ -28,12 +29,12 @@ export default {
     function animSwitch(event){
       if (event.target.value == animState.name){
         animState.Oranges = true;
-        console.log(anims.Oranges);
+        console.log(animState.Oranges);
       }
     };
 
     return {
-      candyButtons,
+      animState,
     }
   },
 };
