@@ -24,8 +24,6 @@ export default {
     { id: 2, name:"Oranges", state: false },
   ];
 
-    const candyButtons = ref(["ChocoMellows", "LifeSavers", "Oranges"]);
-
     function animSwitch(event){
       if (event.target.value == animState.name){
         animState.Oranges = true;
