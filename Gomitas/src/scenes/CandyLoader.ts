@@ -73,22 +73,11 @@ function cloneCandies(scene: Scene, position: Vector3, candiesInstances: Candy[]
   });
 }
 
-function candiesPlay(animFwd: boolean, index: number, candiesMesh: Candy, scene: Scene){
+function candiesPlay( index: number, candiesMesh: Candy, scene: Scene){
     const animations = candiesMesh.object.animationGroups;
-    if(animFwd == true){
-      if (index > 0){
-        animations[index - 1].reset();
-      }
+      scene.stopAllAnimations();
+      animations[index].reset();
       animations[index].play(false);
-      //debugger
-    }
-    else if(animFwd == false){
-      if(index <= 5){
-        animations[index + 1].reset();
-      }
-      animations[index].play(false);
-      //debugger
-    }
 }
 
 function candiesLoader(scene: Scene, position: Vector3, animFwd: boolean, index: number){

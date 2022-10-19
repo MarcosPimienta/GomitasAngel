@@ -5,18 +5,19 @@
         type="radio"
         value="ChocoMellows"
         name="ds"
-        @click="animSwitch()" />
+        @click="animSwitch(item)" />
       <label class="label-text" for="ds">{{ item.name }}</label>
     </div>
   </div>
 </template>
-<script>
+<script lang="ts">
 import { ref, onMounted } from "vue";
+import * as CandyLoader from "../scenes/CandyLoader";
 
 export default {
   name: "RadioButtons",
 
-  setup(attrs,) {
+  setup() {
 
     const animState = [
     { id: 0, name:"ChocoMellow", state: false },
@@ -24,15 +25,21 @@ export default {
     { id: 2, name:"Oranges", state: false },
   ];
 
-    function animSwitch(event){
-      if (event.target.value == animState.name){
-        animState.Oranges = true;
-        console.log(animState.Oranges);
+    function animSwitch(item: any){
+      let animIndex = 0;
+      if(item.name == "ChocoMellow")
+        animIndex = 0
+      else if(item.name == "LifeSavers"){
+        animIndex = 1;
       }
+      else if(item.name == "Oranges"){
+        animIndex = 2;
+      }
+      CandyLoader.candiesPlay( animIndex, candiesInstances[0], scene);
     };
 
     return {
-      animState,
+      animState, animSwitch
     }
   },
 };
