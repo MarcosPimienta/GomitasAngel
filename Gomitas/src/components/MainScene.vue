@@ -7,19 +7,20 @@
 
 <script>
 import { ref, onMounted } from "vue";
+import { objectScene } from "../scenes/Scene";
 import RadioButtons from "./RadioButtons.vue";
-import { createScene } from "../scenes/Scene";
 
 export default {
   name: "MainScene",
   components: {
     RadioButtons
   },
+
   setup() {
     const bjsCanvas = ref(null);
     onMounted(() => {
       if (bjsCanvas.value) {
-        createScene(bjsCanvas.value);
+        objectScene(bjsCanvas.value);
       }
     });
     return {
