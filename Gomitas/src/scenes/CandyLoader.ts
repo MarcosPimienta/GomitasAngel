@@ -96,7 +96,7 @@ function candiesLoader(scene: Scene, position: Vector3, animFwd: boolean, index:
         mesh: "",
         ilePos: position,
       })
-      candiesPlay(animFwd, index, candiesInstances[0], scene);
+      candiesPlay(index, candiesInstances[0], scene);
       cloneCandies(scene, new Vector3(-0.93, 0, 0), candiesInstances);
       cloneCandies(scene, new Vector3(-0.31, 0, 0), candiesInstances);
       cloneCandies(scene, new Vector3(0.31, 0, 0), candiesInstances);

@@ -1,5 +1,7 @@
 <template>
-  <MainScene />
+  <div>
+    <MainScene />
+  </div>
 </template>
 
 <script lang="ts">
@@ -9,6 +11,10 @@ export default {
   name: "App",
   components: {
     MainScene,
+  },
+
+  methods: {
+    
   },
 };
 </script>

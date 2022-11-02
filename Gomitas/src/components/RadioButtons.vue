@@ -12,13 +12,12 @@
 </template>
 <script lang="ts">
 import { ref, onMounted } from "vue";
-import * as CandyLoader from "../scenes/CandyLoader";
+import { objectScene } from "../scenes/Scene";
 
 export default {
   name: "RadioButtons",
 
   setup() {
-
     const animState = [
     { id: 0, name:"ChocoMellow", state: false },
     { id: 1, name:"LifeSavers", state: false },
@@ -26,16 +25,16 @@ export default {
   ];
 
     function animSwitch(item: any){
-      let animIndex = 0;
-      if(item.name == "ChocoMellow")
-        animIndex = 0
+      if(item.name == "ChocoMellow"){
+        console.log(item.name);
+        objectScene.getAnimation()
+      }
       else if(item.name == "LifeSavers"){
-        animIndex = 1;
+        console.log(item.name);
       }
       else if(item.name == "Oranges"){
-        animIndex = 2;
+        console.log(item.name);
       }
-      CandyLoader.candiesPlay( animIndex, candiesInstances[0], scene);
     };
 
     return {
