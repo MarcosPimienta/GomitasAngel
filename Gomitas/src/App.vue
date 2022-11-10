@@ -12,10 +12,6 @@ export default {
   components: {
     MainScene,
   },
-
-  methods: {
-    
-  },
 };
 </script>
 
