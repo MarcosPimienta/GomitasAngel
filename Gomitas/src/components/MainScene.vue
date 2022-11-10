@@ -1,13 +1,13 @@
 <template>
   <div>
-    <RadioButtons @animationPlay="animationExec"/>
+    <RadioButtons @animationPlay="animSwitch"/>
     <canvas  class="bjsCanvas" ref="bjsCanvas"/>
   </div>
 </template>
 
 <script setup lang="ts">
 import {ref, onMounted, onUpdated } from "vue";
-import { createScene } from "../scenes/Scene";
+import { createScene, exposeAnim } from "../scenes/Scene";
 import RadioButtons from "./RadioButtons.vue";
 
   components: {
@@ -23,9 +23,20 @@ import RadioButtons from "./RadioButtons.vue";
       }
     });
 
-      function animationExec(object){
-        console.log(object);
-      };
+      function animSwitch(item: any){
+      if(item.name == "ChocoMellow"){
+        console.log(item.name);
+        exposeAnim(0, bjsScene.scene);
+      }
+      else if(item.name == "LifeSavers"){
+        console.log(item.name);
+        exposeAnim(1, bjsScene.scene);
+      }
+      else if(item.name == "Oranges"){
+        console.log(item.name);
+        exposeAnim(2, bjsScene.scene);
+      }
+    };
 
 </script>
 <style>
