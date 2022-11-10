@@ -26,15 +26,15 @@ import RadioButtons from "./RadioButtons.vue";
       function animSwitch(item: any){
       if(item.name == "ChocoMellow"){
         console.log(item.name);
-        exposeAnim(0, bjsScene.scene);
+        exposeAnim(0, bjsScene.candiesInstances[0], bjsScene.scene);
       }
       else if(item.name == "LifeSavers"){
         console.log(item.name);
-        exposeAnim(1, bjsScene.scene);
+        exposeAnim(1, bjsScene.candiesInstances[0], bjsScene.scene);
       }
       else if(item.name == "Oranges"){
         console.log(item.name);
-        exposeAnim(2, bjsScene.scene);
+        exposeAnim(2, bjsScene.candiesInstances[0], bjsScene.scene);
       }
     };
 
