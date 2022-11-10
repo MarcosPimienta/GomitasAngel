@@ -29,21 +29,6 @@ import { ref, onMounted, onUpdated } from "vue";
     { id: 2, name:"Oranges", state: false },
   ];
 
-    function animSwitch(item: any){
-      let animSelector: Number = 0;
-      if(item.name == "ChocoMellow"){
-        console.log(item.name + "anim " + anim);
-      }
-      else if(item.name == "LifeSavers"){
-        console.log(item.name);
-        anim = 1;
-      }
-      else if(item.name == "Oranges"){
-        console.log(item.name);
-        anim = 2;
-      }
-    };
-
 </script>
 <style lang="css">
 @import "../assets/main.css";

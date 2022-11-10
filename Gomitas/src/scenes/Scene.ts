@@ -37,7 +37,7 @@ const createScene = function (canvas:HTMLCanvasElement){
   let animSelector:number = 0;
 
   let candiesInstances: CandyLoader.Candy[] = CandyLoader.candiesLoader(scene, new Vector3(-1.56, 0, 0),animFwd, animSelector);
-  //CandyLoader.candiesPlay( animSelector, candiesInstances[0], scene);
+  CandyLoader.candiesPlay( animSelector, candiesInstances[0], scene);
   //cloneCandies(scene, new Vector3(-1.56, 0, 0));
 
   /* scene.onKeyboardObservable.add((kbInfo) => {
@@ -74,8 +74,6 @@ const createScene = function (canvas:HTMLCanvasElement){
     //CandyLoader.candiesLoader(scene, new Vector3(-1.56, 0, 0),animFwd, animSelector);
     CandyLoader.candiesPlay(animFwd, animSelector, candiesInstances[0], scene);
   }); */
-
-  //CandyLoader.candiesPlay(animSelector, candiesInstances[0], scene);
   const camera = new ArcRotateCamera(
     "camera1",
     0,
