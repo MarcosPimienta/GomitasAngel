@@ -1,6 +1,6 @@
 <template>
   <div>
-    <RadioButtons @animationPlay="animationExec"/>
+    <RadioButtons @animationPlay="animSwitch"/>
     <canvas  class="bjsCanvas" ref="bjsCanvas"/>
   </div>
 </template>
@@ -23,9 +23,19 @@ import RadioButtons from "./RadioButtons.vue";
       }
     });
 
-      function animationExec(object){
-        console.log(object);
-      };
+    function animSwitch(item: any){
+      let animSelector: Number = 0;
+      if(item.name == "ChocoMellow"){
+        console.log(item.name);
+        bjsScene.animSelector = 0;
+      }
+      else if(item.name == "LifeSavers"){
+        console.log(item.name);
+      }
+      else if(item.name == "Oranges"){
+        console.log(item.name);
+      }
+    };
 
 </script>
 <style>
