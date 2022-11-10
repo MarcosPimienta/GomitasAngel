@@ -12,10 +12,15 @@ import "babylonjs-loaders";
 import * as CandyLoader from "./CandyLoader";
 import { switcherOp } from "./IleController";
 
+function exposeAnim(animSelector: number, scene: Scene){
+  let animFwd : boolean = true;
+  let candiesInstances: CandyLoader.Candy[] = CandyLoader.candiesLoader(scene, new Vector3(-1.56, 0, 0),animFwd, animSelector);
+  CandyLoader.candiesPlay(animSelector, candiesInstances[0], scene);
+};
+
 const createScene = function (canvas:HTMLCanvasElement){
   const engine = new Engine(canvas);
   const scene = new Scene(engine);
-  let animFwd : boolean = true;
   const ileState: any = [
     { state: false, empty: true, anim: 1 },
     { state: false, empty: true, anim: 1  },
@@ -34,6 +39,7 @@ const createScene = function (canvas:HTMLCanvasElement){
   ];
   let ileSelector:number = 0;
   let sceneAnim:number = 0;
+  let animFwd : boolean = true;
   let animSelector:number = 0;
 
   let candiesInstances: CandyLoader.Candy[] = CandyLoader.candiesLoader(scene, new Vector3(-1.56, 0, 0),animFwd, animSelector);
@@ -74,8 +80,6 @@ const createScene = function (canvas:HTMLCanvasElement){
     //CandyLoader.candiesLoader(scene, new Vector3(-1.56, 0, 0),animFwd, animSelector);
     CandyLoader.candiesPlay(animFwd, animSelector, candiesInstances[0], scene);
   }); */
-
-  //CandyLoader.candiesPlay(animSelector, candiesInstances[0], scene);
   const camera = new ArcRotateCamera(
     "camera1",
     0,
@@ -98,7 +102,7 @@ const createScene = function (canvas:HTMLCanvasElement){
   engine.runRenderLoop(() => {
     scene.render();
   });
-  return {scene, engine, animSelector}
+  return {scene, engine, candiesInstances}
 };
 
-export { createScene };
+export { createScene, exposeAnim };
