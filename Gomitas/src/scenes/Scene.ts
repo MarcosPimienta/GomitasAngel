@@ -12,10 +12,8 @@ import "babylonjs-loaders";
 import * as CandyLoader from "./CandyLoader";
 import { switcherOp } from "./IleController";
 
-function exposeAnim(animSelector: number, scene: Scene){
-  let animFwd : boolean = true;
-  let candiesInstances: CandyLoader.Candy[] = CandyLoader.candiesLoader(scene, new Vector3(-1.56, 0, 0),animFwd, animSelector);
-  CandyLoader.candiesPlay(animSelector, candiesInstances[0], scene);
+function exposeAnim(animSelector: number, candiesInstance: CandyLoader.Candy, scene: Scene){
+  CandyLoader.candiesPlay(animSelector, candiesInstance, scene);
 };
 
 const createScene = function (canvas:HTMLCanvasElement){
@@ -43,7 +41,7 @@ const createScene = function (canvas:HTMLCanvasElement){
   let animSelector:number = 0;
 
   let candiesInstances: CandyLoader.Candy[] = CandyLoader.candiesLoader(scene, new Vector3(-1.56, 0, 0),animFwd, animSelector);
-  CandyLoader.candiesPlay( animSelector, candiesInstances[0], scene);
+  //CandyLoader.candiesPlay( animSelector, candiesInstances[0], scene);
   //cloneCandies(scene, new Vector3(-1.56, 0, 0));
 
   /* scene.onKeyboardObservable.add((kbInfo) => {
