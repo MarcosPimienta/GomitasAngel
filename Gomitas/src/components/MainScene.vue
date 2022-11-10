@@ -1,33 +1,32 @@
 <template>
   <div>
-    <RadioButtons />
+    <RadioButtons @animationPlay="animationExec"/>
     <canvas  class="bjsCanvas" ref="bjsCanvas"/>
   </div>
 </template>
 
-<script>
-import { ref, onMounted } from "vue";
-import { objectScene } from "../scenes/Scene";
+<script setup lang="ts">
+import {ref, onMounted, onUpdated } from "vue";
+import { createScene } from "../scenes/Scene";
 import RadioButtons from "./RadioButtons.vue";
 
-export default {
-  name: "MainScene",
   components: {
     RadioButtons
-  },
+  }
 
-  setup() {
     const bjsCanvas = ref(null);
+    let bjsScene = ref(null);
+
     onMounted(() => {
       if (bjsCanvas.value) {
-        objectScene(bjsCanvas.value);
+        bjsScene = createScene(bjsCanvas.value);
       }
     });
-    return {
-      bjsCanvas,
-    };
-  },
-};
+
+      function animationExec(object){
+        console.log(object);
+      };
+
 </script>
 <style>
   .bjsCanvas {
