@@ -12,8 +12,8 @@ import "babylonjs-loaders";
 import * as CandyLoader from "./CandyLoader";
 import { switcherOp } from "./IleController";
 
-function exposeAnim(animSelector: number, candiesInstance: CandyLoader.Candy, scene: Scene){
-  CandyLoader.candiesPlay(animSelector, candiesInstance, scene);
+function exposeAnim(animSelector: number, state: Boolean, candiesInstance: CandyLoader.Candy, scene: Scene){
+  CandyLoader.candiesPlay(animSelector, state, candiesInstance, scene);
 };
 
 const createScene = function (canvas:HTMLCanvasElement){
@@ -35,6 +35,7 @@ const createScene = function (canvas:HTMLCanvasElement){
     { state: false },
     { state: false },
   ];
+  CandyLoader.boxController(["CandyBox"], "./", "CandyBox.gltf", scene);
   let ileSelector:number = 0;
   let sceneAnim:number = 0;
   let animFwd : boolean = true;
@@ -92,7 +93,6 @@ const createScene = function (canvas:HTMLCanvasElement){
 
   new HemisphericLight("light", Vector3.Up(), scene);
 
-  CandyLoader.boxController(["CandyBox"], "./", "CandyBox.gltf", scene);
    /*switcherOp(ileState, ileSelector, animSelector, scene); */
   scene.debugLayer.show({
     embedMode: true,
