@@ -73,7 +73,7 @@ function cloneCandies(scene: Scene, position: Vector3, candiesInstances: Candy[]
   });
 }
 
-function candiesPlay( index: number, candiesMesh: Candy, scene: Scene){
+function candiesPlay( index: number, state: boolean, candiesMesh: Candy, scene: Scene){
     const animations = candiesMesh.object.animationGroups;
       scene.stopAllAnimations();
       animations[index].reset();
@@ -96,12 +96,12 @@ function candiesLoader(scene: Scene, position: Vector3, animFwd: boolean, index:
         mesh: "",
         ilePos: position,
       })
-      candiesPlay(index, candiesInstances[0], scene);
+      /*candiesPlay(index, candiesInstances[0], scene);
       cloneCandies(scene, new Vector3(-0.93, 0, 0), candiesInstances);
       cloneCandies(scene, new Vector3(-0.31, 0, 0), candiesInstances);
       cloneCandies(scene, new Vector3(0.31, 0, 0), candiesInstances);
       cloneCandies(scene, new Vector3(0.93, 0, 0), candiesInstances);
-      cloneCandies(scene, new Vector3(1.56, 0, 0), candiesInstances);
+      cloneCandies(scene, new Vector3(1.56, 0, 0), candiesInstances); */
     } catch (error) {
   }
 })
@@ -114,9 +114,9 @@ function boxController(
   meshNames: string[],
   meshPath: string,
   meshFile: string,
-  scene: BABYLON.Scene
+  scene: Scene
 ) {
-  BABYLON.SceneLoader.ImportMesh(
+  SceneLoader.ImportMesh(
     meshNames,
     meshPath,
     meshFile,
@@ -124,7 +124,7 @@ function boxController(
     function (newMeshes, particleSystems, skeletons, animationGroups) {
       const box = animationGroups[0];
       const ls = newMeshes[0];
-      ls.translate(new BABYLON.Vector3(0, 0, 0), 1, BABYLON.Space.WORLD);
+      ls.translate(new Vector3(0, 0, 0), 1, BABYLON.Space.WORLD);
       box.play(false);
       console.log(box);
     }
