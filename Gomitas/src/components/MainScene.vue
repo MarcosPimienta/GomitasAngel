@@ -8,6 +8,7 @@
 <script setup lang="ts">
 import {ref, onMounted, onUpdated } from "vue";
 import { createScene, exposeAnim } from "../scenes/Scene";
+import * as CandyLoader from "../scenes/CandyLoader";
 import RadioButtons from "./RadioButtons.vue";
 
   components: {
@@ -26,15 +27,18 @@ import RadioButtons from "./RadioButtons.vue";
       function animSwitch(item: any){
       if(item.name == "ChocoMellow"){
         console.log(item.name);
-        exposeAnim(0, bjsScene.candiesInstances[0], bjsScene.scene);
+        CandyLoader.candiesPlay(0, bjsScene.candiesInstances[0], bjsScene.scene);
+        //exposeAnim(0, bjsScene.candiesInstances[0], bjsScene.scene);
       }
       else if(item.name == "LifeSavers"){
         console.log(item.name);
-        exposeAnim(1, bjsScene.candiesInstances[0], bjsScene.scene);
+        //exposeAnim(1, bjsScene.candiesInstances[0], bjsScene.scene);
+        CandyLoader.candiesPlay(1, bjsScene.candiesInstances[0], bjsScene.scene);
       }
       else if(item.name == "Oranges"){
         console.log(item.name);
-        exposeAnim(2, bjsScene.candiesInstances[0], bjsScene.scene);
+        //exposeAnim(2, bjsScene.candiesInstances[0], bjsScene.scene);
+        CandyLoader.candiesPlay(2, bjsScene.candiesInstances[0], bjsScene.scene);
       }
     };
 

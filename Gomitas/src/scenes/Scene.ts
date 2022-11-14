@@ -12,8 +12,8 @@ import "babylonjs-loaders";
 import * as CandyLoader from "./CandyLoader";
 import { switcherOp } from "./IleController";
 
-function exposeAnim(animSelector: number, state: Boolean, candiesInstance: CandyLoader.Candy, scene: Scene){
-  CandyLoader.candiesPlay(animSelector, state, candiesInstance, scene);
+function exposeAnim(animSelector: number, candiesInstance: CandyLoader.Candy, scene: Scene){
+  CandyLoader.candiesPlay(animSelector, candiesInstance, scene);
 };
 
 const createScene = function (canvas:HTMLCanvasElement){
@@ -35,13 +35,13 @@ const createScene = function (canvas:HTMLCanvasElement){
     { state: false },
     { state: false },
   ];
-  CandyLoader.boxController(["CandyBox"], "./", "CandyBox.gltf", scene);
   let ileSelector:number = 0;
   let sceneAnim:number = 0;
   let animFwd : boolean = true;
   let animSelector:number = 0;
 
   let candiesInstances: CandyLoader.Candy[] = CandyLoader.candiesLoader(scene, new Vector3(-1.56, 0, 0),animFwd, animSelector);
+  //exposeAnim(animSelector, candiesInstances[0], scene);
   //CandyLoader.candiesPlay( animSelector, candiesInstances[0], scene);
   //cloneCandies(scene, new Vector3(-1.56, 0, 0));
 
@@ -90,6 +90,8 @@ const createScene = function (canvas:HTMLCanvasElement){
   camera.setTarget(Vector3.Zero());
   camera.attachControl(canvas, true);
   camera.inputs.remove(camera.inputs.attached.keyboard);
+  CandyLoader.boxController(["CandyBox"], "./", "CandyBox.gltf", scene);
+
 
   new HemisphericLight("light", Vector3.Up(), scene);
 
