@@ -75,8 +75,9 @@ function cloneCandies(scene: Scene, position: Vector3, candiesInstances: Candy[]
 
 function candiesPlay( index: number, candiesMesh: Candy, scene: Scene){
     const animations = candiesMesh.object.animationGroups;
-      scene.stopAllAnimations();
-      animations[index].reset();
+      animations.forEach((anim)=>{
+        anim.reset();
+      })
       animations[index].play(false);
 }
 
@@ -96,6 +97,7 @@ function candiesLoader(scene: Scene, position: Vector3, animFwd: boolean, index:
         mesh: "",
         ilePos: position,
       })
+      candiesPlay(0, candiesInstances[0], scene);
       cloneCandies(scene, new Vector3(-0.93, 0, 0), candiesInstances);
       cloneCandies(scene, new Vector3(-0.31, 0, 0), candiesInstances);
       cloneCandies(scene, new Vector3(0.31, 0, 0), candiesInstances);
