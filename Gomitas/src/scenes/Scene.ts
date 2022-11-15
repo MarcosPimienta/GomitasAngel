@@ -40,7 +40,7 @@ const createScene = function (canvas:HTMLCanvasElement){
   let animFwd : boolean = true;
   let animSelector:number = 0;
 
-  let candiesInstances: CandyLoader.Candy[] = CandyLoader.candiesLoader(scene, new Vector3(-1.56, 0, 0),animFwd, animSelector);
+  let candiesInstances: CandyLoader.Candy[] = CandyLoader.candiesLoader(scene, new Vector3(-1.56, 0, 0), animSelector);
   //exposeAnim(animSelector, candiesInstances[0], scene);
   //CandyLoader.candiesPlay( animSelector, candiesInstances[0], scene);
   //cloneCandies(scene, new Vector3(-1.56, 0, 0));

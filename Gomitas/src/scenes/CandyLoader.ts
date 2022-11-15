@@ -81,7 +81,7 @@ function candiesPlay( index: number, candiesMesh: Candy, scene: Scene){
       animations[index].play(false);
 }
 
-function candiesLoader(scene: Scene, position: Vector3, animFwd: boolean, index: number){
+function candiesLoader(scene: Scene, position: Vector3, index: number){
   const candiesInstances: Candy[] = [];
   config.forEach(async (candy) => {
   try {
@@ -97,12 +97,13 @@ function candiesLoader(scene: Scene, position: Vector3, animFwd: boolean, index:
         mesh: "",
         ilePos: position,
       })
-      candiesPlay(0, candiesInstances[0], scene);
-      cloneCandies(scene, new Vector3(-0.93, 0, 0), candiesInstances);
-      cloneCandies(scene, new Vector3(-0.31, 0, 0), candiesInstances);
-      cloneCandies(scene, new Vector3(0.31, 0, 0), candiesInstances);
+      /* candiesPlay(0, candiesInstances[0], scene); */
       cloneCandies(scene, new Vector3(0.93, 0, 0), candiesInstances);
+      cloneCandies(scene, new Vector3(0.31, 0, 0), candiesInstances);
       cloneCandies(scene, new Vector3(1.56, 0, 0), candiesInstances);
+      cloneCandies(scene, new Vector3(-0.31, 0, 0), candiesInstances);
+      cloneCandies(scene, new Vector3(-0.93, 0, 0), candiesInstances);
+      candiesInstances[0].object.meshes[0].translate(position, 1, Space.WORLD);
     } catch (error) {
   }
 })
