@@ -100,4 +100,4 @@ const createScene = function (canvas:HTMLCanvasElement){
   return {scene, engine, candiesInstances}
 };
 
-export { createScene, exposeAnim };
+export { createScene };
