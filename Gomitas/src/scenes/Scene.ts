@@ -7,14 +7,9 @@ import {
   Scene
 } from "@babylonjs/core";
 import "@babylonjs/inspector";
-import * as BABYLON from "babylonjs";
 import "babylonjs-loaders";
 import * as CandyLoader from "./CandyLoader";
 import { switcherOp } from "./IleController";
-
-function exposeAnim(animSelector: number, candiesInstance: CandyLoader.Candy, scene: Scene){
-  CandyLoader.candiesPlay(animSelector, candiesInstance, scene);
-};
 
 const createScene = function (canvas:HTMLCanvasElement){
   const engine = new Engine(canvas);
