@@ -96,13 +96,41 @@ function candiesLoader(scene: Scene, position: Vector3, index: number){
         ),
         mesh: "",
         ilePos: position,
+      },
+      {
+        id: candy.id,
+        name: candy.file,
+        object: await SceneLoader.ImportMeshAsync(
+          candy.name,
+          candy.path,
+          candy.file,
+          scene,
+        ),
+        mesh: "",
+        ilePos: position,
+      },
+      {
+        id: candy.id,
+        name: candy.file,
+        object: await SceneLoader.ImportMeshAsync(
+          candy.name,
+          candy.path,
+          candy.file,
+          scene,
+        ),
+        mesh: "",
+        ilePos: position,
       })
       candiesPlay(0, candiesInstances[0], scene);
-      cloneCandies(scene, new Vector3(0.93, 0, 0), candiesInstances);
+      candiesPlay(0, candiesInstances[1], scene);
+      candiesPlay(0, candiesInstances[2], scene);
+      /* cloneCandies(scene, new Vector3(0.93, 0, 0), candiesInstances);
       cloneCandies(scene, new Vector3(0.31, 0, 0), candiesInstances);
       cloneCandies(scene, new Vector3(1.56, 0, 0), candiesInstances);
       cloneCandies(scene, new Vector3(-0.31, 0, 0), candiesInstances);
-      cloneCandies(scene, new Vector3(-0.93, 0, 0), candiesInstances);
+      cloneCandies(scene, new Vector3(-0.93, 0, 0), candiesInstances); */
+      candiesInstances[2].object.meshes[0].translate(new Vector3(-0.31, 0, 0), 1, Space.WORLD);
+      candiesInstances[1].object.meshes[0].translate(new Vector3(-0.93, 0, 0), 1, Space.WORLD);
       candiesInstances[0].object.meshes[0].translate(position, 1, Space.WORLD);
     } catch (error) {
   }

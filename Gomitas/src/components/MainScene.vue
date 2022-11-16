@@ -1,6 +1,7 @@
 <template>
   <div>
     <RadioButtons @animationPlay="animSwitch"/>
+    <IleButtons @plus="IlePlus" @minus="IleMinus"/>
     <canvas  class="bjsCanvas" ref="bjsCanvas"/>
   </div>
 </template>
@@ -10,13 +11,16 @@ import {ref, onMounted, onUpdated } from "vue";
 import { createScene } from "../scenes/Scene";
 import * as CandyLoader from "../scenes/CandyLoader";
 import RadioButtons from "./RadioButtons.vue";
+import IleButtons from "./IleButtons.vue";
 
   components: {
-    RadioButtons
+    RadioButtons,
+    IleButtons
   }
 
     const bjsCanvas = ref(null);
     let bjsScene = ref(null);
+    let ileSelector = ref(0);
 
     onMounted(() => {
       if (bjsCanvas.value) {
@@ -27,17 +31,27 @@ import RadioButtons from "./RadioButtons.vue";
       function animSwitch(item: any){
       if(item.name == "ChocoMellow"){
         console.log(item.name);
-        CandyLoader.candiesPlay(item.id, bjsScene.candiesInstances[0], bjsScene.scene);
+        CandyLoader.candiesPlay(item.id, bjsScene.candiesInstances[ileSelector.value], bjsScene.scene);
       }
       else if(item.name == "LifeSavers"){
         console.log(item.name);
-        CandyLoader.candiesPlay(item.id, bjsScene.candiesInstances[0], bjsScene.scene);
+        CandyLoader.candiesPlay(item.id, bjsScene.candiesInstances[ileSelector.value], bjsScene.scene);
       }
       else if(item.name == "Oranges"){
         console.log(item.name);
-        CandyLoader.candiesPlay(item.id, bjsScene.candiesInstances[0], bjsScene.scene);
+        CandyLoader.candiesPlay(item.id, bjsScene.candiesInstances[ileSelector.value], bjsScene.scene);
       }
     };
+
+      function IlePlus(){
+        ileSelector.value++;
+        console.log(ileSelector.value);
+      }
+
+      function IleMinus(){
+        ileSelector.value--;
+        console.log(ileSelector.value);
+      }
 
 </script>
 <style>
