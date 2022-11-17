@@ -1,5 +1,5 @@
 <template>
-  <div class="btn-holder">
+  <div>
     <div v-for="item in animState" :key="item.id">
       <input class="radio-btn" v-model="tutorials"
         type="radio"
@@ -27,6 +27,9 @@ import { ref, onMounted, onUpdated } from "vue";
     { id: 0, name:"ChocoMellow", state: false },
     { id: 1, name:"LifeSavers", state: false },
     { id: 2, name:"Oranges", state: false },
+    { id: 3, name:"Ribbons", state: false },
+    { id: 4, name:"Strawberries", state: false },
+    { id: 5, name:"Worms", state: false },
   ];
 
 </script>

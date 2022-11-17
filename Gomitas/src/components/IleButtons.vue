@@ -1,7 +1,7 @@
 <template>
-  <div class="btn-holder">
-    <button class="arrow-btn" type="button" @click="IlePlus"> {{'->'}} </button>
+  <div class="ile-holder">
     <button class="arrow-btn" type="button" @click="IleMinus"> {{'<-'}} </button>
+    <button class="arrow-btn" type="button" @click="IlePlus"> {{'->'}} </button>
   </div>
 </template>
 <script setup lang="ts">
