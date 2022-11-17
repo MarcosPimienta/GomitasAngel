@@ -54,31 +54,18 @@ const config: CandyConfig[] = [{
   row_position: new Vector3(0, 0, 0),
 }]
 
-function cloneCandies(scene: Scene, position: Vector3, candiesInstances: Candy[]) {
-  const candies: Candy[] = candiesInstances;
-  console.log(candiesInstances);
-  candies.forEach((candy) => {
-    console.log(candy);
-    let cloneParent = candy.object.meshes[0]
-    cloneParent.isVisible = true;
-    const clone = cloneParent.clone(
-      candy.name,
-      cloneParent.parent
-    );
-    console.log(clone);
-    if (clone) {
-      clone.translate(position, 1, Space.WORLD);
-      clone.isVisible = true;
-    }
-  });
-}
-
 function candiesPlay( index: number, candiesMesh: Candy, scene: Scene){
     const animations = candiesMesh.object.animationGroups;
+    const meshes = candiesMesh.object.meshes;
       animations.forEach((anim)=>{
         anim.reset();
+        //candiesMesh.object.meshes[0].isVisible = true;
+      })
+      meshes.forEach((mesh)=>{
+        mesh.getChildMeshes();
       })
       animations[index].play(false);
+      meshes[index].isVisible = true;
 }
 
 function candiesLoader(scene: Scene, position: Vector3, index: number){
@@ -120,15 +107,52 @@ function candiesLoader(scene: Scene, position: Vector3, index: number){
         ),
         mesh: "",
         ilePos: position,
+      },
+      {
+        id: candy.id,
+        name: candy.file,
+        object: await SceneLoader.ImportMeshAsync(
+          candy.name,
+          candy.path,
+          candy.file,
+          scene,
+        ),
+        mesh: "",
+        ilePos: position,
+      },
+      {
+        id: candy.id,
+        name: candy.file,
+        object: await SceneLoader.ImportMeshAsync(
+          candy.name,
+          candy.path,
+          candy.file,
+          scene,
+        ),
+        mesh: "",
+        ilePos: position,
+      },
+      {
+        id: candy.id,
+        name: candy.file,
+        object: await SceneLoader.ImportMeshAsync(
+          candy.name,
+          candy.path,
+          candy.file,
+          scene,
+        ),
+        mesh: "",
+        ilePos: position,
       })
       candiesPlay(0, candiesInstances[0], scene);
       candiesPlay(0, candiesInstances[1], scene);
       candiesPlay(0, candiesInstances[2], scene);
-      /* cloneCandies(scene, new Vector3(0.93, 0, 0), candiesInstances);
-      cloneCandies(scene, new Vector3(0.31, 0, 0), candiesInstances);
-      cloneCandies(scene, new Vector3(1.56, 0, 0), candiesInstances);
-      cloneCandies(scene, new Vector3(-0.31, 0, 0), candiesInstances);
-      cloneCandies(scene, new Vector3(-0.93, 0, 0), candiesInstances); */
+      candiesPlay(0, candiesInstances[3], scene);
+      candiesPlay(0, candiesInstances[4], scene);
+      candiesPlay(0, candiesInstances[5], scene);
+      candiesInstances[5].object.meshes[0].translate(new Vector3(1.56, 0, 0), 1, Space.WORLD);
+      candiesInstances[4].object.meshes[0].translate(new Vector3(0.93, 0, 0), 1, Space.WORLD);
+      candiesInstances[3].object.meshes[0].translate(new Vector3(0.31, 0, 0), 1, Space.WORLD);
       candiesInstances[2].object.meshes[0].translate(new Vector3(-0.31, 0, 0), 1, Space.WORLD);
       candiesInstances[1].object.meshes[0].translate(new Vector3(-0.93, 0, 0), 1, Space.WORLD);
       candiesInstances[0].object.meshes[0].translate(position, 1, Space.WORLD);
@@ -192,5 +216,5 @@ function boxController(
     }
   }
 } */
-export { boxController, cloneCandies, candiesLoader, candiesPlay };  export type { Candy };
+export { boxController, candiesLoader, candiesPlay };  export type { Candy };
 

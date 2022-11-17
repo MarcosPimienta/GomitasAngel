@@ -1,7 +1,9 @@
 <template>
   <div>
-    <RadioButtons @animationPlay="animSwitch"/>
-    <IleButtons @plus="IlePlus" @minus="IleMinus"/>
+    <div class="btn-holder">
+      <RadioButtons @animationPlay="animSwitch"/>
+      <IleButtons @plus="IlePlus" @minus="IleMinus"/>
+    </div>
     <canvas  class="bjsCanvas" ref="bjsCanvas"/>
   </div>
 </template>
@@ -29,18 +31,7 @@ import IleButtons from "./IleButtons.vue";
     });
 
       function animSwitch(item: any){
-      if(item.name == "ChocoMellow"){
-        console.log(item.name);
         CandyLoader.candiesPlay(item.id, bjsScene.candiesInstances[ileSelector.value], bjsScene.scene);
-      }
-      else if(item.name == "LifeSavers"){
-        console.log(item.name);
-        CandyLoader.candiesPlay(item.id, bjsScene.candiesInstances[ileSelector.value], bjsScene.scene);
-      }
-      else if(item.name == "Oranges"){
-        console.log(item.name);
-        CandyLoader.candiesPlay(item.id, bjsScene.candiesInstances[ileSelector.value], bjsScene.scene);
-      }
     };
 
       function IlePlus(){

@@ -1,5 +1,6 @@
 @import "./base.css";
 
+
 #app {
   width: 100%;
   height: 100%;
@@ -12,6 +13,15 @@
   position: absolute;
   flex-direction: column;
 }
+
+.ile-holder {
+  display: flex;
+  flex-direction: row;
+}
+
+.arrow-btn {
+  display: flex;
+  }
 
 .radio-btn {
   display: flex;
