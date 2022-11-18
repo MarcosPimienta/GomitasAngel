@@ -31,7 +31,7 @@ import IleButtons from "./IleButtons.vue";
     });
 
       function animSwitch(item: any){
-        CandyLoader.candiesPlay(item.id, bjsScene.candiesInstances[ileSelector.value], bjsScene.scene);
+        CandyLoader.candiesPlay(item.id, bjsScene.candiesInstances[ileSelector.value], bjsScene.scene, item.name);
     };
 
       function IlePlus(){
@@ -46,14 +46,22 @@ import IleButtons from "./IleButtons.vue";
 
 </script>
 <style>
+
+  body,
+  html {
+    overflow: hidden;
+  }
+
   .bjsCanvas {
-    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
+    background: #000000;
   }
   .button{
     display: flex;
     position: absolute;
-    z-index: 1;
   }
 </style>

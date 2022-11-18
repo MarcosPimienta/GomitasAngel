@@ -54,18 +54,34 @@ const config: CandyConfig[] = [{
   row_position: new Vector3(0, 0, 0),
 }]
 
-function candiesPlay( index: number, candiesMesh: Candy, scene: Scene){
+function candiesPlay( index: number, candiesMesh: Candy, scene: Scene, newIndex: string){
     const animations = candiesMesh.object.animationGroups;
-    const meshes = candiesMesh.object.meshes;
+    const meshes = candiesMesh.object.transformNodes;
+    const meshIndex = meshes.findIndex((item)=> item.id == newIndex);
+
+    meshes.forEach((mesh)=>{
+        mesh.setEnabled(false);
+      })
+
       animations.forEach((anim)=>{
         anim.reset();
-        //candiesMesh.object.meshes[0].isVisible = true;
       })
-      meshes.forEach((mesh)=>{
-        mesh.getChildMeshes();
-      })
+
+      meshes[meshIndex].setEnabled(true);
       animations[index].play(false);
-      meshes[index].isVisible = true;
+}
+
+function animationHandler(Candies: Candy[]){
+  Candies.forEach((Candy)=>{
+    const meshes = Candy.object.transformNodes;
+    meshes.forEach((mesh)=>{
+        mesh.setEnabled(false);
+      })
+    Candy.object.animationGroups.forEach((anim)=>{
+      anim.reset();
+      anim.stop();
+    })
+  })
 }
 
 function candiesLoader(scene: Scene, position: Vector3, index: number){
@@ -144,18 +160,19 @@ function candiesLoader(scene: Scene, position: Vector3, index: number){
         mesh: "",
         ilePos: position,
       })
-      candiesPlay(0, candiesInstances[0], scene);
-      candiesPlay(0, candiesInstances[1], scene);
-      candiesPlay(0, candiesInstances[2], scene);
-      candiesPlay(0, candiesInstances[3], scene);
-      candiesPlay(0, candiesInstances[4], scene);
-      candiesPlay(0, candiesInstances[5], scene);
       candiesInstances[5].object.meshes[0].translate(new Vector3(1.56, 0, 0), 1, Space.WORLD);
       candiesInstances[4].object.meshes[0].translate(new Vector3(0.93, 0, 0), 1, Space.WORLD);
       candiesInstances[3].object.meshes[0].translate(new Vector3(0.31, 0, 0), 1, Space.WORLD);
       candiesInstances[2].object.meshes[0].translate(new Vector3(-0.31, 0, 0), 1, Space.WORLD);
       candiesInstances[1].object.meshes[0].translate(new Vector3(-0.93, 0, 0), 1, Space.WORLD);
       candiesInstances[0].object.meshes[0].translate(position, 1, Space.WORLD);
+      animationHandler(candiesInstances);
+      /* candiesPlay(0, candiesInstances[0], scene, 'ChocoMellows');
+      candiesPlay(0, candiesInstances[0], scene, 'LifeSavers');
+      candiesPlay(0, candiesInstances[0], scene, 'Oranges');
+      candiesPlay(0, candiesInstances[0], scene, 'Ribbons');
+      candiesPlay(0, candiesInstances[0], scene, 'Strawberries');
+      candiesPlay(0, candiesInstances[0], scene, 'Worms'); */
     } catch (error) {
   }
 })
@@ -178,9 +195,8 @@ function boxController(
     function (newMeshes, particleSystems, skeletons, animationGroups) {
       const box = animationGroups[0];
       const ls = newMeshes[0];
-      ls.translate(new Vector3(0, 0, 0), 1, BABYLON.Space.WORLD);
+      ls.translate(new Vector3(0, 0, 0), 1, Space.WORLD);
       box.play(false);
-      console.log(box);
     }
   );
 }
