@@ -10,8 +10,9 @@
 
 .btn-holder {
   display: flex;
-  position: absolute;
+  position: relative;
   flex-direction: column;
+  z-index: 2;
 }
 
 .ile-holder {

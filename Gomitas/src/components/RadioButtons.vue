@@ -24,7 +24,7 @@ import { ref, onMounted, onUpdated } from "vue";
     };
 
     const animState: AnimState[] = [
-    { id: 0, name:"ChocoMellow", state: false },
+    { id: 0, name:"ChocoMellows", state: false },
     { id: 1, name:"LifeSavers", state: false },
     { id: 2, name:"Oranges", state: false },
     { id: 3, name:"Ribbons", state: false },

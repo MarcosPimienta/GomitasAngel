@@ -9,7 +9,6 @@ import {
 import "@babylonjs/inspector";
 import "babylonjs-loaders";
 import * as CandyLoader from "./CandyLoader";
-import { switcherOp } from "./IleController";
 
 const createScene = function (canvas:HTMLCanvasElement){
   const engine = new Engine(canvas);
@@ -30,12 +29,8 @@ const createScene = function (canvas:HTMLCanvasElement){
     { state: false },
     { state: false },
   ];
-  let ileSelector:number = 0;
-  let sceneAnim:number = 0;
-  let animFwd : boolean = true;
-  let animSelector:number = 0;
 
-  let candiesInstances: CandyLoader.Candy[] = CandyLoader.candiesLoader(scene, new Vector3(-1.56, 0, 0), animSelector);
+  let candiesInstances: CandyLoader.Candy[] = CandyLoader.candiesLoader(scene, new Vector3(-1.56, 0, 0), 0);
   //exposeAnim(animSelector, candiesInstances[0], scene);
   //CandyLoader.candiesPlay( animSelector, candiesInstances[0], scene);
   //cloneCandies(scene, new Vector3(-1.56, 0, 0));
