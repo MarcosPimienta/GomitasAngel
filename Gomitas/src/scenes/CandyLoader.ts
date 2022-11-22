@@ -15,7 +15,7 @@ interface Candy {
 //This handles the configuration of the imported Candy above and its values inside the scene
 interface CandyConfig {
   id: number;
-  name: string;
+  name: string[];
   path: string;
   file: string;
   row_position: Vector3;
@@ -48,7 +48,7 @@ interface CandyObject {
 
 const config: CandyConfig[] = [{
   id: 0,
-  name: "",
+  name: ['ChocoMellows', 'LifeSavers', 'Oranges', 'Ribbons', 'Strawberries', 'Worms'],
   path: "./",
   file: "Candies.glb",
   row_position: new Vector3(0, 0, 0),
@@ -84,7 +84,7 @@ function animationHandler(Candies: Candy[]){
   })
 }
 
-function candiesLoader(scene: Scene, position: Vector3, index: number){
+function candiesLoader(scene: Scene, position: Vector3){
   const candiesInstances: Candy[] = [];
   config.forEach(async (candy) => {
   try {
@@ -160,6 +160,7 @@ function candiesLoader(scene: Scene, position: Vector3, index: number){
         mesh: "",
         ilePos: position,
       })
+      console.log(candiesInstances);
       candiesInstances[5].object.meshes[0].translate(new Vector3(1.56, 0, 0), 1, Space.WORLD);
       candiesInstances[4].object.meshes[0].translate(new Vector3(0.93, 0, 0), 1, Space.WORLD);
       candiesInstances[3].object.meshes[0].translate(new Vector3(0.31, 0, 0), 1, Space.WORLD);
@@ -167,12 +168,6 @@ function candiesLoader(scene: Scene, position: Vector3, index: number){
       candiesInstances[1].object.meshes[0].translate(new Vector3(-0.93, 0, 0), 1, Space.WORLD);
       candiesInstances[0].object.meshes[0].translate(position, 1, Space.WORLD);
       animationHandler(candiesInstances);
-      /* candiesPlay(0, candiesInstances[0], scene, 'ChocoMellows');
-      candiesPlay(0, candiesInstances[0], scene, 'LifeSavers');
-      candiesPlay(0, candiesInstances[0], scene, 'Oranges');
-      candiesPlay(0, candiesInstances[0], scene, 'Ribbons');
-      candiesPlay(0, candiesInstances[0], scene, 'Strawberries');
-      candiesPlay(0, candiesInstances[0], scene, 'Worms'); */
     } catch (error) {
   }
 })
