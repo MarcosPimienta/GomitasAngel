@@ -9,7 +9,7 @@ interface Ile {
 const iles: Ile[] = [];
 
 function ileLoad( position: Vector3, rotation: number, scene: Scene){
-  const plane: any = MeshBuilder.CreatePlane('select',{size: 1, width: 0.45, height: 1, sideOrientation: 2});
+  const plane: any = MeshBuilder.CreatePlane('select',{size: 1, width: 0.5, height: 2.5, sideOrientation: 2});
   plane.rotation.x = Math.PI/2;
   plane.rotate(new Vector3(1, 1, 1), rotation * Math.PI, Space.WORLD);
   plane.translate(position, 1, Space.WORLD);
@@ -34,15 +34,14 @@ function ileLoad( position: Vector3, rotation: number, scene: Scene){
       iles[0].object?.translate(new Vector3(0.64, 0, 0), 1, Space.WORLD);
       iles[1].object?.translate(new Vector3(1.28, 0, 0), 1, Space.WORLD);
       iles[2].object?.translate(new Vector3(1.88, 0, 0), 1, Space.WORLD);
-      iles[3].object?.translate(new Vector3(2.48, 0, 0), 1, Space.WORLD);
-      iles[4].object?.translate(new Vector3(3.08, 0, 0), 1, Space.WORLD);
+      iles[3].object?.translate(new Vector3(2.5, 0, 0), 1, Space.WORLD);
+      iles[4].object?.translate(new Vector3(3.15, 0, 0), 1, Space.WORLD);
   return iles;
 }
 
-function ilePlay( position: Vector3, rotation: number, scene: Scene){
+function ileSelect( position: Vector3, rotation: number, scene: Scene){
 
-  
 }
 
-export { ilePlay, ileLoad };
+export { ileSelect, ileLoad };
 
