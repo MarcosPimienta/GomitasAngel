@@ -42,11 +42,15 @@ function ileLoad( position: Vector3, rotation: number, scene: Scene){
       iles[2].object?.translate(new Vector3(1.88, 0, 0), 1, Space.WORLD);
       iles[3].object?.translate(new Vector3(2.5, 0, 0), 1, Space.WORLD);
       iles[4].object?.translate(new Vector3(3.15, 0, 0), 1, Space.WORLD);
+      ileSelect(1, iles, scene);
   return iles;
 }
 
-function ileSelect( position: Vector3, rotation: number, scene: Scene){
-
+function ileSelect( index: number, Selectors: Ile[], scene: Scene){
+  Selectors.forEach((Selector)=>{
+    Selector.object?.setEnabled(false);
+  })
+  Selectors[index].object?.setEnabled(true);
 }
 
 export { ileSelect, ileLoad };
