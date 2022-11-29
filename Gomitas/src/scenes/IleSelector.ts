@@ -1,4 +1,4 @@
-import { HighlightLayer, SceneLoader, Vector3, Space, GizmoManager, UtilityLayerRenderer, type Scene, MeshBuilder, CreatePlane, RotationGizmo, InstancedMesh, Mesh } from "@babylonjs/core";
+import { HighlightLayer, StandardMaterial, SceneLoader, Vector3, Color3, Space, GizmoManager, UtilityLayerRenderer, type Scene, MeshBuilder, CreatePlane, RotationGizmo, InstancedMesh, Mesh } from "@babylonjs/core";
 import { objectToString } from "@vue/shared";
 
 interface Ile {
@@ -9,10 +9,16 @@ interface Ile {
 const iles: Ile[] = [];
 
 function ileLoad( position: Vector3, rotation: number, scene: Scene){
+  const highlightLayer = new HighlightLayer("highlight", scene);
   const plane: any = MeshBuilder.CreatePlane('select',{size: 1, width: 0.5, height: 2.5, sideOrientation: 2});
+  highlightLayer.addMesh(plane, Color3.Green());
+  let mat1 = new StandardMaterial("mat1", scene);
+  mat1.alpha = 0;
+  plane.material = mat1;
   plane.rotation.x = Math.PI/2;
   plane.rotate(new Vector3(1, 1, 1), rotation * Math.PI, Space.WORLD);
   plane.translate(position, 1, Space.WORLD);
+
 
   iles.push(
       { id: 1,
