@@ -6,19 +6,15 @@ interface Ile {
   object?: Mesh;
 }
 
-const iles: Ile[] = [];
-
-function ileLoad( position: Vector3, rotation: number, scene: Scene){
-  const highlightLayer = new HighlightLayer("highlight", scene);
-  const plane: any = MeshBuilder.CreatePlane('select',{size: 1, width: 0.5, height: 2.5, sideOrientation: 2});
-  highlightLayer.addMesh(plane, Color3.Green());
+function ileLoad(scene: Scene){
+  const iles :Ile[] = [];
+  const plane: any = MeshBuilder.CreatePlane('select',{size: 1, width: 0.5, height: 2.7, sideOrientation: 2});
   let mat1 = new StandardMaterial("mat1", scene);
   mat1.alpha = 0;
   plane.material = mat1;
   plane.rotation.x = Math.PI/2;
-  plane.rotate(new Vector3(1, 1, 1), rotation * Math.PI, Space.WORLD);
-  plane.translate(position, 1, Space.WORLD);
-
+  plane.rotate(new Vector3(1, 1, 1), 90 * Math.PI, Space.WORLD);
+  plane.translate(new Vector3(-1.56, 0.3, 0), 1, Space.WORLD)
 
   iles.push(
       { id: 1,
@@ -38,19 +34,30 @@ function ileLoad( position: Vector3, rotation: number, scene: Scene){
       },
     )
       iles[0].object?.translate(new Vector3(0.64, 0, 0), 1, Space.WORLD);
-      iles[1].object?.translate(new Vector3(1.28, 0, 0), 1, Space.WORLD);
+      iles[1].object?.translate(new Vector3(1.28, 0., 0), 1, Space.WORLD);
       iles[2].object?.translate(new Vector3(1.88, 0, 0), 1, Space.WORLD);
       iles[3].object?.translate(new Vector3(2.5, 0, 0), 1, Space.WORLD);
       iles[4].object?.translate(new Vector3(3.15, 0, 0), 1, Space.WORLD);
-      ileSelect(1, iles, scene);
-  return iles;
 }
 
-function ileSelect( index: number, Selectors: Ile[], scene: Scene){
-  Selectors.forEach((Selector)=>{
-    Selector.object?.setEnabled(false);
-  })
-  Selectors[index].object?.setEnabled(true);
+function ileSelect( index: number, scene: Scene){
+  const highlightLayer = new HighlightLayer("highlight", scene);
+  const cone: Mesh = MeshBuilder.CreateCylinder("cone", {height: 0.15, diameterTop: 0, diameterBottom: 0.2, tessellation: 8, subdivisions: 24}, scene);
+  highlightLayer.addMesh(cone, Color3.White());
+  let mat1 = new StandardMaterial("mat1", scene);
+  cone.material = mat1;
+  mat1.alpha = 0;
+  cone.rotation.x = Math.PI;
+  cone.rotate(new Vector3(1, 1, 1), 180 * Math.PI, Space.WORLD);
+  let ilePositions: Array<Vector3> = [
+    new Vector3(-1.56, 0.5, 1.5),
+    new Vector3(-0.93, 0.5, 1.5),
+    new Vector3(-0.31, 0.5, 1.5),
+    new Vector3(0.31, 0.5, 1.5),
+    new Vector3(0.93, 0.5, 1.5),
+    new Vector3(1.56, 0.5, 1.5)
+  ];
+  cone.translate(ilePositions[index], 1, Space.WORLD);
 }
 
 export { ileSelect, ileLoad };

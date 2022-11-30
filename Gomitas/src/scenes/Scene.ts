@@ -14,6 +14,7 @@ const createScene = function (canvas:HTMLCanvasElement){
   const engine = new Engine(canvas);
   const scene = new Scene(engine);
 
+  let indexSelect: number = 0;
   let candiesInstances: CandyLoader.Candy[] = CandyLoader.candiesLoader(scene, new Vector3(-1.56, 0, 0));
 
   const camera = new ArcRotateCamera(
@@ -27,7 +28,8 @@ const createScene = function (canvas:HTMLCanvasElement){
   camera.setTarget(Vector3.Zero());
   camera.attachControl(canvas, true);
   CandyLoader.boxController(["CandyBox"], "./", "CandyBox.gltf", scene);
-  IleSelector.ileLoad(new Vector3(-1.57, 0.3, 0), 90, scene);
+  IleSelector.ileLoad(scene);
+  IleSelector.ileSelect(indexSelect, scene);
   new HemisphericLight("light", Vector3.Up(), scene);
 
   scene.debugLayer.show({
@@ -36,7 +38,7 @@ const createScene = function (canvas:HTMLCanvasElement){
   engine.runRenderLoop(() => {
     scene.render();
   });
-  return {scene, engine, candiesInstances}
+  return {scene, engine, candiesInstances, indexSelect}
 };
 
 export { createScene };

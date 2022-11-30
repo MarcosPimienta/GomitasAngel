@@ -12,11 +12,12 @@
 import {ref, onMounted, onUpdated } from "vue";
 import { createScene } from "../scenes/Scene";
 import * as CandyLoader from "../scenes/CandyLoader";
+import * as IleSelector from "../scenes/IleSelector";
 import RadioButtons from "./RadioButtons.vue";
 import IleButtons from "./IleButtons.vue";
 
   components: {
-    RadioButtons,
+    RadioButtons
     IleButtons
   }
 
@@ -36,11 +37,13 @@ import IleButtons from "./IleButtons.vue";
 
       function IlePlus(){
         ileSelector.value++;
+        IleSelector.ileSelect(bjsScene.indexSelect[ileSelector.value], bjsScene.scene);
         console.log(ileSelector.value);
       }
 
       function IleMinus(){
         ileSelector.value--;
+        IleSelector.ileSelect(bjsScene.indexSelect[ileSelector.value], bjsScene.scene);
         console.log(ileSelector.value);
       }
 
