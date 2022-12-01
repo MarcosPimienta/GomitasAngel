@@ -1,9 +1,23 @@
-import { HighlightLayer, StandardMaterial, SceneLoader, Vector3, Color3, Space, GizmoManager, UtilityLayerRenderer, type Scene, MeshBuilder, CreatePlane, RotationGizmo, InstancedMesh, Mesh } from "@babylonjs/core";
+import { HighlightLayer, StandardMaterial, SceneLoader, Vector3, Color3, Space, GizmoManager, UtilityLayerRenderer, type Scene, MeshBuilder, CreatePlane, RotationGizmo, InstancedMesh, Mesh, AbstractMesh } from "@babylonjs/core";
 import { objectToString } from "@vue/shared";
 
 interface Ile {
   id: number | string;
   object?: Mesh;
+}
+
+function ileCone(scene:Scene): Mesh{
+  const highlightLayer = new HighlightLayer("highlight", scene);
+      const cone: Mesh = MeshBuilder.CreateCylinder("cone", {height: 0.15, diameterTop: 0, diameterBottom: 0.2, tessellation: 8, subdivisions: 24}, scene);
+      highlightLayer.addMesh(cone, Color3.White());
+      let mat2 = new StandardMaterial("mat1", scene);
+      cone.material = mat2;
+      mat2.alpha = 0;
+      cone.rotation.x = Math.PI;
+      cone.rotate(new Vector3(1, 1, 1), 180 * Math.PI, Space.WORLD);
+      cone.translate(new Vector3(-1.56, 0.5, 1.5), 1, Space.WORLD);
+
+      return cone;
 }
 
 function ileLoad(scene: Scene){
@@ -38,27 +52,20 @@ function ileLoad(scene: Scene){
       iles[2].object?.translate(new Vector3(1.88, 0, 0), 1, Space.WORLD);
       iles[3].object?.translate(new Vector3(2.5, 0, 0), 1, Space.WORLD);
       iles[4].object?.translate(new Vector3(3.15, 0, 0), 1, Space.WORLD);
-}
+    }
 
-function ileSelect( index: number, scene: Scene){
-  const highlightLayer = new HighlightLayer("highlight", scene);
-  const cone: Mesh = MeshBuilder.CreateCylinder("cone", {height: 0.15, diameterTop: 0, diameterBottom: 0.2, tessellation: 8, subdivisions: 24}, scene);
-  highlightLayer.addMesh(cone, Color3.White());
-  let mat1 = new StandardMaterial("mat1", scene);
-  cone.material = mat1;
-  mat1.alpha = 0;
-  cone.rotation.x = Math.PI;
-  cone.rotate(new Vector3(1, 1, 1), 180 * Math.PI, Space.WORLD);
-  let ilePositions: Array<Vector3> = [
-    new Vector3(-1.56, 0.5, 1.5),
-    new Vector3(-0.93, 0.5, 1.5),
-    new Vector3(-0.31, 0.5, 1.5),
-    new Vector3(0.31, 0.5, 1.5),
-    new Vector3(0.93, 0.5, 1.5),
-    new Vector3(1.56, 0.5, 1.5)
+function ileSelect( index: number, cone: Mesh){
+  console.log(index);
+  let ilePositions: Array<number> = [
+    -1.56,
+    -0.93,
+    -0.31,
+    0.31,
+    0.93,
+    1.56,
   ];
-  cone.translate(ilePositions[index], 1, Space.WORLD);
+  cone.position.x = ilePositions[index];
 }
 
-export { ileSelect, ileLoad };
+export { ileSelect, ileLoad, ileCone };
 

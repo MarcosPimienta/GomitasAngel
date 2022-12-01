@@ -28,8 +28,9 @@ const createScene = function (canvas:HTMLCanvasElement){
   camera.setTarget(Vector3.Zero());
   camera.attachControl(canvas, true);
   CandyLoader.boxController(["CandyBox"], "./", "CandyBox.gltf", scene);
+  let ilesCone = IleSelector.ileCone(scene);
   IleSelector.ileLoad(scene);
-  IleSelector.ileSelect(indexSelect, scene);
+  IleSelector.ileSelect(indexSelect, ilesCone);
   new HemisphericLight("light", Vector3.Up(), scene);
 
   scene.debugLayer.show({
@@ -38,7 +39,7 @@ const createScene = function (canvas:HTMLCanvasElement){
   engine.runRenderLoop(() => {
     scene.render();
   });
-  return {scene, engine, candiesInstances, indexSelect}
+  return {scene, engine, candiesInstances, indexSelect, ilesCone}
 };
 
 export { createScene };

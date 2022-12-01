@@ -23,7 +23,7 @@ import IleButtons from "./IleButtons.vue";
 
     const bjsCanvas = ref(null);
     let bjsScene = ref(null);
-    let ileSelector = ref(0);
+    let ileIndex = ref(0);
 
     onMounted(() => {
       if (bjsCanvas.value) {
@@ -32,19 +32,23 @@ import IleButtons from "./IleButtons.vue";
     });
 
       function animSwitch(item: any){
-        CandyLoader.candiesPlay(item.id, bjsScene.candiesInstances[ileSelector.value], bjsScene.scene, item.name);
+        CandyLoader.candiesPlay(item.id, bjsScene.candiesInstances[ileIndex.value], bjsScene.scene, item.name);
     };
 
       function IlePlus(){
-        ileSelector.value++;
-        IleSelector.ileSelect(bjsScene.indexSelect[ileSelector.value], bjsScene.scene);
-        console.log(ileSelector.value);
+        if(ileIndex.value < 5){
+          ileIndex.value++;
+          bjsScene.indexSelect = ileIndex.value;
+          IleSelector.ileSelect(bjsScene.indexSelect, bjsScene.ilesCone);
+        }
       }
 
       function IleMinus(){
-        ileSelector.value--;
-        IleSelector.ileSelect(bjsScene.indexSelect[ileSelector.value], bjsScene.scene);
-        console.log(ileSelector.value);
+        if(ileIndex.value > 0){
+          ileIndex.value--;
+          bjsScene.indexSelect = ileIndex.value;
+          IleSelector.ileSelect(bjsScene.indexSelect, bjsScene.ilesCone);
+        }
       }
 
 </script>
