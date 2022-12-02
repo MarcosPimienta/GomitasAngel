@@ -1,4 +1,4 @@
-import { HighlightLayer, StandardMaterial, SceneLoader, Vector3, Color3, Space, GizmoManager, UtilityLayerRenderer, type Scene, MeshBuilder, CreatePlane, RotationGizmo, InstancedMesh, Mesh, AbstractMesh } from "@babylonjs/core";
+import { HighlightLayer, StandardMaterial, PointerEventTypes, SceneLoader, Vector3, Color3, Space, GizmoManager, UtilityLayerRenderer, type Scene, MeshBuilder, CreatePlane, RotationGizmo, InstancedMesh, Mesh, AbstractMesh } from "@babylonjs/core";
 import { objectToString } from "@vue/shared";
 
 interface Ile {
@@ -22,15 +22,19 @@ function ileCone(scene:Scene): Mesh{
 
 function ileLoad(scene: Scene){
   const iles :Ile[] = [];
-  const plane: any = MeshBuilder.CreatePlane('select',{size: 1, width: 0.5, height: 2.7, sideOrientation: 2});
+  const plane: any = MeshBuilder.CreatePlane('parent',{size: 1, width: 0.5, height: 2.7, sideOrientation: 2});
   let mat1 = new StandardMaterial("mat1", scene);
   mat1.alpha = 0;
   plane.material = mat1;
   plane.rotation.x = Math.PI/2;
   plane.rotate(new Vector3(1, 1, 1), 90 * Math.PI, Space.WORLD);
   plane.translate(new Vector3(-1.56, 0.3, 0), 1, Space.WORLD)
+  plane.setEnabled(false);
 
   iles.push(
+      { id: 0,
+        object: plane.createInstance(`plane${0}`),
+      },
       { id: 1,
         object: plane.createInstance(`plane${1}`),
       },
@@ -47,11 +51,12 @@ function ileLoad(scene: Scene){
         object: plane.createInstance(`plane${5}`),
       },
     )
-      iles[0].object?.translate(new Vector3(0.64, 0, 0), 1, Space.WORLD);
-      iles[1].object?.translate(new Vector3(1.28, 0., 0), 1, Space.WORLD);
-      iles[2].object?.translate(new Vector3(1.88, 0, 0), 1, Space.WORLD);
-      iles[3].object?.translate(new Vector3(2.5, 0, 0), 1, Space.WORLD);
-      iles[4].object?.translate(new Vector3(3.15, 0, 0), 1, Space.WORLD);
+      iles[0].object?.translate(new Vector3(0, 0, 0), 1, Space.WORLD);
+      iles[1].object?.translate(new Vector3(0.64, 0, 0), 1, Space.WORLD);
+      iles[2].object?.translate(new Vector3(1.28, 0., 0), 1, Space.WORLD);
+      iles[3].object?.translate(new Vector3(1.88, 0, 0), 1, Space.WORLD);
+      iles[4].object?.translate(new Vector3(2.5, 0, 0), 1, Space.WORLD);
+      iles[5].object?.translate(new Vector3(3.15, 0, 0), 1, Space.WORLD);
     }
 
 function ileSelect( index: number, cone: Mesh){
@@ -67,5 +72,20 @@ function ileSelect( index: number, cone: Mesh){
   cone.position.x = ilePositions[index];
 }
 
-export { ileSelect, ileLoad, ileCone };
+function mouseListener(scene: Scene, Iles: Ile[]){
+  scene.onPointerObservable.add(event=>{
+  mouseSelect(event.pickInfo, Iles);
+}, PointerEventTypes.POINTERDOWN)
+}
+
+function mouseSelect(pickResult: any, Iles: Ile[]){
+  const foundIle = Iles.find(elem=>{
+    elem.object?.id === pickResult.pickedMesh.id;
+  });
+  if(foundIle){
+    pickResult.pickedMesh.showBoundingBox = true;
+  }
+}
+
+export { ileSelect, ileLoad, ileCone, mouseListener };
 
