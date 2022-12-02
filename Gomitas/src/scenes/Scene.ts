@@ -29,7 +29,8 @@ const createScene = function (canvas:HTMLCanvasElement){
   camera.attachControl(canvas, true);
   CandyLoader.boxController(["CandyBox"], "./", "CandyBox.gltf", scene);
   let ilesCone = IleSelector.ileCone(scene);
-  IleSelector.ileLoad(scene);
+  let iles = IleSelector.ileLoad(scene);
+  IleSelector.mouseListener(scene, iles);
   IleSelector.ileSelect(indexSelect, ilesCone);
   new HemisphericLight("light", Vector3.Up(), scene);
 
