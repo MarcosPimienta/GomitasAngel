@@ -61,10 +61,8 @@ function ileLoad(scene: Scene){
     return iles;
   }
 
-function ileSelect( index: number, mouseIndex: number, cone: Mesh){
-  console.log(index + 'vue');
-  console.log(mouseIndex + 'vue');
-
+function ileSelect( index: number, cone: Mesh){
+  console.log(index);
   let ilePositions: Array<number> = [
     -1.56,
     -0.93,
@@ -80,9 +78,9 @@ function mouseListener(scene: Scene, Iles: Ile[], camera: Camera, cone: Mesh){
   scene.onPointerDown = function castRay(){
     let ray = scene.createPickingRay(scene.pointerX, scene.pointerY, Matrix.Identity(), camera, false);
     let hit: any = scene.pickWithRay(ray);
-    let selectedIndex = hit?.pickedMesh?.uniqueId -10;
     Iles.find(elem=>{
       if(elem.object?.id === hit?.pickedMesh?.id){
+        let selectedIndex = hit?.pickedMesh?.uniqueId -10;
         ileMouseSelect(Iles, selectedIndex, cone)
       }
     })
@@ -93,7 +91,6 @@ function ileMouseSelect(Iles: Ile[], index: number, cone: Mesh) {
   Iles.findIndex((mesh) => {
     if (mesh.id === index){
       console.log('Hi ' + mesh.id);
-      ileSelect(index, cone);
     }
   })
   let ilePositions: Array<number> = [
