@@ -1,4 +1,4 @@
-import { HighlightLayer, StandardMaterial, PointerEventTypes, SceneLoader, Vector3, Color3, Space, GizmoManager, UtilityLayerRenderer, type Scene, MeshBuilder, CreatePlane, RotationGizmo, InstancedMesh, Mesh, AbstractMesh } from "@babylonjs/core";
+import { HighlightLayer, StandardMaterial, PointerEventTypes, SceneLoader, Vector3, Color3, Space, Matrix, type Scene, MeshBuilder, CreatePlane, RotationGizmo, InstancedMesh, Mesh, AbstractMesh, Camera } from "@babylonjs/core";
 import { objectToString } from "@vue/shared";
 
 interface Ile {
@@ -57,10 +57,14 @@ function ileLoad(scene: Scene){
       iles[3].object?.translate(new Vector3(1.88, 0, 0), 1, Space.WORLD);
       iles[4].object?.translate(new Vector3(2.5, 0, 0), 1, Space.WORLD);
       iles[5].object?.translate(new Vector3(3.15, 0, 0), 1, Space.WORLD);
-    }
 
-function ileSelect( index: number, cone: Mesh){
-  console.log(index);
+    return iles;
+  }
+
+function ileSelect( index: number, mouseIndex: number, cone: Mesh){
+  console.log(index + 'vue');
+  console.log(mouseIndex + 'vue');
+
   let ilePositions: Array<number> = [
     -1.56,
     -0.93,
@@ -72,19 +76,35 @@ function ileSelect( index: number, cone: Mesh){
   cone.position.x = ilePositions[index];
 }
 
-function mouseListener(scene: Scene, Iles: Ile[]){
-  scene.onPointerObservable.add(event=>{
-  mouseSelect(event.pickInfo, Iles);
-}, PointerEventTypes.POINTERDOWN)
+function mouseListener(scene: Scene, Iles: Ile[], camera: Camera, cone: Mesh){
+  scene.onPointerDown = function castRay(){
+    let ray = scene.createPickingRay(scene.pointerX, scene.pointerY, Matrix.Identity(), camera, false);
+    let hit: any = scene.pickWithRay(ray);
+    let selectedIndex = hit?.pickedMesh?.uniqueId -10;
+    Iles.find(elem=>{
+      if(elem.object?.id === hit?.pickedMesh?.id){
+        ileMouseSelect(Iles, selectedIndex, cone)
+      }
+    })
+  }
 }
 
-function mouseSelect(pickResult: any, Iles: Ile[]){
-  const foundIle = Iles.find(elem=>{
-    elem.object?.id === pickResult.pickedMesh.id;
-  });
-  if(foundIle){
-    pickResult.pickedMesh.showBoundingBox = true;
-  }
+function ileMouseSelect(Iles: Ile[], index: number, cone: Mesh) {
+  Iles.findIndex((mesh) => {
+    if (mesh.id === index){
+      console.log('Hi ' + mesh.id);
+      ileSelect(index, cone);
+    }
+  })
+  let ilePositions: Array<number> = [
+    -1.56,
+    -0.93,
+    -0.31,
+    0.31,
+    0.93,
+    1.56,
+  ];
+  cone.position.x = ilePositions[index];
 }
 
 export { ileSelect, ileLoad, ileCone, mouseListener };
