@@ -10,11 +10,12 @@ import "babylonjs-loaders";
 import * as CandyLoader from "./CandyLoader";
 import * as IleSelector from "./IleSelector"
 
+let indexSelect: number =  0;
+
 const createScene = function (canvas:HTMLCanvasElement){
   const engine = new Engine(canvas);
   const scene = new Scene(engine);
 
-  let indexSelect: number = 0;
   let candiesInstances: CandyLoader.Candy[] = CandyLoader.candiesLoader(scene, new Vector3(-1.56, 0, 0));
 
   const camera = new ArcRotateCamera(
@@ -43,4 +44,4 @@ const createScene = function (canvas:HTMLCanvasElement){
   return {scene, engine, candiesInstances, indexSelect, ilesCone}
 };
 
-export { createScene };
+export { createScene, indexSelect };
