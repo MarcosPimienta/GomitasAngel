@@ -1,4 +1,4 @@
-import { HighlightLayer, StandardMaterial, PointerEventTypes, SceneLoader, Vector3, Color3, Space, Matrix, type Scene, MeshBuilder, CreatePlane, RotationGizmo, InstancedMesh, Mesh, AbstractMesh, Camera } from "@babylonjs/core";
+import { HighlightLayer, StandardMaterial, Vector3, Color3, Space, Matrix, type Scene, MeshBuilder, Mesh, Camera } from "@babylonjs/core";
 import { objectToString } from "@vue/shared";
 
 interface Ile {
@@ -87,22 +87,15 @@ function mouseListener(scene: Scene, Iles: Ile[], camera: Camera, cone: Mesh){
   }
 }
 
-function ileMouseSelect(Iles: Ile[], index: number, cone: Mesh) {
+function ileMouseSelect(Iles: Ile[], index: number, cone: Mesh){
   Iles.findIndex((mesh) => {
     if (mesh.id === index){
       console.log('Hi ' + mesh.id);
     }
   })
-  let ilePositions: Array<number> = [
-    -1.56,
-    -0.93,
-    -0.31,
-    0.31,
-    0.93,
-    1.56,
-  ];
-  cone.position.x = ilePositions[index];
+  ileSelect(index, cone);
+  return index;
 }
 
-export { ileSelect, ileLoad, ileCone, mouseListener };
+export { ileSelect, ileMouseSelect, ileLoad, ileCone, mouseListener };
 
