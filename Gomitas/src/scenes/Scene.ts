@@ -10,8 +10,6 @@ import "babylonjs-loaders";
 import * as CandyLoader from "./CandyLoader";
 import * as IleSelector from "./IleSelector"
 
-let indexSelect: number =  0;
-
 const createScene = function (canvas:HTMLCanvasElement){
   const engine = new Engine(canvas);
   const scene = new Scene(engine);
@@ -32,16 +30,16 @@ const createScene = function (canvas:HTMLCanvasElement){
   let ilesCone = IleSelector.ileCone(scene);
   let iles = IleSelector.ileLoad(scene);
   IleSelector.mouseListener(scene, iles, camera, ilesCone);
-  IleSelector.ileSelect(indexSelect, ilesCone);
   new HemisphericLight("light", Vector3.Up(), scene);
 
   scene.debugLayer.show({
     embedMode: true,
   });
+
   engine.runRenderLoop(() => {
     scene.render();
   });
-  return {scene, engine, candiesInstances, indexSelect, ilesCone}
+  return {scene, engine, candiesInstances, ilesCone}
 };
 
-export { createScene, indexSelect };
+export { createScene };

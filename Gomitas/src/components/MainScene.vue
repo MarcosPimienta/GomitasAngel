@@ -38,16 +38,14 @@ import IleButtons from "./IleButtons.vue";
       function IlePlus(){
         if(ileIndex.value < 5){
           ileIndex.value++;
-          bjsScene.indexSelect = ileIndex.value;
-          IleSelector.ileSelect(bjsScene.indexSelect, bjsScene.ilesCone);
+          IleSelector.ileSelect(ileIndex.value, bjsScene.ilesCone);
         }
       }
 
       function IleMinus(){
         if(ileIndex.value > 0){
           ileIndex.value--;
-          bjsScene.indexSelect = ileIndex.value;
-          IleSelector.ileSelect(bjsScene.indexSelect, bjsScene.ilesCone);
+          IleSelector.ileSelect(ileIndex.value, bjsScene.ilesCone);
         }
       }
 
