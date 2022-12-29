@@ -1,6 +1,8 @@
 import { HighlightLayer, StandardMaterial, Vector3, Color3, Space, Matrix, type Scene, MeshBuilder, Mesh, Camera } from "@babylonjs/core";
 import { objectToString } from "@vue/shared";
 
+let selectedIndex: number = 0;
+
 interface Ile {
   id: number | string;
   object?: Mesh;
@@ -72,6 +74,8 @@ function ileSelect( index: number, cone: Mesh){
     1.56,
   ];
   cone.position.x = ilePositions[index];
+  console.log(index);
+  return index;
 }
 
 function mouseListener(scene: Scene, Iles: Ile[], camera: Camera, cone: Mesh){
@@ -80,8 +84,10 @@ function mouseListener(scene: Scene, Iles: Ile[], camera: Camera, cone: Mesh){
     let hit: any = scene.pickWithRay(ray);
     Iles.find(elem=>{
       if(elem.object?.id === hit?.pickedMesh?.id){
-        let selectedIndex = hit?.pickedMesh?.uniqueId -10;
-        ileMouseSelect(Iles, selectedIndex, cone)
+        selectedIndex = hit?.pickedMesh?.uniqueId -10;
+        ileMouseSelect(Iles, selectedIndex, cone);
+        console.log(selectedIndex);
+        return selectedIndex;
       }
     })
   }
@@ -97,5 +103,5 @@ function ileMouseSelect(Iles: Ile[], index: number, cone: Mesh){
   return index;
 }
 
-export { ileSelect, ileMouseSelect, ileLoad, ileCone, mouseListener };
+export { ileSelect, ileMouseSelect, ileLoad, ileCone, mouseListener, selectedIndex };
 
