@@ -31,20 +31,25 @@ import IleButtons from "./IleButtons.vue";
       }
     });
 
+      onUpdated(()=>{
+
+      })
+
       function animSwitch(item: any){
-        CandyLoader.candiesPlay(item.id, bjsScene.candiesInstances[ileIndex.value], bjsScene.scene, item.name);
+        CandyLoader.candiesPlay(item.id, bjsScene.candiesInstances[IleSelector.getIndex()], bjsScene.scene, item.name);
+        console.log(IleSelector.getIndex());
     };
 
       function IlePlus(){
-        if(ileIndex.value < 5){
-          ileIndex.value++;
-          IleSelector.ileSelect(ileIndex.value, bjsScene.ilesCone);
+        if(IleSelector.getIndex() < 5){
+          IleSelector.setIndex(IleSelector.getIndex() + 1);
+          IleSelector.ileSelect(IleSelector.getIndex(), bjsScene.ilesCone);
         }
       }
 
       function IleMinus(){
-        if(ileIndex.value > 0){
-          ileIndex.value--;
+        if(IleSelector.getIndex() > 0){
+          IleSelector.setIndex(IleSelector.getIndex() - 1);
           IleSelector.ileSelect(ileIndex.value, bjsScene.ilesCone);
         }
       }

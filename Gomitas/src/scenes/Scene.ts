@@ -10,6 +10,8 @@ import "babylonjs-loaders";
 import * as CandyLoader from "./CandyLoader";
 import * as IleSelector from "./IleSelector"
 
+let indexSelect: number =  IleSelector.selectedIndex;
+
 const createScene = function (canvas:HTMLCanvasElement){
   const engine = new Engine(canvas);
   const scene = new Scene(engine);
@@ -26,10 +28,20 @@ const createScene = function (canvas:HTMLCanvasElement){
   );
   camera.setTarget(Vector3.Zero());
   camera.attachControl(canvas, true);
+
+  //load candy box with open animation
   CandyLoader.boxController(["CandyBox"], "./", "CandyBox.gltf", scene);
+
+  //load cone for selection display
   let ilesCone = IleSelector.ileCone(scene);
+
+  //load iles for selection and loading
   let iles = IleSelector.ileLoad(scene);
+
+  //allows mouse to select within BabylonJS Scene with coordinates
   IleSelector.mouseListener(scene, iles, camera, ilesCone);
+
+  //adds light into BabylonJS Scene
   new HemisphericLight("light", Vector3.Up(), scene);
 
   scene.debugLayer.show({
@@ -39,7 +51,7 @@ const createScene = function (canvas:HTMLCanvasElement){
   engine.runRenderLoop(() => {
     scene.render();
   });
-  return {scene, engine, candiesInstances, ilesCone}
+  return {scene, engine, candiesInstances, indexSelect, ilesCone}
 };
 
-export { createScene };
+export { createScene, indexSelect };
