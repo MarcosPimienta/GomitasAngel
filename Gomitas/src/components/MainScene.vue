@@ -12,17 +12,18 @@
 import {ref, onMounted, onUpdated } from "vue";
 import { createScene } from "../scenes/Scene";
 import * as CandyLoader from "../scenes/CandyLoader";
+import * as IleSelector from "../scenes/IleSelector";
 import RadioButtons from "./RadioButtons.vue";
 import IleButtons from "./IleButtons.vue";
 
   components: {
-    RadioButtons,
+    RadioButtons
     IleButtons
   }
 
     const bjsCanvas = ref(null);
     let bjsScene = ref(null);
-    let ileSelector = ref(0);
+    let ileIndex = ref(0);
 
     onMounted(() => {
       if (bjsCanvas.value) {
@@ -30,18 +31,27 @@ import IleButtons from "./IleButtons.vue";
       }
     });
 
+      onUpdated(()=>{
+
+      })
+
       function animSwitch(item: any){
-        CandyLoader.candiesPlay(item.id, bjsScene.candiesInstances[ileSelector.value], bjsScene.scene, item.name);
+        CandyLoader.candiesPlay(item.id, bjsScene.candiesInstances[IleSelector.getIndex()], bjsScene.scene, item.name);
+        console.log(IleSelector.getIndex());
     };
 
       function IlePlus(){
-        ileSelector.value++;
-        console.log(ileSelector.value);
+        if(IleSelector.getIndex() < 5){
+          IleSelector.setIndex(IleSelector.getIndex() + 1);
+          IleSelector.ileSelect(IleSelector.getIndex(), bjsScene.ilesCone);
+        }
       }
 
       function IleMinus(){
-        ileSelector.value--;
-        console.log(ileSelector.value);
+        if(IleSelector.getIndex() > 0){
+          IleSelector.setIndex(IleSelector.getIndex() - 1);
+          IleSelector.ileSelect(ileIndex.value, bjsScene.ilesCone);
+        }
       }
 
 </script>
