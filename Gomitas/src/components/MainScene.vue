@@ -50,7 +50,7 @@ import IleButtons from "./IleButtons.vue";
       function IleMinus(){
         if(IleSelector.getIndex() > 0){
           IleSelector.setIndex(IleSelector.getIndex() - 1);
-          IleSelector.ileSelect(ileIndex.value, bjsScene.ilesCone);
+          IleSelector.ileSelect(IleSelector.getIndex(), bjsScene.ilesCone);
         }
       }
 
