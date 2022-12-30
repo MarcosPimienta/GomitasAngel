@@ -86,7 +86,8 @@ function mouseListener(scene: Scene, Iles: Ile[], camera: Camera, cone: Mesh){
       if(elem.object?.id === hit?.pickedMesh?.id){
         selectedIndex = hit?.pickedMesh?.uniqueId -10;
         ileMouseSelect(Iles, selectedIndex, cone);
-        console.log(selectedIndex);
+        setIndex(selectedIndex);
+        console.log('Selected Index is: ' + selectedIndex);
         return selectedIndex;
       }
     })
@@ -103,5 +104,13 @@ function ileMouseSelect(Iles: Ile[], index: number, cone: Mesh){
   return index;
 }
 
-export { ileSelect, ileMouseSelect, ileLoad, ileCone, mouseListener, selectedIndex };
+function setIndex(index: number){
+  selectedIndex = index;
+}
+
+function getIndex():number{
+ return selectedIndex;
+}
+
+export { ileSelect, ileMouseSelect, ileLoad, ileCone, mouseListener, setIndex, getIndex };
 
