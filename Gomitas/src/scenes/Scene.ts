@@ -2,6 +2,8 @@ import {
   Engine,
   ArcRotateCamera,
   Vector3,
+  Color3,
+  Color4,
   HemisphericLight,
   Scene,
 } from "@babylonjs/core";
@@ -9,8 +11,6 @@ import "@babylonjs/inspector";
 import "babylonjs-loaders";
 import * as CandyLoader from "./CandyLoader";
 import * as IleSelector from "./IleSelector"
-
-let indexSelect: number =  IleSelector.selectedIndex;
 
 const createScene = function (canvas:HTMLCanvasElement){
   const engine = new Engine(canvas);
@@ -30,7 +30,7 @@ const createScene = function (canvas:HTMLCanvasElement){
   camera.attachControl(canvas, true);
 
   //load candy box with open animation
-  CandyLoader.boxController(["CandyBox"], "./", "CandyBox.gltf", scene);
+  let box = CandyLoader.boxController(["CandyBox"], "./", "CandyBox.gltf", scene);
 
   //load cone for selection display
   let ilesCone = IleSelector.ileCone(scene);
@@ -42,7 +42,10 @@ const createScene = function (canvas:HTMLCanvasElement){
   IleSelector.mouseListener(scene, iles, camera, ilesCone);
 
   //adds light into BabylonJS Scene
-  new HemisphericLight("light", Vector3.Up(), scene);
+  let light = new HemisphericLight("light", new Vector3(0, 5, 0), scene);
+  //let light2 = new HemisphericLight("light", new Vector3(2, -1, 0), scene);
+
+  scene.clearColor = new Color4(0.91, 0.96, 0.97, 1);
 
   scene.debugLayer.show({
     embedMode: true,
@@ -51,7 +54,7 @@ const createScene = function (canvas:HTMLCanvasElement){
   engine.runRenderLoop(() => {
     scene.render();
   });
-  return {scene, engine, candiesInstances, indexSelect, ilesCone}
+  return {scene, engine, candiesInstances, ilesCone}
 };
 
-export { createScene, indexSelect };
+export { createScene };

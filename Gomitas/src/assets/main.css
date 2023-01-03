@@ -9,6 +9,7 @@
 }
 
 .btn-holder {
+  user-select: none;
   display: flex;
   position: relative;
   flex-direction: column;

@@ -11,7 +11,7 @@ interface Ile {
 function ileCone(scene:Scene): Mesh{
   const highlightLayer = new HighlightLayer("highlight", scene);
       const cone: Mesh = MeshBuilder.CreateCylinder("cone", {height: 0.15, diameterTop: 0, diameterBottom: 0.2, tessellation: 8, subdivisions: 24}, scene);
-      highlightLayer.addMesh(cone, Color3.White());
+      highlightLayer.addMesh(cone, new Color3(0.90, 0.55, 0.74), true);
       let mat2 = new StandardMaterial("mat1", scene);
       cone.material = mat2;
       mat2.alpha = 0;
