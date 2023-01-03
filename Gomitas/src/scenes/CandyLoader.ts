@@ -1,4 +1,4 @@
-import { AnimationGroup, SceneLoader, Vector3, Space, type ISceneLoaderAsyncResult, Scene } from "@babylonjs/core";
+import { AnimationGroup, SceneLoader, Vector3, Color3, PBRMetallicRoughnessMaterial, NoiseProceduralTexture, Space, type ISceneLoaderAsyncResult, Scene } from "@babylonjs/core";
 import { objectToString } from "@vue/shared";
 
 //This will handle the instance to be imported
@@ -188,6 +188,13 @@ function boxController(
     meshFile,
     scene,
     function (newMeshes, particleSystems, skeletons, animationGroups) {
+      //material creation
+      const material = new PBRMetallicRoughnessMaterial("boxMaterial", scene);
+      material.baseColor = new Color3(0.79, 0.78, 0.55);
+      material.metallic = 0;
+      for (let i = 0; i < newMeshes.length; i++){
+        newMeshes[i].material = material;
+      }
       const box = animationGroups[0];
       const ls = newMeshes[0];
       ls.translate(new Vector3(0, 0, 0), 1, Space.WORLD);

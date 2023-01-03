@@ -23,7 +23,6 @@ import IleButtons from "./IleButtons.vue";
 
     const bjsCanvas = ref(null);
     let bjsScene = ref(null);
-    let ileIndex = ref(0);
 
     onMounted(() => {
       if (bjsCanvas.value) {
