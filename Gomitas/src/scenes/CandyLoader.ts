@@ -1,4 +1,4 @@
-import { AnimationGroup, SceneLoader, Vector3, Color3, PBRMetallicRoughnessMaterial, NoiseProceduralTexture, Space, type ISceneLoaderAsyncResult, Scene } from "@babylonjs/core";
+import { AnimationGroup, SceneLoader, Vector3, Color3, PBRMetallicRoughnessMaterial, Texture, Space, type ISceneLoaderAsyncResult, Scene } from "@babylonjs/core";
 import { objectToString } from "@vue/shared";
 
 //This will handle the instance to be imported
@@ -188,8 +188,11 @@ function boxController(
     meshFile,
     scene,
     function (newMeshes, particleSystems, skeletons, animationGroups) {
+      const boxTexture = new Texture("/textures/GrungeTexture.jpeg", scene);
       //material creation
       const material = new PBRMetallicRoughnessMaterial("boxMaterial", scene);
+      /* material.baseTexture = boxTexture;
+      material.baseTexture.getAlphaFromRGB = true; */
       material.baseColor = new Color3(0.79, 0.78, 0.55);
       material.metallic = 0;
       for (let i = 0; i < newMeshes.length; i++){
@@ -203,36 +206,5 @@ function boxController(
   );
 }
 
-/* async function candiesLoader(
-  meshNames: string,
-  meshPath: string,
-  meshFile: string,
-  candiesID: number,
-  scene: BABYLON.Scene,
-  ilePos: BABYLON.Vector3,
-) {
-  if (animGate.state) {
-    if (animGate.empty) {
-
-      const meshGroups: BABYLON.ISceneLoaderAsyncResult =
-        await BABYLON.SceneLoader.ImportMeshAsync(
-          meshNames,
-          meshPath,
-          meshFile,
-          scene
-        );
-      const candyParent = meshGroups.meshes[0];
-      let [ChocoMellows, LifeSavers, Oranges, Ribbons, Strawberries, Worms] =
-        meshGroups.animationGroups;
-        candyParent.translate(ilePos, 1, BABYLON.Space.WORLD);
-        ChocoMellows.play(false);
-        LifeSavers.stop();
-        Oranges.stop();
-        Ribbons.stop();
-        Strawberries.stop();
-        Worms.stop();
-    }
-  }
-} */
 export { boxController, candiesLoader, candiesPlay };  export type { Candy };
 

@@ -45,7 +45,7 @@ const createScene = function (canvas:HTMLCanvasElement){
   let light = new HemisphericLight("light", new Vector3(0, 5, 0), scene);
   //let light2 = new HemisphericLight("light", new Vector3(2, -1, 0), scene);
 
-  scene.clearColor = new Color4(0.91, 0.96, 0.97, 1);
+  scene.clearColor = new Color4(0.40, 0.78, 0.78);
 
   scene.debugLayer.show({
     embedMode: true,
