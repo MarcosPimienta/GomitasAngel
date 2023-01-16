@@ -8,18 +8,19 @@ interface Ile {
   object?: Mesh;
 }
 
-function ileCone(scene:Scene): Mesh{
+function ileCone(scene:Scene): Mesh {
   const highlightLayer = new HighlightLayer("highlight", scene);
-      const cone: Mesh = MeshBuilder.CreateCylinder("cone", {height: 0.15, diameterTop: 0, diameterBottom: 0.2, tessellation: 8, subdivisions: 24}, scene);
-      highlightLayer.addMesh(cone, new Color3(0.90, 0.55, 0.74), true);
-      let mat2 = new StandardMaterial("mat1", scene);
-      cone.material = mat2;
-      mat2.alpha = 0;
-      cone.rotation.x = Math.PI;
-      cone.rotate(new Vector3(1, 1, 1), 180 * Math.PI, Space.WORLD);
-      cone.translate(new Vector3(-1.56, 0.5, 1.5), 1, Space.WORLD);
+    const cone: Mesh = MeshBuilder.CreateCylinder("cone", {height: 0.15, diameterTop: 0, diameterBottom: 0.2, tessellation: 8, subdivisions: 24}, scene);
+    highlightLayer.addMesh(cone, new Color3(0.40, 0.78, 0.78), true);
+    let mat2 = new StandardMaterial("mat1", scene);
+    cone.material = mat2;
+    mat2.alpha = 1;
+    mat2.emissiveColor = new Color3(0.40, 0.78, 0.78);
+    cone.rotation.x = Math.PI;
+    cone.rotate(new Vector3(1, 1, 1), 180 * Math.PI, Space.WORLD);
+    cone.translate(new Vector3(-1.56, 0.5, 1.5), 1, Space.WORLD);
 
-      return cone;
+    return cone;
 }
 
 function ileLoad(scene: Scene){
