@@ -1,6 +1,15 @@
-# Gomitas
+# Gomitas Angel
 
-This template should help get you started developing with Vue 3 in Vite.
+## Description
+
+This application is an interactive 3D scene developed using Vue.js and Babylon.js. It allows users to select different 'Ile' objects and play animations on 'Candy' objects in a 3D environment.
+
+The main virtues of combining Vue.js and Babylon.js in this project include:
+- Leveraging the simplicity and structure of Vue.js to build user interfaces in a component-based architecture.
+- Utilizing Babylon.js to create rich 3D interactive experiences, including complex 3D graphics and animations.
+- Employing Vue.js's reactivity system to automatically update the 3D scene when the underlying data changes.
+- Providing an engaging user experience by combining a responsive user interface with an immersive 3D environment.
+- Benefiting from the active community and rich ecosystem of plugins and resources for both Vue.js and Babylon.js.
 
 ## Recommended IDE Setup
 
@@ -21,6 +30,17 @@ If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has a
 
 See [Vite Configuration Reference](https://vitejs.dev/config/).
 
+## Installation
+
+Provide steps on how to install and run your application in the local environment.
+
+```bash
+# Clone the repository
+git clone <https://github.com/MarcosPimienta/GomitasAngel.git>
+
+# Navigate into the directory
+cd <repo-directory/Gomitas>
+
 ## Project Setup
 
 ```sh
@@ -38,3 +58,7 @@ npm run dev
 ```sh
 npm run build
 ```
+## Usage
+In this application, you can interact with a 3D box model. Use the mouse to orbit around the box. You can select 'Ile' objects by clicking on them.
+
+To the left of the screen, there is a GUI made in Vue.js. This GUI includes arrow icons that you can click to control the selection of the 'Ile' box. It also includes radio buttons that allow you to control the 3D animations of the 'Candy' objects.
