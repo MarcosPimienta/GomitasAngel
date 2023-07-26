@@ -66,4 +66,4 @@ To the left of the screen, there is a GUI made in Vue.js. This GUI includes arro
 ## Contributors
 If you wish to contribute to this project, please fork this repository and submit a pull request.
 
-- **Contributor Name** - [Abdel Baruc](https://github.com/Balhut)
+- **Contributor Name** - [Abdel Baruc](https://github.com/Bhalut)
