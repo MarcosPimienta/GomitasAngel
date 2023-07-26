@@ -6,6 +6,7 @@ import {
   Color4,
   HemisphericLight,
   Scene,
+  ComputeShaderParticleSystem,
 } from "@babylonjs/core";
 import "@babylonjs/inspector";
 import "babylonjs-loaders";
@@ -42,7 +43,7 @@ const createScene = function (canvas:HTMLCanvasElement){
   IleSelector.mouseListener(scene, iles, camera, ilesCone);
 
   //adds light into BabylonJS Scene
-  let light = new HemisphericLight("light", new Vector3(0, 5, 0), scene);
+  let light = new HemisphericLight("light", new Vector3(0, 10, 0), scene);
   //let light2 = new HemisphericLight("light", new Vector3(2, -1, 0), scene);
 
   scene.clearColor = new Color4(0.40, 0.78, 0.78);
