@@ -62,3 +62,8 @@ npm run build
 In this application, you can interact with a 3D box model. Use the mouse to orbit around the box. You can select 'Ile' objects by clicking on them.
 
 To the left of the screen, there is a GUI made in Vue.js. This GUI includes arrow icons that you can click to control the selection of the 'Ile' box. It also includes radio buttons that allow you to control the 3D animations of the 'Candy' objects.
+
+## Contributors
+If you wish to contribute to this project, please fork this repository and submit a pull request.
+
+- **Contributor Name** - [ContributorName](https://github.com/MarcosPimienta)
