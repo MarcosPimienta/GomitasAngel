@@ -1,6 +1,7 @@
 <template>
   <div>
     <div class="btn-holder">
+      <CartButton :candiesCount="totalCandiesSelected" @showModal="yourModalFunction"/>
       <RadioButtons @animationPlay="animSwitch"/>
       <IleButtons @plus="IlePlus" @minus="IleMinus"/>
     </div>
@@ -13,12 +14,14 @@ import {ref, onMounted, onUpdated } from "vue";
 import { createScene } from "../scenes/Scene";
 import * as CandyLoader from "../scenes/CandyLoader";
 import * as IleSelector from "../scenes/IleSelector";
+import CartButton from "./CartButton.vue"
 import RadioButtons from "./RadioButtons.vue";
 import IleButtons from "./IleButtons.vue";
 
   components: {
     RadioButtons
     IleButtons
+    CartButton
   }
 
     const bjsCanvas = ref(null);
@@ -69,8 +72,8 @@ import IleButtons from "./IleButtons.vue";
     height: 100%;
     background: #000000;
   }
-  .button{
+  /* .button{
     display: flex;
     position: absolute;
-  }
+  } */
 </style>

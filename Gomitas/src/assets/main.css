@@ -29,6 +29,11 @@
   display: flex;
   }
 
+.cart-btn {
+  display: flex;
+  width: 5%;
+  }
+
 .label-text {
   display: flex;
   color: white;
