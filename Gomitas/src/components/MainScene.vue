@@ -1,60 +1,68 @@
 <template>
   <div>
     <div class="btn-holder">
-      <CartButton :candiesCount="totalCandiesSelected" @showModal="yourModalFunction"/>
-      <RadioButtons @animationPlay="animSwitch"/>
+      <CartButton :isEnabled="allCandiesSelected" @showModal="yourModalFunction"/>
+      <RadioButtons @animationPlay="animSwitch" @candySelected="selectCandyForIle(IleSelector.getIndex(), $event)" />
       <IleButtons @plus="IlePlus" @minus="IleMinus"/>
     </div>
-    <canvas  class="bjsCanvas" ref="bjsCanvas"/>
+    <canvas class="bjsCanvas" ref="bjsCanvas"/>
   </div>
 </template>
 
 <script setup lang="ts">
-import {ref, onMounted, onUpdated } from "vue";
+import { ref, computed, onMounted, onUpdated } from "vue";
 import { createScene } from "../scenes/Scene";
 import * as CandyLoader from "../scenes/CandyLoader";
 import * as IleSelector from "../scenes/IleSelector";
-import CartButton from "./CartButton.vue"
+import CartButton from "./CartButton.vue";
 import RadioButtons from "./RadioButtons.vue";
 import IleButtons from "./IleButtons.vue";
 
-  components: {
-    RadioButtons
-    IleButtons
-    CartButton
+// Tracking selected candies for each 'ile'
+const selectedCandies = ref([null, null, null, null, null, null]);
+
+// Computed property to check if all 'iles' have candies selected
+const allCandiesSelected = computed(() => {
+  return selectedCandies.value.every(candy => candy !== null);
+});
+
+const bjsCanvas = ref(null);
+let bjsScene = ref(null);
+
+onMounted(() => {
+  if (bjsCanvas.value) {
+    bjsScene = createScene(bjsCanvas.value);
   }
+});
 
-    const bjsCanvas = ref(null);
-    let bjsScene = ref(null);
+function selectCandyForIle(ileIndex, candyId) {
+  selectedCandies.value[ileIndex] = candyId;
+}
 
-    onMounted(() => {
-      if (bjsCanvas.value) {
-        bjsScene = createScene(bjsCanvas.value);
-      }
-    });
+function enableCart() {
+  if (allCandiesSelected.value) {
+    // Logic to enable cart or show modal goes here
+  }
+}
 
-      onUpdated(()=>{
+function animSwitch(item: any) {
+  CandyLoader.candiesPlay(item.id, bjsScene.candiesInstances[IleSelector.getIndex()], bjsScene.scene, item.name);
+  console.log(IleSelector.getIndex());
+};
 
-      })
+function IlePlus() {
+  if (IleSelector.getIndex() < 5) {
+    IleSelector.setIndex(IleSelector.getIndex() + 1);
+    IleSelector.ileSelect(IleSelector.getIndex(), bjsScene.ilesCone);
+  }
+}
 
-      function animSwitch(item: any){
-        CandyLoader.candiesPlay(item.id, bjsScene.candiesInstances[IleSelector.getIndex()], bjsScene.scene, item.name);
-        console.log(IleSelector.getIndex());
-    };
-
-      function IlePlus(){
-        if(IleSelector.getIndex() < 5){
-          IleSelector.setIndex(IleSelector.getIndex() + 1);
-          IleSelector.ileSelect(IleSelector.getIndex(), bjsScene.ilesCone);
-        }
-      }
-
-      function IleMinus(){
-        if(IleSelector.getIndex() > 0){
-          IleSelector.setIndex(IleSelector.getIndex() - 1);
-          IleSelector.ileSelect(IleSelector.getIndex(), bjsScene.ilesCone);
-        }
-      }
+function IleMinus() {
+  if (IleSelector.getIndex() > 0) {
+    IleSelector.setIndex(IleSelector.getIndex() - 1);
+    IleSelector.ileSelect(IleSelector.getIndex(), bjsScene.ilesCone);
+  }
+}
 
 </script>
 <style>

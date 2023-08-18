@@ -5,16 +5,17 @@
         type="radio"
         value="ChocoMellows"
         name="ds"
-        @click="emit('animationPlay', item)" />
+        @click="handleClick(item)" />
       <label class="label-text" for="ds">{{ item.name }}</label>
     </div>
   </div>
 </template>
 <script setup lang="ts">
 
-  const emit = defineEmits<{
-  (e: 'animationPlay', object: AnimState): void
-  }>();
+const emit = defineEmits<{
+  (e: 'animationPlay', object: AnimState): void;
+  (e: 'candySelected', candyId: number): void;
+}>();
 
     interface AnimState {
       id: number;
@@ -30,6 +31,11 @@
     { id: 4, name:"Strawberries", state: false },
     { id: 5, name:"Worms", state: false },
   ];
+
+  function handleClick(item: AnimState) {
+  emit('animationPlay', item);
+  emit('candySelected', item.id);
+}
 
 </script>
 <style lang="css">
