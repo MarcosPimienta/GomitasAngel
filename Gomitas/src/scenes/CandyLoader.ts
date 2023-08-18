@@ -1,4 +1,4 @@
-import { AnimationGroup, SceneLoader, Vector3, Axis, Color3, PBRMetallicRoughnessMaterial, Texture, Space, type ISceneLoaderAsyncResult, Scene, PBRMaterial, StandardMaterial } from "@babylonjs/core";
+import { AnimationGroup, SceneLoader, Vector3, Space, type ISceneLoaderAsyncResult, Scene } from "@babylonjs/core";
 import { objectToString } from "@vue/shared";
 
 //This will handle the instance to be imported
@@ -21,18 +21,6 @@ interface CandyConfig {
   row_position: Vector3;
 }
 
-
-const candies: Candy[] = [
-  // {
-  //   id: 0,
-  //   name: "ChocoMellows",
-  //   path: "./",
-  //   object: null,
-  //   mesh: "ChocoMellows",
-  //   animation: null,
-  // },
-]
-
 //let POSITION: Vector3 = new Vector3(0, 0, 0);
 
 interface CandyObject {
@@ -53,6 +41,25 @@ const config: CandyConfig[] = [{
   file: "Candies.glb",
   row_position: new Vector3(0, 0, 0),
 }]
+
+function resetAllAnimations(candiesInstances: Candy[]) {
+  candiesInstances.forEach(candyInstance => {
+    if (candyInstance.object) {
+      // Reset animations
+      if (candyInstance.object.animationGroups) {
+        candyInstance.object.animationGroups.forEach(anim => {
+          anim.reset();
+        });
+      }
+
+      if (candyInstance.object.transformNodes) {
+        candyInstance.object.transformNodes.forEach(mesh => {
+          mesh.setEnabled(false);
+        });
+      }
+    }
+  });
+}
 
 function candiesPlay( index: number, candiesMesh: Candy, scene: Scene, newIndex: string){
     const animations = candiesMesh.object.animationGroups;
@@ -194,10 +201,10 @@ function boxController(
       //ls.rotate(Axis.Y, Math.PI, Space.LOCAL);
       box.play(false);
       //scene.beginAnimation(ls.skeleton, 0, 10, false, 1.0)
-      console.log(ls);
+      //console.log(ls);
     }
   );
 }
 
-export { boxController, candiesLoader, candiesPlay };  export type { Candy };
+export { boxController, candiesLoader, candiesPlay, resetAllAnimations };  export type { Candy };
 

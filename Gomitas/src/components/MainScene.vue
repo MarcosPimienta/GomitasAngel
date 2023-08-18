@@ -4,6 +4,7 @@
       <CartButton :isEnabled="allCandiesSelected" @showModal="yourModalFunction"/>
       <RadioButtons @animationPlay="animSwitch" @candySelected="selectCandyForIle(IleSelector.getIndex(), $event)" />
       <IleButtons @plus="IlePlus" @minus="IleMinus"/>
+      <ResetButton @reset="resetAllCandies"/>
     </div>
     <canvas class="bjsCanvas" ref="bjsCanvas"/>
   </div>
@@ -15,6 +16,7 @@ import { createScene } from "../scenes/Scene";
 import * as CandyLoader from "../scenes/CandyLoader";
 import * as IleSelector from "../scenes/IleSelector";
 import CartButton from "./CartButton.vue";
+import ResetButton from "./ResetButton.vue";
 import RadioButtons from "./RadioButtons.vue";
 import IleButtons from "./IleButtons.vue";
 
@@ -43,6 +45,12 @@ function enableCart() {
   if (allCandiesSelected.value) {
     // Logic to enable cart or show modal goes here
   }
+}
+
+function resetAllCandies() {
+  selectedCandies.value = [null, null, null, null, null, null];
+
+  CandyLoader.resetAllAnimations(bjsScene.candiesInstances);
 }
 
 function animSwitch(item: any) {
