@@ -5,7 +5,6 @@
 </template>
 
 <script lang="ts">
-import { ref, defineProps, defineEmits } from 'vue';
 
 export default {
   name: 'CartButton',
