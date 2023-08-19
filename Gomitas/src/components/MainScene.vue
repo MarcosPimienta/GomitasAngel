@@ -6,7 +6,7 @@
       <IleButtons @plus="IlePlus" @minus="IleMinus"/>
       <ResetButton @reset="resetAllCandies"/>
     </div>
-    <CartModal :show="showModal" :selectedCandies="selectedCandies" :allCandies="allCandies" @close="showModal = false"/>
+    <CartModal class="modal" :show="showModal" :selectedCandies="selectedCandies" :allCandies="allCandies" @close="showModal = false"/>
     <canvas class="bjsCanvas" ref="bjsCanvas"/>
   </div>
 </template>
