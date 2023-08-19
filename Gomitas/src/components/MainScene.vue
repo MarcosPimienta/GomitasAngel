@@ -1,11 +1,12 @@
 <template>
   <div>
     <div class="btn-holder">
-      <CartButton :isEnabled="allCandiesSelected" @showModal="yourModalFunction"/>
+      <CartButton :isEnabled="allCandiesSelected" @showModal="displayModal"/>
       <RadioButtons @animationPlay="animSwitch" @candySelected="selectCandyForIle(IleSelector.getIndex(), $event)" />
       <IleButtons @plus="IlePlus" @minus="IleMinus"/>
       <ResetButton @reset="resetAllCandies"/>
     </div>
+    <CartModal :show="showModal" :selectedCandies="selectedCandies" :allCandies="allCandies" @close="showModal = false"/>
     <canvas class="bjsCanvas" ref="bjsCanvas"/>
   </div>
 </template>
@@ -16,12 +17,23 @@ import { createScene } from "../scenes/Scene";
 import * as CandyLoader from "../scenes/CandyLoader";
 import * as IleSelector from "../scenes/IleSelector";
 import CartButton from "./CartButton.vue";
+import CartModal from "./CartModal.vue";
 import ResetButton from "./ResetButton.vue";
 import RadioButtons from "./RadioButtons.vue";
 import IleButtons from "./IleButtons.vue";
 
 // Tracking selected candies for each 'ile'
 const selectedCandies = ref([null, null, null, null, null, null]);
+const showModal = ref(false);
+const allCandies = [
+  { id: 0, name:"ChocoMellows" },
+  { id: 1, name:"LifeSavers" },
+  { id: 2, name:"Oranges" },
+  { id: 3, name:"Ribbons" },
+  { id: 4, name:"Strawberries" },
+  { id: 5, name:"Worms" },
+  // ... add other candies
+];
 
 // Computed property to check if all 'iles' have candies selected
 const allCandiesSelected = computed(() => {
@@ -39,6 +51,10 @@ onMounted(() => {
 
 function selectCandyForIle(ileIndex, candyId) {
   selectedCandies.value[ileIndex] = candyId;
+}
+
+function displayModal() {
+    showModal.value = true;  // This will show the modal when CartButton is clicked
 }
 
 function enableCart() {
