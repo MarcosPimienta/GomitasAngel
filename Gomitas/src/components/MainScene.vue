@@ -6,7 +6,7 @@
       <IleButtons @plus="IlePlus" @minus="IleMinus"/>
       <ResetButton @reset="resetAllCandies"/>
     </div>
-    <CartModal class="modal" :show="showModal" :selectedCandies="selectedCandies" :allCandies="allCandies" @close="showModal = false"/>
+    <CartModal class="modal" :key="modalKey" :show="showModal" :selectedCandies="selectedCandies" :allCandies="allCandies" @close="showModal = false"/>
     <canvas class="bjsCanvas" ref="bjsCanvas"/>
   </div>
 </template>
@@ -41,6 +41,7 @@ const allCandiesSelected = computed(() => {
 });
 
 const bjsCanvas = ref(null);
+const modalKey = ref(0);
 let bjsScene = ref(null);
 
 onMounted(() => {
@@ -65,8 +66,9 @@ function enableCart() {
 
 function resetAllCandies() {
   selectedCandies.value = [null, null, null, null, null, null];
-
   CandyLoader.resetAllAnimations(bjsScene.candiesInstances);
+  showModal.value = false
+  modalKey.value++;
 }
 
 function animSwitch(item: any) {
