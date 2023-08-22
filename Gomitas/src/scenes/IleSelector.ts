@@ -2,6 +2,8 @@ import { HighlightLayer, StandardMaterial, Vector3, Color3, Space, Matrix, type 
 import { objectToString } from "@vue/shared";
 
 let selectedIndex: number = 0;
+let selectedCandiesForIles: (number | null)[] = [null, null, null, null, null, null];
+let allCandiesReference: { id: number; name: string }[] = [];
 
 interface Ile {
   id: number | string;
@@ -65,7 +67,7 @@ function ileLoad(scene: Scene){
   }
 
 function ileSelect( index: number, cone: Mesh){
-  console.log(index);
+
   let ilePositions: Array<number> = [
     -1.56,
     -0.93,
@@ -75,33 +77,54 @@ function ileSelect( index: number, cone: Mesh){
     1.56,
   ];
   cone.position.x = ilePositions[index];
-  console.log(index);
+
   return index;
 }
 
-function mouseListener(scene: Scene, Iles: Ile[], camera: Camera, cone: Mesh){
+function setCandyForIle(ileIndex: number, candyId: number) {
+  selectedCandiesForIles[ileIndex] = candyId;
+}
+
+function mouseListener(scene: Scene, Iles: Ile[], camera: Camera, cone: Mesh, onIleSelected: (index: number) => void){
   scene.onPointerDown = function castRay(){
     let ray = scene.createPickingRay(scene.pointerX, scene.pointerY, Matrix.Identity(), camera, false);
     let hit: any = scene.pickWithRay(ray);
     Iles.find(elem=>{
       if(elem.object?.id === hit?.pickedMesh?.id){
         selectedIndex = hit?.pickedMesh?.uniqueId -10;
-        ileMouseSelect(Iles, selectedIndex, cone);
+        ileMouseSelect(Iles, selectedIndex, cone, onIleSelected);
         setIndex(selectedIndex);
-        console.log('Selected Index is: ' + selectedIndex);
+
         return selectedIndex;
       }
     })
   }
 }
 
-function ileMouseSelect(Iles: Ile[], index: number, cone: Mesh){
-  Iles.findIndex((mesh) => {
-    if (mesh.id === index){
-      console.log('Hi ' + mesh.id);
-    }
-  })
+function setAllCandiesReference(candies: { id: number; name: string }[]) {
+  allCandiesReference = candies;
+}
+
+function ileMouseSelect(Iles: Ile[], index: number, cone: Mesh, onIleSelected: (index: number) => void) {
+
+  // Log the selected candy for the given Ile
+  const selectedCandyForIle = selectedCandiesForIles[index];
+  const candyDetails = allCandiesReference.find(c => c.id === selectedCandyForIle);
+
+  if (selectedCandyForIle !== null) {
+    console.log(`Ile ${index} has candy with ID: ${selectedCandyForIle}`);
+  } else {
+    console.log(`Ile ${index} has no candy selected.`);
+  }
   ileSelect(index, cone);
+  onIleSelected(index);
+
+  if (candyDetails) {
+    console.log(`Ile ${index} has candy: ${candyDetails.name}`);
+  } else {
+    console.log(`Ile ${index} has no candy selected.`);
+  }
+
   return index;
 }
 
@@ -110,8 +133,8 @@ function setIndex(index: number){
 }
 
 function getIndex():number{
- return selectedIndex;
+  return selectedIndex;
 }
 
-export { ileSelect, ileMouseSelect, ileLoad, ileCone, mouseListener, setIndex, getIndex };
+export { ileSelect, ileMouseSelect, ileLoad, ileCone, mouseListener, setIndex, setCandyForIle, getIndex, setAllCandiesReference };
 

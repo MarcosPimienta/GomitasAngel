@@ -13,7 +13,8 @@ import "babylonjs-loaders";
 import * as CandyLoader from "./CandyLoader";
 import * as IleSelector from "./IleSelector"
 
-const createScene = function (canvas:HTMLCanvasElement){
+const createScene = function (canvas:HTMLCanvasElement, onIleSelected: (index: number) => void) {
+
   const engine = new Engine(canvas);
   const scene = new Scene(engine);
 
@@ -40,7 +41,7 @@ const createScene = function (canvas:HTMLCanvasElement){
   let iles = IleSelector.ileLoad(scene);
 
   //allows mouse to select within BabylonJS Scene with coordinates
-  IleSelector.mouseListener(scene, iles, camera, ilesCone);
+  IleSelector.mouseListener(scene, iles, camera, ilesCone, onIleSelected);
 
   //adds light into BabylonJS Scene
   let light = new HemisphericLight("light", new Vector3(0, 10, 0), scene);

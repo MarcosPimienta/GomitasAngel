@@ -2,7 +2,11 @@
   <div>
     <div class="btn-holder">
       <CartButton :isEnabled="allCandiesSelected" @showModal="displayModal"/>
-      <RadioButtons @animationPlay="animSwitch" @candySelected="selectCandyForIle(IleSelector.getIndex(), $event)" />
+      <RadioButtons
+      :key="currentIleIndex ?? 0"
+      :selectedCandyId="selectedCandies[IleSelector.getIndex()]"
+      @animationPlay="animSwitch"
+      @candySelected="selectCandyForIle(IleSelector.getIndex(), $event)" />
       <IleButtons @plus="IlePlus" @minus="IleMinus"/>
       <ResetButton @reset="resetAllCandies"/>
     </div>
@@ -12,6 +16,7 @@
 </template>
 
 <script setup lang="ts">
+import type { Scene, Engine, Mesh } from "@babylonjs/core";
 import { ref, computed, onMounted, onUpdated } from "vue";
 import { createScene } from "../scenes/Scene";
 import * as CandyLoader from "../scenes/CandyLoader";
@@ -35,6 +40,13 @@ const allCandies = [
   // ... add other candies
 ];
 
+interface SceneReturnType {
+  scene: Scene;
+  engine: Engine;
+  candiesInstances: CandyLoader.Candy[];
+  ilesCone: Mesh;
+}
+
 // Computed property to check if all 'iles' have candies selected
 const allCandiesSelected = computed(() => {
   return selectedCandies.value.every(candy => candy !== null);
@@ -42,16 +54,22 @@ const allCandiesSelected = computed(() => {
 
 const bjsCanvas = ref(null);
 const modalKey = ref(0);
-let bjsScene = ref(null);
+const currentIleIndex = ref<number | null>(null);
+let bjsScene: Ref<SceneReturnType | null> = ref(null)
 
 onMounted(() => {
   if (bjsCanvas.value) {
-    bjsScene = createScene(bjsCanvas.value);
+    bjsScene = createScene(bjsCanvas.value, (selectedIndex) => {
+      currentIleIndex.value = selectedIndex;
+      // Further logic to handle the ile selection can go here
+    });
+    IleSelector.setAllCandiesReference(allCandies); // This is set once after the scene is created
   }
 });
 
 function selectCandyForIle(ileIndex, candyId) {
   selectedCandies.value[ileIndex] = candyId;
+  IleSelector.setCandyForIle(ileIndex, candyId);
 }
 
 function displayModal() {
@@ -80,6 +98,7 @@ function IlePlus() {
   if (IleSelector.getIndex() < 5) {
     IleSelector.setIndex(IleSelector.getIndex() + 1);
     IleSelector.ileSelect(IleSelector.getIndex(), bjsScene.ilesCone);
+    currentIleIndex.value = IleSelector.getIndex();
   }
 }
 
@@ -87,6 +106,7 @@ function IleMinus() {
   if (IleSelector.getIndex() > 0) {
     IleSelector.setIndex(IleSelector.getIndex() - 1);
     IleSelector.ileSelect(IleSelector.getIndex(), bjsScene.ilesCone);
+    currentIleIndex.value = IleSelector.getIndex();
   }
 }
 
