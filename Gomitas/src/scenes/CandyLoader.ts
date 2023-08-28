@@ -1,4 +1,4 @@
-import { AnimationGroup, SceneLoader, Vector3, Space, type ISceneLoaderAsyncResult, Scene } from "@babylonjs/core";
+import { AnimationGroup, SceneLoader, Vector3, Space, type ISceneLoaderAsyncResult, Scene, StandardMaterial, Texture } from "@babylonjs/core";
 import { objectToString } from "@vue/shared";
 
 //This will handle the instance to be imported
@@ -89,6 +89,28 @@ function animationHandler(Candies: Candy[]){
       anim.stop();
     })
   })
+}
+
+function testMeshTexture(
+  meshNames: string[],
+  meshPath: string,
+  meshFile: string,
+  scene: Scene
+) {
+  SceneLoader.ImportMesh(
+    meshNames,
+    meshPath,
+    meshFile,
+    scene,
+    function (newMeshes) {
+      /* const material = new StandardMaterial('LifeSaver', scene)
+      material.diffuseTexture = new Texture("./textures/Gomita_salvaida_BaseColor.png", scene);
+      material.bumpTexture = new Texture("./textures/Gomita_salvaida_Normal.png", scene); */
+      const ms = newMeshes[0];
+      /* ms.material = material; */
+      ms.translate(new Vector3(0, 0, 0), 1, Space.WORLD);
+    }
+  );
 }
 
 function candiesLoader(scene: Scene, position: Vector3){
@@ -206,5 +228,5 @@ function boxController(
   );
 }
 
-export { boxController, candiesLoader, candiesPlay, resetAllAnimations };  export type { Candy };
+export { boxController, candiesLoader, candiesPlay, resetAllAnimations, testMeshTexture };  export type { Candy };
 
