@@ -1,0 +1,25 @@
+{
+"compilerOptions": {
+  "target": "ESNext",
+  "module": "commonjs",
+  "moduleResolution": "node",
+  "esModuleInterop": true,
+  "skipLibCheck": true,
+  "forceConsistentCasingInFileNames": true,
+  "strict": true,
+  "noImplicitAny": false,
+  "strictNullChecks": true,
+  "strictFunctionTypes": true,
+  "strictBindCallApply": true,
+  "strictPropertyInitialization": true,
+  "noImplicitThis": true,
+  "alwaysStrict": true,
+  "outDir": "./dist",
+  "rootDir": "./src",
+  "removeComments": true,
+  "preserveConstEnums": true,
+  "sourceMap": true
+},
+"include": ["src/**/*.ts"],
+"exclude": ["node_modules"]
+}
