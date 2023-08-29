@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "@babylonjs/inspector": "^5.23.0",
+    "babylonjs-gui": "^5.23.0",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.5.7",
+    "nodemon": "^3.0.1",
+    "typescript": "^5.2.2"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "npx nodemon --exec 'ts-node' ./src/server.ts"
+  }
+}
