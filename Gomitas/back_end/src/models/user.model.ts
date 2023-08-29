@@ -32,7 +32,12 @@ const getUserByUsername = async (username: string): Promise<RowDataPacket | null
 };
 
 const getUserById = async (userId: number | string): Promise<RowDataPacket[]> => {
-    const [rows] = await pool.execute<RowDataPacket[]>('SELECT * FROM Users WHERE id = ?', [userId]);
+    const [rows] = await pool.execute<RowDataPacket[]>('SELECT * FROM Users WHERE userID = ?', [userId]);
+    return rows;
+};
+
+const getUsers = async (): Promise<RowDataPacket[]> => {
+    const [rows] = await pool.execute<RowDataPacket[]>('SELECT * FROM Users');
     return rows;
 };
 
@@ -41,4 +46,4 @@ const deleteUser = async (username: string) => {
     return result;
 };
 
-export { createUser, updateUserEmail, updateUser, getUserByUsername, getUserById, deleteUser };
+export { createUser, updateUserEmail, updateUser, getUserByUsername, getUserById, getUsers, deleteUser };
