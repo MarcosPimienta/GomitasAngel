@@ -7,7 +7,7 @@
       "@/*": ["./src/*"]
     },
     "sourceMap": true,
-    "allowJS": true
+    "allowJs": true
   },
 
   "references": [

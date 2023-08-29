@@ -5,6 +5,6 @@
     "composite": true,
     "types": ["node"],
     "sourceMap": true,
-    "allowJS": true
+    "allowJs": true
   }
 }
