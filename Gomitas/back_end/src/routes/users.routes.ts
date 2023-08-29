@@ -1,5 +1,5 @@
 import express from 'express';
-import { createUser, getUserById, updateUser, deleteUser} from '../models/user.model';
+import { createUser, getUserById, getUsers, updateUser, deleteUser} from '../models/user.model';
 
 const router = express.Router();
 
@@ -22,6 +22,16 @@ router.get('/users/:id', async (req, res) => {
     res.status(200).json(user);
   } catch (error) {
     res.status(500).json({ message: 'Error fetching user.', error });
+  }
+});
+
+router.get('/users', async (req, res) => {
+  try {
+    const userId = req.params;
+    const user = await getUsers();
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching users.', error });
   }
 });
 
