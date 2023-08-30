@@ -48,13 +48,19 @@ router.put('/users/:id', async (req, res) => {
 });
 
 // Delete (DELETE)
-router.delete('/users/:id', async (req, res) => {
-    try {
-    const userId = req.params.id;
-    await deleteUser(userId);
-    res.status(200).json({ message: 'User deleted successfully!' });
+
+router.delete('/users/:username', async (req, res) => {
+  try {
+      const userName = req.params.username;
+      const affectedRows = await deleteUser(userName);  // Get the number of rows that were deleted
+
+      if (affectedRows === 0) {
+          res.status(404).json({ message: 'User not found!' });  // No rows were deleted, so the user was not found
+      } else {
+          res.status(200).json({ message: 'User deleted successfully!' });
+      }
   } catch (error) {
-    res.status(500).json({ message: 'Error deleting user.', error });
+      res.status(500).json({ message: 'Error deleting user.', error });
   }
 });
 

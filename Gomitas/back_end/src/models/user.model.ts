@@ -41,9 +41,9 @@ const getUsers = async (): Promise<RowDataPacket[]> => {
     return rows;
 };
 
-const deleteUser = async (username: string) => {
-    const [result] = await pool.execute('DELETE FROM Users WHERE username = ?', [username]);
-    return result;
+const deleteUser = async (username: string): Promise<number> => {
+    const [result]: any = await pool.execute('DELETE FROM Users WHERE username = ?', [username]);
+    return result.affectedRows;  // Return the number of rows that were deleted
 };
 
 export { createUser, updateUserEmail, updateUser, getUserByUsername, getUserById, getUsers, deleteUser };
