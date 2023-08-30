@@ -12,7 +12,7 @@ const createUser = async (userData: any): Promise<ResultSetHeader> => {
 
 const updateUser = async (userId: string, updatedData: any): Promise<ResultSetHeader> => {
     const [result] = await pool.execute<ResultSetHeader>(
-        'UPDATE Users SET email = ?, username = ?, password = ?, shippingAddress = ?, phoneNumber = ? WHERE id = ?',
+        'UPDATE Users SET email = ?, username = ?, password = ?, shippingAddress = ?, phoneNumber = ? WHERE userID = ?',
         [updatedData.email, updatedData.username, updatedData.password, updatedData.shippingAddress, updatedData.phoneNumber, userId]
     );
     return result;
