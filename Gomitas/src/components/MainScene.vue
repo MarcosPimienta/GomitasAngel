@@ -1,4 +1,5 @@
 <template>
+  <AuthLogin v-if="!isAuthenticated" @loginSuccessful="handleLogin" />
   <div>
     <div class="btn-holder">
       <CartButton :isEnabled="allCandiesSelected" @showModal="displayModal"/>
@@ -21,6 +22,7 @@ import { ref, computed, onMounted, onUpdated } from "vue";
 import { createScene } from "../scenes/Scene";
 import * as CandyLoader from "../scenes/CandyLoader";
 import * as IleSelector from "../scenes/IleSelector";
+import AuthLogin from './AuthLogin.vue';
 import CartButton from "./CartButton.vue";
 import CartModal from "./CartModal.vue";
 import ResetButton from "./ResetButton.vue";
@@ -30,6 +32,8 @@ import IleButtons from "./IleButtons.vue";
 // Tracking selected candies for each 'ile'
 const selectedCandies = ref([null, null, null, null, null, null]);
 const showModal = ref(false);
+const isAuthenticated = ref(false); // This should be set based on your authentication status
+
 const allCandies = [
   { id: 0, name:"ChocoMellows" },
   { id: 1, name:"LifeSavers" },
@@ -66,6 +70,11 @@ onMounted(() => {
     IleSelector.setAllCandiesReference(allCandies); // This is set once after the scene is created
   }
 });
+
+function handleLogin() {
+    isAuthenticated.value = true;
+    // Additional logic for when the user logs in successfully
+  }
 
 function selectCandyForIle(ileIndex, candyId) {
   selectedCandies.value[ileIndex] = candyId;
