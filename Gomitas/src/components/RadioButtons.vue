@@ -4,7 +4,8 @@
       <input
         class="radio-btn"
         :value="item.id"
-        v-model="selectedCandyId"
+        :checked="item.id === selectedCandyId"
+        @input="updateSelectedCandy(item.id)"
         type="radio"
         :name="'ds_' + item.id"
         @click="handleClick(item)"
@@ -18,6 +19,7 @@
 import type { PropType } from 'vue';
 
 const emit = defineEmits<{
+  (e: 'update:selectedCandyId', value: number): void;
   (e: 'animationPlay', object: AnimState): void;
   (e: 'candySelected', candyId: number): void;
 }>();
@@ -44,6 +46,10 @@ const props = defineProps({
     default: null
   }
 });
+
+function updateSelectedCandy(value) {
+    emit('update:selectedCandyId', value);
+  }
 
 function handleClick(item: AnimState) {
   emit('animationPlay', item);

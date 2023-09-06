@@ -1,18 +1,20 @@
 {
-  "extends": "@vue/tsconfig/tsconfig.web.json",
-  "include": ["env.d.ts", "src/**/*", "src/**/*.vue"],
   "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "jsx": "preserve",
+    "esModuleInterop": true,
+    "allowJs": true,
+    "strict": true,
+    "sourceMap": true,
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
     },
-    "sourceMap": true,
-    "allowJs": true
+    "types": ["webpack-env", "jest"],
+    "lib": ["esnext", "dom"]
   },
-
-  "references": [
-    {
-      "path": "./tsconfig.config.json"
-    }
-  ]
+  "include": ["env.d.ts", "src/**/*", "src/**/*.vue", "vue-shims.d.ts"],
+  "exclude": ["node_modules"]
 }
