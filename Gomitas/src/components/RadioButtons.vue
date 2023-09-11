@@ -32,8 +32,8 @@ interface AnimState {
 
 const animState: AnimState[] = [
   { id: 0, name:"ChocoMellows", state: false },
-  { id: 1, name:"LifeSavers", state: false },
-  { id: 2, name:"Oranges", state: false },
+  { id: 1, name:"Cables", state: false },
+  { id: 2, name:"LifeSavers", state: false },
   { id: 3, name:"Ribbons", state: false },
   { id: 4, name:"Strawberries", state: false },
   { id: 5, name:"Worms", state: false },
@@ -47,7 +47,7 @@ const props = defineProps({
   }
 });
 
-function updateSelectedCandy(value) {
+function updateSelectedCandy(value: number) {
     emit('update:selectedCandyId', value);
   }
 

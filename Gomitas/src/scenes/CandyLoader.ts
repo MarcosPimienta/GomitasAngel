@@ -36,9 +36,9 @@ interface CandyObject {
 
 const config: CandyConfig[] = [{
   id: 0,
-  name: ['ChocoMellows', 'LifeSavers', 'Oranges', 'Ribbons', 'Strawberries', 'Worms'],
+  name: ['ChocoMellows', 'Cables', 'LifeSavers', 'Ribbons', 'Worms', 'Strawberries'],
   path: "./",
-  file: "Candies.glb",
+  file: "Candies00.glb",
   row_position: new Vector3(0, 0, 0),
 }]
 
@@ -217,13 +217,19 @@ function boxController(
     meshFile,
     scene,
     function (newMeshes, particleSystems, skeletons, animationGroups) {
-      const box = animationGroups[0];
-      //const ls = newMeshes[0];
-      //ls.translate(new Vector3(0, 0, 0), 1, Space.WORLD);
-      //ls.rotate(Axis.Y, Math.PI, Space.LOCAL);
-      box.play(false);
-      //scene.beginAnimation(ls.skeleton, 0, 10, false, 1.0)
-      //console.log(ls);
+      const outer_box = animationGroups[0];
+      /* const outer_card = animationGroups[1];
+      const inner_card = animationGroups[2]; */
+
+      // Set the speedRatio to negative for reverse playback
+      /* outer_box.speedRatio = -1;
+      outer_card.speedRatio = -1;
+      inner_card.speedRatio = -1; */
+
+      // Start the animation groups
+      outer_box.play(false);
+      /* outer_card.play(false);
+      inner_card.play(false); */
     }
   );
 }

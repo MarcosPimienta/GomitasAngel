@@ -32,7 +32,7 @@ const createScene = function (canvas:HTMLCanvasElement, onIleSelected: (index: n
   camera.attachControl(canvas, true);
 
   //load candy box with open animation
-  let box = CandyLoader.boxController(["CandyBox"], "./", "CandyBox.gltf", scene);
+  let box = CandyLoader.boxController(["CandyBox"], "./", "Candy_Box.gltf", scene);
 
   //load cone for selection display
   let ilesCone = IleSelector.ileCone(scene);
