@@ -35,12 +35,12 @@ const showModal = ref(false);
 const isAuthenticated = ref(false); // This should be set based on your authentication status
 
 const allCandies = [
-  { id: 0, name:"ChocoMellows" },
-  { id: 1, name:"LifeSavers" },
-  { id: 2, name:"Oranges" },
-  { id: 3, name:"Ribbons" },
-  { id: 4, name:"Strawberries" },
-  { id: 5, name:"Worms" },
+  { id: 0, name:"ChocoMellows"},
+  { id: 1, name:"Cables"},
+  { id: 2, name:"LifeSavers"},
+  { id: 3, name:"Ribbons"},
+  { id: 4, name:"Strawberries"},
+  { id: 5, name:"Worms"},
   // ... add other candies
 ];
 
