@@ -1,0 +1,16 @@
+import "@babylonjs/core/Shaders/ShadersInclude/bonesDeclaration.js";
+import "@babylonjs/core/Shaders/ShadersInclude/bakedVertexAnimationDeclaration.js";
+import "@babylonjs/core/Shaders/ShadersInclude/instancesDeclaration.js";
+import "@babylonjs/core/Shaders/ShadersInclude/clipPlaneVertexDeclaration.js";
+import "@babylonjs/core/Shaders/ShadersInclude/fogVertexDeclaration.js";
+import "@babylonjs/core/Shaders/ShadersInclude/instancesVertex.js";
+import "@babylonjs/core/Shaders/ShadersInclude/bonesVertex.js";
+import "@babylonjs/core/Shaders/ShadersInclude/bakedVertexAnimation.js";
+import "@babylonjs/core/Shaders/ShadersInclude/clipPlaneVertex.js";
+import "@babylonjs/core/Shaders/ShadersInclude/fogVertex.js";
+import "@babylonjs/core/Shaders/ShadersInclude/vertexColorMixing.js";
+/** @internal */
+export declare const fireVertexShader: {
+    name: string;
+    shader: string;
+};

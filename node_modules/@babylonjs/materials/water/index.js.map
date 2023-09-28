@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../lts/materials/generated/water/index.ts"],"names":[],"mappings":"AAAA,cAAc,iBAAiB,CAAC","sourcesContent":["export * from \"./waterMaterial\";\r\n"]}

@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../lts/materials/generated/shadowOnly/index.ts"],"names":[],"mappings":"AAAA,cAAc,sBAAsB,CAAC","sourcesContent":["export * from \"./shadowOnlyMaterial\";\r\n"]}
