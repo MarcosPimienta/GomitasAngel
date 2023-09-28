@@ -1,5 +1,4 @@
 import { AnimationGroup, SceneLoader, Vector3, Space, type ISceneLoaderAsyncResult, Scene, StandardMaterial, Texture } from "@babylonjs/core";
-import { objectToString } from "@vue/shared";
 
 //This will handle the instance to be imported
 interface Candy {
@@ -36,9 +35,9 @@ interface CandyObject {
 
 const config: CandyConfig[] = [{
   id: 0,
-  name: ['ChocoMellows', 'Cables', 'LifeSavers', 'Ribbons', 'Worms', 'Strawberries'],
+  name: ['ChocoMellows', 'Cables', 'LifeSavers', 'Ribbons', 'Strawberries', 'Worms'],
   path: "./",
-  file: "Candies00.glb",
+  file: "Gummies.gltf",
   row_position: new Vector3(0, 0, 0),
 }]
 
@@ -190,11 +189,11 @@ function candiesLoader(scene: Scene, position: Vector3){
         ilePos: position,
       })
       console.log(candiesInstances);
-      candiesInstances[5].object.meshes[0].translate(new Vector3(1.56, 0, 0), 1, Space.WORLD);
-      candiesInstances[4].object.meshes[0].translate(new Vector3(0.93, 0, 0), 1, Space.WORLD);
-      candiesInstances[3].object.meshes[0].translate(new Vector3(0.31, 0, 0), 1, Space.WORLD);
-      candiesInstances[2].object.meshes[0].translate(new Vector3(-0.31, 0, 0), 1, Space.WORLD);
-      candiesInstances[1].object.meshes[0].translate(new Vector3(-0.93, 0, 0), 1, Space.WORLD);
+      candiesInstances[5].object.meshes[0].translate(new Vector3(1.62, 0, 0), 1, Space.WORLD);
+      candiesInstances[4].object.meshes[0].translate(new Vector3(0.98, 0, 0), 1, Space.WORLD);
+      candiesInstances[3].object.meshes[0].translate(new Vector3(0.35, 0, 0), 1, Space.WORLD);
+      candiesInstances[2].object.meshes[0].translate(new Vector3(-0.29, 0, 0), 1, Space.WORLD);
+      candiesInstances[1].object.meshes[0].translate(new Vector3(-0.91, 0, 0), 1, Space.WORLD);
       candiesInstances[0].object.meshes[0].translate(position, 1, Space.WORLD);
       animationHandler(candiesInstances);
     } catch (error) {
@@ -217,7 +216,10 @@ function boxController(
     meshFile,
     scene,
     function (newMeshes, particleSystems, skeletons, animationGroups) {
-      const outer_box = animationGroups[0];
+      const box = newMeshes[0];
+      const start_box = animationGroups[0];
+      const open_box = animationGroups[1];
+
       /* const outer_card = animationGroups[1];
       const inner_card = animationGroups[2]; */
 
@@ -227,7 +229,8 @@ function boxController(
       inner_card.speedRatio = -1; */
 
       // Start the animation groups
-      outer_box.play(false);
+      box.translate(new Vector3(0, 0, 0), 1, Space.WORLD);
+      start_box.play(false);
       /* outer_card.play(false);
       inner_card.play(false); */
     }

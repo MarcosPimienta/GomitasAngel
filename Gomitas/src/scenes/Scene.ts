@@ -5,6 +5,7 @@ import {
   Color3,
   Color4,
   HemisphericLight,
+  SpotLight,
   Scene,
   ComputeShaderParticleSystem,
 } from "@babylonjs/core";
@@ -30,9 +31,10 @@ const createScene = function (canvas:HTMLCanvasElement, onIleSelected: (index: n
   );
   camera.setTarget(Vector3.Zero());
   camera.attachControl(canvas, true);
+  //camera.minZ = 0.1;
 
   //load candy box with open animation
-  let box = CandyLoader.boxController(["CandyBox"], "./", "Candy_Box.gltf", scene);
+  let box = CandyLoader.boxController(["CandyBox"], "./", "CandyBox.gltf", scene);
 
   //load cone for selection display
   let ilesCone = IleSelector.ileCone(scene);
@@ -45,7 +47,9 @@ const createScene = function (canvas:HTMLCanvasElement, onIleSelected: (index: n
 
   //adds light into BabylonJS Scene
   let light = new HemisphericLight("light", new Vector3(0, 10, 0), scene);
-  //let light2 = new HemisphericLight("light", new Vector3(2, -1, 0), scene);
+  //let light2 = new HemisphericLight("light2", new Vector3(2, -1, 0), scene);
+  let spotlight = new SpotLight("spotLight", new Vector3(0, 6, 0), new Vector3(0, -45, 0), Math.PI * 2, 2, scene);
+  spotlight.intensity = 100;
 
   scene.clearColor = new Color4(0.40, 0.78, 0.78);
 

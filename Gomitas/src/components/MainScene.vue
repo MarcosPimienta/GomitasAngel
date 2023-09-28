@@ -1,5 +1,5 @@
 <template>
-  <AuthLogin v-if="!isAuthenticated" @loginSuccessful="handleLogin" />
+  <!-- <AuthLogin v-if="!isAuthenticated" @loginSuccessful="handleLogin" /> -->
   <div>
     <div class="btn-holder">
       <CartButton :isEnabled="allCandiesSelected" @showModal="displayModal"/>
@@ -22,7 +22,7 @@ import { ref, computed, onMounted, onUpdated } from "vue";
 import { createScene } from "../scenes/Scene";
 import * as CandyLoader from "../scenes/CandyLoader";
 import * as IleSelector from "../scenes/IleSelector";
-import AuthLogin from './AuthLogin.vue';
+/* import AuthLogin from './AuthLogin.vue'; */
 import CartButton from "./CartButton.vue";
 import CartModal from "./CartModal.vue";
 import ResetButton from "./ResetButton.vue";
