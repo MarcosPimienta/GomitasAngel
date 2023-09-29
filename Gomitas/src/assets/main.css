@@ -63,6 +63,15 @@
   display: flex;
   }
 
+.name-field {
+  display: flex;
+  width: 8%;
+  background: transparent;
+  border-radius: 2rem;
+  border-color: white;
+  outline: none;
+}
+
 .cart-btn {
   display: flex;
   width: 5%;

@@ -1,5 +1,6 @@
 <template>
-  <input v-model="dynamicText" @input="updateTexture" />
+  <label class="label-text">Name</label>
+  <input class="name-field" v-model="dynamicText" @input="updateTexture" />
 </template>
 <script>
   export default {
@@ -21,4 +22,7 @@
         },
     },
   };
-      </script>
+</script>
+<style lang="css">
+@import "../assets/main.css";
+</style>
