@@ -8,6 +8,7 @@
       :selectedCandyId="selectedCandies[IleSelector.getIndex()]"
       @animationPlay="animSwitch"
       @candySelected="selectCandyForIle(IleSelector.getIndex(), $event)" />
+      <NameField/>
       <IleButtons @plus="IlePlus" @minus="IleMinus"/>
       <ResetButton @reset="resetAllCandies"/>
     </div>
@@ -28,6 +29,7 @@ import CartModal from "./CartModal.vue";
 import ResetButton from "./ResetButton.vue";
 import RadioButtons from "./RadioButtons.vue";
 import IleButtons from "./IleButtons.vue";
+import NameField from "./NameField.vue";
 
 // Tracking selected candies for each 'ile'
 const selectedCandies = ref([null, null, null, null, null, null]);
