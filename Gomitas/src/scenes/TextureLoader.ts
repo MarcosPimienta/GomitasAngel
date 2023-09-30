@@ -1,18 +1,18 @@
-import { Scene, DynamicTexture } from "@babylonjs/core";
+import { Scene, DynamicTexture, Engine } from "@babylonjs/core";
 
-function createTextTexture(scene: Scene, text: string) {
+function createTextTexture(scene: Scene, text: string, engine: Engine) {
   const textureResolution = 512;
 
   // Create a dynamic texture
   const dynamicTexture = new DynamicTexture(
     "dynamic texture",
-    textureResolution,
+    {width: textureResolution, height: textureResolution},
     scene,
     true
   );
 
   // Get the 2D drawing context of the dynamic texture
-  const ctx = dynamicTexture.getContext();
+  const ctx = dynamicTexture.getContext() as CanvasRenderingContext2D;
 
   // Clear the context with a transparent color
   ctx.clearRect(0, 0, textureResolution, textureResolution);
@@ -20,20 +20,21 @@ function createTextTexture(scene: Scene, text: string) {
   // Set the font properties
   ctx.font = "bold 44px Arial";
   ctx.fillStyle = "white";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
 
-  // Cast the context to the standard CanvasRenderingContext2D type to access textAlign and textBaseline properties
-  const standardCtx = ctx as CanvasRenderingContext2D;
-  standardCtx.textAlign = "center";
-  standardCtx.textBaseline = "middle";
+  // Update function to change text
+  const updateText = (newText: string) => {
+    ctx.clearRect(0, 0, textureResolution, textureResolution); // Clear previous text
+    ctx.fillText(newText, textureResolution / 2, textureResolution / 2); // Draw new text
+    dynamicTexture.update(); // Update the texture
+  };
 
-  // Draw the text at the center of the texture
-  ctx.fillText(text, textureResolution / 2, textureResolution / 2);
+  updateText(text); // Initial update
 
-  // Update the texture so the new drawing is visible
-  dynamicTexture.update();
-
-  return dynamicTexture;
+  return {
+    dynamicTexture,
+    updateText
+  };
 };
-
-export { createTextTexture };
 
