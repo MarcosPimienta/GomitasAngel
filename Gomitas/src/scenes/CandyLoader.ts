@@ -228,7 +228,8 @@ function boxController(
   meshNames: string[],
   meshPath: string,
   meshFile: string,
-  scene: Scene
+  scene: Scene,
+  engine: Engine
 ) {
   SceneLoader.ImportMesh(
     meshNames,
@@ -241,28 +242,55 @@ function boxController(
       if (innerCover && innerCover.material) {
         const pbrMaterial = innerCover.material as PBRMaterial;
 
-        // Assign a new texture to the pbrMaterial from the public/textures folder
-        const texture = new Texture(
-          './textures/Outer_Box_Texture.png',
-          scene,
-          undefined,  // no need to invertY
-          undefined,  // no mip mapping
-          undefined,  // sampling mode
-          () => {  // onLoad callback
-            console.log("Texture loaded successfully");
+        // Create a dynamic texture
+        const textureResolution = 1024;
+        const dynamicTexture = new DynamicTexture("dynamic texture", textureResolution, scene);
+        const textureContext = dynamicTexture.getContext();
 
-            // Apply the texture and rotation
-            pbrMaterial.albedoTexture = texture;
-            texture.name = "Inner_Card";
-            texture.vScale = -1;
+        pbrMaterial.albedoTexture = dynamicTexture;
 
-            // Log the texture assignment
-            console.log('Texture assigned:', pbrMaterial.albedoTexture);
-          },
-          (message, exception) => {  // onError callback
-            console.error("Error loading texture", message, exception);
+        const img = new Image();
+        img.src = './textures/Outer_Box_Texture.png';
+
+        img.onload = () => {
+          // Add image to dynamic texture
+          textureContext.drawImage(img, 0, 0, textureResolution, textureResolution);
+          textureContext.drawImage(img, 0, 0, textureResolution, textureResolution);
+          dynamicTexture.update();
+
+          // Flip the canvas vertically
+          textureContext.translate(0, textureResolution);
+          textureContext.scale(1, -1);
+
+          // Rotation
+          const x = 400; // x coordinate of the text
+          const y = textureResolution - 400; // y coordinate of the text, adjusted for the flip
+          const angleInRadians = Math.PI / 0; // Divided by 6 it Rotates 30 degrees as example
+
+          textureContext.translate(x, y);
+          textureContext.rotate(-angleInRadians);
+          textureContext.translate(-x, -y);
+
+          // Ensure the custom font is loaded before drawing text with it
+          if (document.fonts) {
+            document.fonts.load('1em Simplicity').then(() => {
+              drawTextWithCustomFont();
+            });
+          } else {
+            // Fallback if document.fonts is not supported; there might be a flash of unstyled text
+            drawTextWithCustomFont();
           }
-        );
+        };
+
+        const drawTextWithCustomFont = () => {
+          // Add text to dynamic texture with the custom font
+          const font = "bold 88px Simplicity";  // Updated the font here
+          dynamicTexture.drawText("Luz Dey", 350, 600, font, "white", null, true, true);
+
+          // Reset the transformation to draw other elements normally
+          textureContext.setTransform(1, 0, 0, 1, 0, 0);
+          dynamicTexture.update();
+        };
       } else {
         console.log("Inner_Cover mesh or material not found");
       }
