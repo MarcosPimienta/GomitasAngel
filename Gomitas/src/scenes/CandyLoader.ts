@@ -1,4 +1,8 @@
-import { AnimationGroup, SceneLoader, Vector3, Space, type ISceneLoaderAsyncResult, Scene, StandardMaterial, Texture } from "@babylonjs/core";
+import { AnimationGroup, SceneLoader, Vector3, Tools, Space, DynamicTexture, Engine, PBRMaterial, Texture, type ISceneLoaderAsyncResult, Scene, StandardMaterial } from "@babylonjs/core";
+
+
+//This is my GUI engine
+let engine: Engine;
 
 //This will handle the instance to be imported
 interface Candy {
@@ -90,27 +94,43 @@ function animationHandler(Candies: Candy[]){
   })
 }
 
-function testMeshTexture(
-  meshNames: string[],
-  meshPath: string,
-  meshFile: string,
-  scene: Scene
-) {
-  SceneLoader.ImportMesh(
-    meshNames,
-    meshPath,
-    meshFile,
+function createTextTexture(scene: Scene, text: string, engine: Engine) {
+  const textureResolution = 512;
+
+  // Create a dynamic texture
+  const dynamicTexture = new DynamicTexture(
+    "dynamic texture",
+    {width: textureResolution, height: textureResolution},
     scene,
-    function (newMeshes) {
-      /* const material = new StandardMaterial('LifeSaver', scene)
-      material.diffuseTexture = new Texture("./textures/Gomita_salvaida_BaseColor.png", scene);
-      material.bumpTexture = new Texture("./textures/Gomita_salvaida_Normal.png", scene); */
-      const ms = newMeshes[0];
-      /* ms.material = material; */
-      ms.translate(new Vector3(0, 0, 0), 1, Space.WORLD);
-    }
+    true
   );
-}
+
+  // Get the 2D drawing context of the dynamic texture
+  const ctx = dynamicTexture.getContext() as CanvasRenderingContext2D;
+
+  // Clear the context with a transparent color
+  ctx.clearRect(0, 0, textureResolution, textureResolution);
+
+  // Set the font properties
+  ctx.font = "bold 44px Arial";
+  ctx.fillStyle = "white";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+
+  // Update function to change text
+  const updateText = (newText: string) => {
+    ctx.clearRect(0, 0, textureResolution, textureResolution); // Clear previous text
+    ctx.fillText(newText, textureResolution / 2, textureResolution / 2); // Draw new text
+    dynamicTexture.update(); // Update the texture
+  };
+
+  updateText(text); // Initial update
+
+  return {
+    dynamicTexture,
+    updateText
+  };
+};
 
 function candiesLoader(scene: Scene, position: Vector3){
   const candiesInstances: Candy[] = [];
@@ -215,27 +235,47 @@ function boxController(
     meshPath,
     meshFile,
     scene,
-    function (newMeshes, particleSystems, skeletons, animationGroups) {
+    (newMeshes, particleSystems, skeletons, animationGroups) => {
+      // Locate the Inner_Cover mesh
+      const innerCover = newMeshes.find((mesh) => mesh.name === "Inner_Cover");
+      if (innerCover && innerCover.material) {
+        const pbrMaterial = innerCover.material as PBRMaterial;
+
+        // Assign a new texture to the pbrMaterial from the public/textures folder
+        const texture = new Texture(
+          './textures/Outer_Box_Texture.png',
+          scene,
+          undefined,  // no need to invertY
+          undefined,  // no mip mapping
+          undefined,  // sampling mode
+          () => {  // onLoad callback
+            console.log("Texture loaded successfully");
+
+            // Apply the texture and rotation
+            pbrMaterial.albedoTexture = texture;
+            texture.name = "Inner_Card";
+            texture.vScale = -1;
+
+            // Log the texture assignment
+            console.log('Texture assigned:', pbrMaterial.albedoTexture);
+          },
+          (message, exception) => {  // onError callback
+            console.error("Error loading texture", message, exception);
+          }
+        );
+      } else {
+        console.log("Inner_Cover mesh or material not found");
+      }
+
       const box = newMeshes[0];
-      const start_box = animationGroups[0];
-      const open_box = animationGroups[1];
-
-      /* const outer_card = animationGroups[1];
-      const inner_card = animationGroups[2]; */
-
-      // Set the speedRatio to negative for reverse playback
-      /* outer_box.speedRatio = -1;
-      outer_card.speedRatio = -1;
-      inner_card.speedRatio = -1; */
+      const startBox = animationGroups[0];
 
       // Start the animation groups
       box.translate(new Vector3(0, 0, 0), 1, Space.WORLD);
-      start_box.play(false);
-      /* outer_card.play(false);
-      inner_card.play(false); */
+      startBox.play(false);
     }
   );
 }
 
-export { boxController, candiesLoader, candiesPlay, resetAllAnimations, testMeshTexture };  export type { Candy };
+export { boxController, candiesLoader, candiesPlay, resetAllAnimations };  export type { Candy };
 
