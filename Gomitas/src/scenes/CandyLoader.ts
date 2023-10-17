@@ -228,8 +228,8 @@ function boxController(
   meshNames: string[],
   meshPath: string,
   meshFile: string,
+  updatedText: string,
   scene: Scene,
-  engine: Engine
 ) {
   SceneLoader.ImportMesh(
     meshNames,
@@ -285,7 +285,7 @@ function boxController(
         const drawTextWithCustomFont = () => {
           // Add text to dynamic texture with the custom font
           const font = "bold 88px Simplicity";  // Updated the font here
-          dynamicTexture.drawText("Luz Dey", 350, 600, font, "white", null, true, true);
+          dynamicTexture.drawText(updatedText, 350, 600, font, "white", null, true, true);
 
           // Reset the transformation to draw other elements normally
           textureContext.setTransform(1, 0, 0, 1, 0, 0);

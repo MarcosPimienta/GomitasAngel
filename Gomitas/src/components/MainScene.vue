@@ -8,7 +8,7 @@
       :selectedCandyId="selectedCandies[IleSelector.getIndex()]"
       @animationPlay="animSwitch"
       @candySelected="selectCandyForIle(IleSelector.getIndex(), $event)" />
-      <NameField/>
+      <NameField @text-updated="handleTextUpdated" />
       <IleButtons @plus="IlePlus" @minus="IleMinus"/>
       <ResetButton @reset="resetAllCandies"/>
     </div>
@@ -61,6 +61,7 @@ const allCandiesSelected = computed(() => {
 const bjsCanvas = ref(null);
 const modalKey = ref(0);
 const currentIleIndex = ref<number | null>(null);
+let dynamicText = ref(null);
 let bjsScene: Ref<SceneReturnType | null> = ref(null)
 
 onMounted(() => {
@@ -70,8 +71,14 @@ onMounted(() => {
       // Further logic to handle the ile selection can go here
     });
     IleSelector.setAllCandiesReference(allCandies); // This is set once after the scene is created
+    dynamicTexture.value = getDynamicTextureFromSceneOrMesh();
   }
 });
+
+const handleTextUpdated = (updatedText: string) => {
+  dynamicText.value = updatedText;
+  // This dynamicText.value will now hold the updated text from the NameField component
+};
 
 function handleLogin() {
     isAuthenticated.value = true;
