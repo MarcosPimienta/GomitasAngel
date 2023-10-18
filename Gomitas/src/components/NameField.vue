@@ -3,22 +3,30 @@
   <input class="name-field" v-model="dynamicText" @input="updateTexture" />
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { ref, defineComponent, PropType } from 'vue';
+
+export default defineComponent({
   props: {
-    dynamicTexture: Object,
-  },
-  data() {
-    return {
-      dynamicText: "",
-    };
-  },
-  methods: {
-    updateTexture() {
-      this.$emit('text-updated', this.dynamicText);
+    onTextUpdated: {
+      type: Function as PropType<(text: string) => void>,
+      required: true,
     },
   },
-};
+  setup(props) {
+    const dynamicText = ref('');
+
+    const updateTexture = () => {
+      console.log('Updating texture with text:', dynamicText.value);
+      props.onTextUpdated(dynamicText.value);
+    };
+
+    return {
+      dynamicText,
+      updateTexture,
+    };
+  },
+});
 </script>
 <style lang="css">
 @import "../assets/main.css";

@@ -228,9 +228,11 @@ function boxController(
   meshNames: string[],
   meshPath: string,
   meshFile: string,
-  updatedText: string,
-  scene: Scene,
+  scene: Scene
 ) {
+  // A variable to hold the dynamic texture so we can update it later
+  let dynamicTexture:DynamicTexture;
+
   SceneLoader.ImportMesh(
     meshNames,
     meshPath,
@@ -244,7 +246,7 @@ function boxController(
 
         // Create a dynamic texture
         const textureResolution = 1024;
-        const dynamicTexture = new DynamicTexture("dynamic texture", textureResolution, scene);
+        dynamicTexture = new DynamicTexture("dynamic texture", textureResolution, scene);
         const textureContext = dynamicTexture.getContext();
 
         pbrMaterial.albedoTexture = dynamicTexture;
@@ -255,40 +257,6 @@ function boxController(
         img.onload = () => {
           // Add image to dynamic texture
           textureContext.drawImage(img, 0, 0, textureResolution, textureResolution);
-          textureContext.drawImage(img, 0, 0, textureResolution, textureResolution);
-          dynamicTexture.update();
-
-          // Flip the canvas vertically
-          textureContext.translate(0, textureResolution);
-          textureContext.scale(1, -1);
-
-          // Rotation
-          const x = 400; // x coordinate of the text
-          const y = textureResolution - 400; // y coordinate of the text, adjusted for the flip
-          const angleInRadians = Math.PI / 0; // Divided by 6 it Rotates 30 degrees as example
-
-          textureContext.translate(x, y);
-          textureContext.rotate(-angleInRadians);
-          textureContext.translate(-x, -y);
-
-          // Ensure the custom font is loaded before drawing text with it
-          if (document.fonts) {
-            document.fonts.load('1em Simplicity').then(() => {
-              drawTextWithCustomFont();
-            });
-          } else {
-            // Fallback if document.fonts is not supported; there might be a flash of unstyled text
-            drawTextWithCustomFont();
-          }
-        };
-
-        const drawTextWithCustomFont = () => {
-          // Add text to dynamic texture with the custom font
-          const font = "bold 88px Simplicity";  // Updated the font here
-          dynamicTexture.drawText(updatedText, 350, 600, font, "white", null, true, true);
-
-          // Reset the transformation to draw other elements normally
-          textureContext.setTransform(1, 0, 0, 1, 0, 0);
           dynamicTexture.update();
         };
       } else {
@@ -303,6 +271,55 @@ function boxController(
       startBox.play(false);
     }
   );
+
+  const updateText = (newText: string) => {
+    if (!dynamicTexture) return;
+
+    const textureContext = dynamicTexture.getContext();
+    const textureResolution = 1024;
+
+    // Load the background image
+    const img = new Image();
+    img.src = './textures/Outer_Box_Texture.png';
+
+    img.onload = () => {
+      // Draw the background image onto the dynamic texture
+      textureContext.drawImage(img, 0, 0, textureResolution, textureResolution);
+
+      // Flip the canvas vertically
+      textureContext.translate(0, textureResolution);
+      textureContext.scale(1, -1);
+
+      // Rotation
+      const x = 400;
+      const y = textureResolution - 400;
+      const angleInRadians = Math.PI / 0;
+
+      textureContext.translate(x, y);
+      textureContext.rotate(-angleInRadians);
+      textureContext.translate(-x, -y);
+
+      // Ensure the custom font is loaded before drawing text with it
+      const drawTextWithCustomFont = () => {
+        const font = "bold 88px Simplicity";
+        dynamicTexture.drawText(newText, 350, 600, font, "white", null, true, true);
+
+        // Reset the transformation to draw other elements normally
+        textureContext.setTransform(1, 0, 0, 1, 0, 0);
+        dynamicTexture.update();
+      };
+
+      if (document.fonts) {
+        document.fonts.load('1em Simplicity').then(drawTextWithCustomFont);
+      } else {
+        drawTextWithCustomFont();
+      }
+    };
+  };
+
+  return {
+    updateText  // Expose the updateText method
+  };
 }
 
 export { boxController, candiesLoader, candiesPlay, resetAllAnimations };  export type { Candy };
