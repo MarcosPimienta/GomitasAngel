@@ -113,8 +113,12 @@ function resetAllCandies() {
 }
 
 function animSwitch(item: any) {
-  CandyLoader.candiesPlay(item.id, bjsScene.candiesInstances[IleSelector.getIndex()], bjsScene.scene, item.name);
-  console.log(IleSelector.getIndex());
+  if (bjsScene.value && bjsScene.value.candiesInstances && bjsScene.value.candiesInstances.length > 0) {
+    CandyLoader.candiesPlay(item.id, bjsScene.value.candiesInstances[IleSelector.getIndex()], bjsScene.value.scene, item.name);
+    console.log(IleSelector.getIndex());
+  } else {
+    console.error('candiesInstances is not yet defined');
+  }
 };
 
 function IlePlus() {
