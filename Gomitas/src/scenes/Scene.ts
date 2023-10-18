@@ -15,6 +15,7 @@ import * as CandyLoader from "./CandyLoader";
 import * as IleSelector from "./IleSelector"
 
 const createScene = function (canvas:HTMLCanvasElement, onIleSelected: (index: number) => void) {
+  console.log('createScene called');
 
   const engine = new Engine(canvas);
   const scene = new Scene(engine);
@@ -34,7 +35,8 @@ const createScene = function (canvas:HTMLCanvasElement, onIleSelected: (index: n
   //camera.minZ = 0.1;
 
   //load candy box with open animation
-  let box = CandyLoader.boxController(["CandyBox"], "./", "CandyBox.gltf", "Test Text", scene);
+  let box = CandyLoader.boxController(["CandyBox"], "./", "CandyBox.gltf", scene);
+  console.log(box);
 
   //load cone for selection display
   let ilesCone = IleSelector.ileCone(scene);
@@ -60,7 +62,18 @@ const createScene = function (canvas:HTMLCanvasElement, onIleSelected: (index: n
   engine.runRenderLoop(() => {
     scene.render();
   });
-  return {scene, engine, candiesInstances, ilesCone}
+  const result = {
+    scene,
+    engine,
+    candiesInstances,
+    ilesCone,
+    updateText: box.updateText
+  };
+  console.log('createScene executed');
+  console.log('Box:', box);
+  console.log('Box updateText:', box.updateText);
+  console.log('createScene is returning:', result);
+  return result;
 };
 
 export { createScene };

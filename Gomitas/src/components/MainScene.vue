@@ -8,7 +8,7 @@
       :selectedCandyId="selectedCandies[IleSelector.getIndex()]"
       @animationPlay="animSwitch"
       @candySelected="selectCandyForIle(IleSelector.getIndex(), $event)" />
-      <NameField @text-updated="handleTextUpdated" />
+      <NameField @text-updated="handleUpdatedText" />
       <IleButtons @plus="IlePlus" @minus="IleMinus"/>
       <ResetButton @reset="resetAllCandies"/>
     </div>
@@ -61,23 +61,28 @@ const allCandiesSelected = computed(() => {
 const bjsCanvas = ref(null);
 const modalKey = ref(0);
 const currentIleIndex = ref<number | null>(null);
-let dynamicText = ref(null);
 let bjsScene: Ref<SceneReturnType | null> = ref(null)
 
-onMounted(() => {
+  onMounted(async () => {
+  console.log('bjsCanvas.value before createScene:', bjsCanvas.value);
   if (bjsCanvas.value) {
-    bjsScene = createScene(bjsCanvas.value, (selectedIndex) => {
+    const sceneObject = createScene(bjsCanvas.value, (selectedIndex) => {
       currentIleIndex.value = selectedIndex;
-      // Further logic to handle the ile selection can go here
     });
-    IleSelector.setAllCandiesReference(allCandies); // This is set once after the scene is created
-    dynamicTexture.value = getDynamicTextureFromSceneOrMesh();
+    console.log('sceneObject after createScene:', sceneObject);
+    bjsScene.value = sceneObject;
   }
+  console.log('bjsScene.value after assignment:', bjsScene.value);
 });
 
-const handleTextUpdated = (updatedText: string) => {
-  dynamicText.value = updatedText;
-  // This dynamicText.value will now hold the updated text from the NameField component
+const handleUpdatedText = (updatedText: string) => {
+  console.log('Updating texture with text:', updatedText);
+  if (bjsScene.value && bjsScene.value.updateText) {
+    console.log("Calling updateText Function");
+    bjsScene.value.updateText(updatedText); // Call the updateText function with the new text
+  } else {
+    console.log("updateText Function is Undefined");
+  }
 };
 
 function handleLogin() {
