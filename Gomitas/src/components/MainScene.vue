@@ -77,7 +77,6 @@ let bjsScene: Ref<SceneReturnType | null> = ref(null)
     bjsScene.value = sceneObject;
   }
   console.log('bjsScene.value after assignment:', bjsScene.value);
-  playCloseAnimation(-1);
 });
 
 const handleUpdatedText = (updatedText: string) => {
