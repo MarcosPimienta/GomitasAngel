@@ -252,6 +252,46 @@ const drawText = (dynamicTexture: DynamicTexture, text: string, positionY: numbe
   }
 };
 
+const initializeDynamicTexture = (newMeshes: AbstractMesh[], scene: Scene) => {
+  const innerCover = newMeshes.find((mesh) => mesh.name === "Inner_Cover");
+  let dynamicTexture: DynamicTexture | null = null;
+
+  if (innerCover && innerCover.material) {
+      const pbrMaterial = innerCover.material as PBRMaterial;
+
+      // Create a dynamic texture
+      const textureResolution = 1024;
+      dynamicTexture = new DynamicTexture("dynamic texture", textureResolution, scene);
+      const textureContext = dynamicTexture.getContext();
+
+      pbrMaterial.albedoTexture = dynamicTexture;
+
+      const img = new Image();
+      img.src = './textures/Outer_Box_Texture.png';
+
+      img.onload = () => {
+          // Add image to dynamic texture
+          textureContext.drawImage(img, 0, 0, textureResolution, textureResolution);
+          dynamicTexture?.update();
+      };
+  } else {
+      console.log("Inner_Cover mesh or material not found");
+  }
+
+  return dynamicTexture;
+};
+
+function updateText(dynamicTexture: DynamicTexture | null, newText: string) {
+  if (!dynamicTexture) return;
+  drawText(dynamicTexture, newText, 600, "bold 88px Simplicity", 1024);
+}
+
+// Function to update the message on the dynamic texture
+function updateMsg(dynamicTexture: DynamicTexture | null, newText: string) {
+  if (!dynamicTexture) return;
+  drawText(dynamicTexture, newText, 750, "italic 68px Simplicity", 1024);
+}
+
 // The main boxController function
 function boxController(
 meshNames: string[],
@@ -259,8 +299,7 @@ meshPath: string,
 meshFile: string,
 scene: Scene
 ) {
-  // A variable to hold the dynamic texture so we can update it later
-  let dynamicTexture: DynamicTexture;
+  let dynamicTexture: DynamicTexture | null = null;
 
   SceneLoader.ImportMesh(
       meshNames,
@@ -268,29 +307,7 @@ scene: Scene
       meshFile,
       scene,
       (newMeshes, particleSystems, skeletons, animationGroups) => {
-          // Locate the Inner_Cover mesh
-          const innerCover = newMeshes.find((mesh) => mesh.name === "Inner_Cover");
-          if (innerCover && innerCover.material) {
-              const pbrMaterial = innerCover.material as PBRMaterial;
-
-              // Create a dynamic texture
-              const textureResolution = 1024;
-              dynamicTexture = new DynamicTexture("dynamic texture", textureResolution, scene);
-              const textureContext = dynamicTexture.getContext();
-
-              pbrMaterial.albedoTexture = dynamicTexture;
-
-              const img = new Image();
-              img.src = './textures/Outer_Box_Texture.png';
-
-              img.onload = () => {
-                  // Add image to dynamic texture
-                  textureContext.drawImage(img, 0, 0, textureResolution, textureResolution);
-                  dynamicTexture.update();
-              };
-          } else {
-              console.log("Inner_Cover mesh or material not found");
-          }
+          dynamicTexture = initializeDynamicTexture(newMeshes, scene);
 
           const box = newMeshes[0];
           const startBox = animationGroups[0];
@@ -301,19 +318,9 @@ scene: Scene
       }
   );
 
-  const updateText = (newText: string) => {
-      if (!dynamicTexture) return;
-      drawText(dynamicTexture, newText, 600, "bold 88px Simplicity", 1024);
-  };
-
-  const updateMsg = (newText: string) => {
-      if (!dynamicTexture) return;
-      drawText(dynamicTexture, newText, 750, "italic 68px Simplicity", 1024);
-  };
-
   return {
-      updateText,  // Expose the updateText method
-      updateMsg  // Expose the updateMessage method
+    updateText: (newText: string) => updateText(dynamicTexture, newText), // Expose the updateText method
+    updateMsg: (newText: string) => updateMsg(dynamicTexture, newText) // Expose the updateMessage method
   };
 }
 
