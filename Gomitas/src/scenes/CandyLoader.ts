@@ -309,12 +309,40 @@ scene: Scene
       (newMeshes, particleSystems, skeletons, animationGroups) => {
           dynamicTexture = initializeDynamicTexture(newMeshes, scene);
 
+           // Log the names of the animation groups
+          if (animationGroups && animationGroups.length > 0) {
+            console.log('Animation Groups:');
+            animationGroups.forEach((group) => console.log(group.name));
+          } else {
+            console.log('No animation groups found.');
+          }
+
           const box = newMeshes[0];
           const startBox = animationGroups[0];
 
           // Start the animation groups
           box.translate(new Vector3(0, 0, 0), 1, Space.WORLD);
           startBox.play(false);
+
+          const playCloseAnimation = () => {
+            if (animationGroups) {
+              const closeAnimation = animationGroups.find((group) => group.name === 'Close');
+              if (closeAnimation) {
+                closeAnimation.play(false);
+                console.log('Playing Close Animation');
+              } else {
+                console.log('Close Animation Not Found');
+              }
+            } else {
+              console.log('Animation Groups Not Loaded Yet');
+            }
+          };
+
+          return {
+            updateText: (newText: string) => updateText(dynamicTexture, newText),
+            updateMsg: (newText: string) => updateMsg(dynamicTexture, newText),
+            playCloseAnimation // Expose the playCloseAnimation method
+          };
       }
   );
 

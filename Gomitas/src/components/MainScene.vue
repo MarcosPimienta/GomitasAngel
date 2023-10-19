@@ -10,6 +10,7 @@
       @candySelected="selectCandyForIle(IleSelector.getIndex(), $event)" />
       <NameField @text-updated="handleUpdatedText" />
       <MessageField @text-updated="handleUpdatedMsg" />
+      <CloseSwitch @update="handleCloseAnimation" />
       <IleButtons @plus="IlePlus" @minus="IleMinus"/>
       <ResetButton @reset="resetAllCandies"/>
     </div>
@@ -32,6 +33,7 @@ import RadioButtons from "./RadioButtons.vue";
 import IleButtons from "./IleButtons.vue";
 import NameField from "./NameField.vue";
 import MessageField from "./MessageField.vue";
+import CloseSwitch from "./CloseSwitch.vue";
 
 // Tracking selected candies for each 'ile'
 const selectedCandies = ref([null, null, null, null, null, null]);
@@ -75,6 +77,7 @@ let bjsScene: Ref<SceneReturnType | null> = ref(null)
     bjsScene.value = sceneObject;
   }
   console.log('bjsScene.value after assignment:', bjsScene.value);
+  playCloseAnimation(-1);
 });
 
 const handleUpdatedText = (updatedText: string) => {
@@ -94,6 +97,24 @@ const handleUpdatedMsg = (updatedText: string) => {
     bjsScene.value.updateMsg(updatedText); // Call the updateText function with the new text
   } else {
     console.log("updateText Function is Undefined");
+  }
+};
+
+const handleCloseAnimation = (direction: number) => {
+  playCloseAnimation(direction); // Pass the direction to the playCloseAnimation function
+};
+
+const playCloseAnimation = (direction: number) => {
+  if (bjsScene.value && bjsScene.value.scene && bjsScene.value.candiesInstances) {
+    const animationGroup = bjsScene.value.scene.getAnimationGroupByName("Close");
+    if (animationGroup) {
+      animationGroup.speedRatio = direction;
+      animationGroup.play(false);
+    } else {
+      console.error('Close animation not found');
+    }
+  } else {
+    console.error('Scene or candiesInstances is not defined');
   }
 };
 
