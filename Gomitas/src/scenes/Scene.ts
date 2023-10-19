@@ -2,12 +2,10 @@ import {
   Engine,
   ArcRotateCamera,
   Vector3,
-  Color3,
   Color4,
   HemisphericLight,
   SpotLight,
   Scene,
-  ComputeShaderParticleSystem,
 } from "@babylonjs/core";
 import "@babylonjs/inspector";
 import "babylonjs-loaders";
@@ -67,7 +65,8 @@ const createScene = function (canvas:HTMLCanvasElement, onIleSelected: (index: n
     engine,
     candiesInstances,
     ilesCone,
-    updateText: box.updateText
+    updateText: box.updateText,
+    updateMsg: box.updateMsg
   };
   console.log('createScene executed');
   console.log('Box:', box);

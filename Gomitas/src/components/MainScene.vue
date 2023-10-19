@@ -9,6 +9,7 @@
       @animationPlay="animSwitch"
       @candySelected="selectCandyForIle(IleSelector.getIndex(), $event)" />
       <NameField @text-updated="handleUpdatedText" />
+      <MessageField @text-updated="handleUpdatedMsg" />
       <IleButtons @plus="IlePlus" @minus="IleMinus"/>
       <ResetButton @reset="resetAllCandies"/>
     </div>
@@ -30,6 +31,7 @@ import ResetButton from "./ResetButton.vue";
 import RadioButtons from "./RadioButtons.vue";
 import IleButtons from "./IleButtons.vue";
 import NameField from "./NameField.vue";
+import MessageField from "./MessageField.vue";
 
 // Tracking selected candies for each 'ile'
 const selectedCandies = ref([null, null, null, null, null, null]);
@@ -80,6 +82,16 @@ const handleUpdatedText = (updatedText: string) => {
   if (bjsScene.value && bjsScene.value.updateText) {
     console.log("Calling updateText Function");
     bjsScene.value.updateText(updatedText); // Call the updateText function with the new text
+  } else {
+    console.log("updateText Function is Undefined");
+  }
+};
+
+const handleUpdatedMsg = (updatedText: string) => {
+  console.log('Updating texture with message:', updatedText);
+  if (bjsScene.value && bjsScene.value.updateText) {
+    console.log("Calling updateText Function");
+    bjsScene.value.updateMsg(updatedText); // Call the updateText function with the new text
   } else {
     console.log("updateText Function is Undefined");
   }
