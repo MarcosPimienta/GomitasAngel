@@ -1,36 +1,46 @@
 <template>
-  <button @click="toggleAnimation">
-    {{ isOn ? 'On' : 'Off' }}
-  </button>
+  <div class="switch">
+    <input class="toggle" type="checkbox" :id="id" v-model="isOn" @change="toggleAnimation" />
+    <label :for="id">
+      <span :class="{ slider: true, round: true, on: isOn }">
+        <span class="slider-text" v-if="isOn">Open</span>
+        <span class="slider-text" v-else>Close</span>
+      </span>
+    </label>
+  </div>
 </template>
 
 <script lang="ts">
-import { ref, defineComponent } from 'vue';
+import { ref, defineComponent, PropType } from 'vue';
 
 export default defineComponent({
   name: 'CloseSwitch',
-  emits: ['update'],  // Define the custom event here
-  setup(_, { emit }) {
+  props: {
+    id: {
+      type: String,
+      required: true,
+    },
+    playCloseAnimation: {
+      type: Function as PropType<(direction: number) => void>,
+      required: true,
+    },
+  },
+  setup(props) {
+    const renderKey = ref(0);
     const isOn = ref(false); // state to track whether the switch is on or off
 
     // Function to toggle the animation state
     const toggleAnimation = () => {
-      isOn.value = !isOn.value;
-      const direction = isOn.value ? -1 : 1; // Determine the direction based on the switch state
-      emit('update', direction);  // Emit the direction to the parent component
+      props.playCloseAnimation(isOn.value ? -1 : 1);
+      console.log('Toggle Animation:', isOn.value); // Log to console for debugging
+      renderKey.value++;
     };
 
-    return { isOn, toggleAnimation };
-  }
+    return { isOn, toggleAnimation, renderKey };
+  },
 });
 </script>
 
-<style scoped>
-button {
-  padding: 10px;
-  margin: 5px;
-  cursor: pointer;
-}
-
-/* You can add more styles or customize the button as needed */
+<style lang="css">
+@import "../assets/main.css";
 </style>

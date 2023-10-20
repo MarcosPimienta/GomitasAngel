@@ -10,7 +10,7 @@
       @candySelected="selectCandyForIle(IleSelector.getIndex(), $event)" />
       <NameField @text-updated="handleUpdatedText" />
       <MessageField @text-updated="handleUpdatedMsg" />
-      <CloseSwitch @update="handleCloseAnimation" />
+      <CloseSwitch id="closeSwitch" :playCloseAnimation="playCloseAnimation"/>
       <IleButtons @plus="IlePlus" @minus="IleMinus"/>
       <ResetButton @reset="resetAllCandies"/>
     </div>
@@ -97,10 +97,6 @@ const handleUpdatedMsg = (updatedText: string) => {
   } else {
     console.log("updateText Function is Undefined");
   }
-};
-
-const handleCloseAnimation = (direction: number) => {
-  playCloseAnimation(direction); // Pass the direction to the playCloseAnimation function
 };
 
 const playCloseAnimation = (direction: number) => {
