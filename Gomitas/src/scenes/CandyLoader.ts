@@ -225,7 +225,14 @@ function candiesLoader(scene: Scene, position: Vector3){
 // const path = `static/models/${candy.name}.glb`;
 
 // Function to draw text with a custom font on the dynamic texture
-const drawTextWithCustomFont = (dynamicTexture: DynamicTexture, text: string, positionY: number, font: string, textureResolution: number) => {
+const drawTextWithCustomFont = (
+  dynamicTexture: DynamicTexture,
+  text: string,
+  positionY: number,
+  font: string,
+  textureResolution: number,
+  maxWidth: number
+) => {
   const textureContext = dynamicTexture.getContext();
   const x = 400;
   const y = positionY;
@@ -233,6 +240,12 @@ const drawTextWithCustomFont = (dynamicTexture: DynamicTexture, text: string, po
   textureContext.save();
   textureContext.translate(x, textureResolution - y);
   textureContext.scale(1, -1);
+
+  // Clear the specific area where the text will be drawn
+  const textHeight = parseInt(font.split(' ')[1], 10);  // Extracting font size from the font string
+  textureContext.clearRect(0, 0, maxWidth, textHeight);
+
+  // Draw text
   dynamicTexture.drawText(text, 0, 0, font, "white", null, true, true);
   textureContext.restore();
 
@@ -241,14 +254,21 @@ const drawTextWithCustomFont = (dynamicTexture: DynamicTexture, text: string, po
   dynamicTexture.update();
 };
 
-// Function to draw text on the dynamic texture
-const drawText = (dynamicTexture: DynamicTexture, text: string, positionY: number, font: string, textureResolution: number) => {
+// Updated drawText function to include maxWidth parameter
+const drawText = (
+  dynamicTexture: DynamicTexture,
+  text: string,
+  positionY: number,
+  font: string,
+  textureResolution: number,
+  maxWidth: number
+) => {
   if (document.fonts) {
-      document.fonts.load(`1em ${font.split(' ')[2]}`).then(() => {
-          drawTextWithCustomFont(dynamicTexture, text, positionY, font, textureResolution);
-      });
+    document.fonts.load(`1em ${font.split(' ')[2]}`).then(() => {
+      drawTextWithCustomFont(dynamicTexture, text, positionY, font, textureResolution, maxWidth);
+    });
   } else {
-      drawTextWithCustomFont(dynamicTexture, text, positionY, font, textureResolution);
+    drawTextWithCustomFont(dynamicTexture, text, positionY, font, textureResolution, maxWidth);
   }
 };
 
@@ -281,15 +301,22 @@ const initializeDynamicTexture = (newMeshes: AbstractMesh[], scene: Scene) => {
   return dynamicTexture;
 };
 
+// Storing the current values of both text fields
+let currentText = "";
+let currentMsg = "";
+
+// Function to update the text on the dynamic texture
 function updateText(dynamicTexture: DynamicTexture | null, newText: string) {
   if (!dynamicTexture) return;
-  drawText(dynamicTexture, newText, 600, "bold 88px Simplicity", 1024);
+  currentText = newText; // Update the current text
+  drawText(dynamicTexture, currentText, 600, "bold 88px Simplicity", 1024, 600);// Also redraw the message to ensure it isn't cleared
 }
 
 // Function to update the message on the dynamic texture
-function updateMsg(dynamicTexture: DynamicTexture | null, newText: string) {
+function updateMsg(dynamicTexture: DynamicTexture | null, newMsg: string) {
   if (!dynamicTexture) return;
-  drawText(dynamicTexture, newText, 750, "italic 68px Simplicity", 1024);
+  currentMsg = newMsg; // Update the current message
+  drawText(dynamicTexture, currentMsg, 750, "italic 68px Simplicity", 1024, 600);
 }
 
 // The main boxController function
@@ -323,29 +350,8 @@ scene: Scene
           // Start the animation groups
           box.translate(new Vector3(0, 0, 0), 1, Space.WORLD);
           startBox.play(false);
-
-          const playCloseAnimation = () => {
-            if (animationGroups) {
-              const closeAnimation = animationGroups.find((group) => group.name === 'Close');
-              if (closeAnimation) {
-                closeAnimation.play(false);
-                console.log('Playing Close Animation');
-              } else {
-                console.log('Close Animation Not Found');
-              }
-            } else {
-              console.log('Animation Groups Not Loaded Yet');
-            }
-          };
-
-          return {
-            updateText: (newText: string) => updateText(dynamicTexture, newText),
-            updateMsg: (newText: string) => updateMsg(dynamicTexture, newText),
-            playCloseAnimation // Expose the playCloseAnimation method
-          };
       }
   );
-
   return {
     updateText: (newText: string) => updateText(dynamicTexture, newText), // Expose the updateText method
     updateMsg: (newText: string) => updateMsg(dynamicTexture, newText) // Expose the updateMessage method
