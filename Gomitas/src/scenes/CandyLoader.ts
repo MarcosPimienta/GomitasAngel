@@ -225,28 +225,28 @@ function candiesLoader(scene: Scene, position: Vector3){
 // const path = `static/models/${candy.name}.glb`;
 
 // Function to draw text with a custom font on the dynamic texture
-const drawTextWithCustomFont = (
-  dynamicTexture: DynamicTexture,
-  text: string,
-  positionY: number,
-  font: string,
-  textureResolution: number
-) => {
+const drawTextWithCustomFont = (dynamicTexture: DynamicTexture, text: string, positionY: number, font: string, textureResolution: number) => {
   const textureContext = dynamicTexture.getContext();
   const x = 400;
   const y = positionY;
 
-  textureContext.save();
-  textureContext.translate(x, textureResolution - y);
-  textureContext.scale(1, -1);
+  // Redraw the background texture
+  const img = new Image();
+  img.src = './textures/Outer_Box_Texture.png';
+  img.onload = () => {
+      textureContext.clearRect(0, 0, textureResolution, textureResolution);
+      textureContext.drawImage(img, 0, 0, textureResolution, textureResolution);
 
-  // Draw text
-  dynamicTexture.drawText(text, 0, 0, font, "white", null, true, true);
-  textureContext.restore();
+      textureContext.save();
+      textureContext.translate(x, textureResolution - y);
+      textureContext.scale(1, -1);
+      dynamicTexture.drawText(text, 0, 0, font, "white", null, true, true);
+      textureContext.restore();
 
-  // Reset the transformation to draw other elements normally
-  textureContext.setTransform(1, 0, 0, 1, 0, 0);
-  dynamicTexture.update();
+      // Reset the transformation to draw other elements normally
+      textureContext.setTransform(1, 0, 0, 1, 0, 0);
+      dynamicTexture.update();
+  };
 };
 
 // Updated drawText function to remove maxWidth parameter
