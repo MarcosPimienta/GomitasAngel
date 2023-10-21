@@ -230,8 +230,7 @@ const drawTextWithCustomFont = (
   text: string,
   positionY: number,
   font: string,
-  textureResolution: number,
-  maxWidth: number
+  textureResolution: number
 ) => {
   const textureContext = dynamicTexture.getContext();
   const x = 400;
@@ -240,10 +239,6 @@ const drawTextWithCustomFont = (
   textureContext.save();
   textureContext.translate(x, textureResolution - y);
   textureContext.scale(1, -1);
-
-  // Clear the specific area where the text will be drawn
-  const textHeight = parseInt(font.split(' ')[1], 10);  // Extracting font size from the font string
-  textureContext.clearRect(0, 0, maxWidth, textHeight);
 
   // Draw text
   dynamicTexture.drawText(text, 0, 0, font, "white", null, true, true);
@@ -254,21 +249,20 @@ const drawTextWithCustomFont = (
   dynamicTexture.update();
 };
 
-// Updated drawText function to include maxWidth parameter
+// Updated drawText function to remove maxWidth parameter
 const drawText = (
   dynamicTexture: DynamicTexture,
   text: string,
   positionY: number,
   font: string,
-  textureResolution: number,
-  maxWidth: number
+  textureResolution: number
 ) => {
   if (document.fonts) {
     document.fonts.load(`1em ${font.split(' ')[2]}`).then(() => {
-      drawTextWithCustomFont(dynamicTexture, text, positionY, font, textureResolution, maxWidth);
+      drawTextWithCustomFont(dynamicTexture, text, positionY, font, textureResolution);
     });
   } else {
-    drawTextWithCustomFont(dynamicTexture, text, positionY, font, textureResolution, maxWidth);
+    drawTextWithCustomFont(dynamicTexture, text, positionY, font, textureResolution);
   }
 };
 
@@ -309,14 +303,14 @@ let currentMsg = "";
 function updateText(dynamicTexture: DynamicTexture | null, newText: string) {
   if (!dynamicTexture) return;
   currentText = newText; // Update the current text
-  drawText(dynamicTexture, currentText, 600, "bold 88px Simplicity", 1024, 600);// Also redraw the message to ensure it isn't cleared
+  drawText(dynamicTexture, currentText, 600, "bold 88px Simplicity", 1024);// Also redraw the message to ensure it isn't cleared
 }
 
 // Function to update the message on the dynamic texture
 function updateMsg(dynamicTexture: DynamicTexture | null, newMsg: string) {
   if (!dynamicTexture) return;
   currentMsg = newMsg; // Update the current message
-  drawText(dynamicTexture, currentMsg, 750, "italic 68px Simplicity", 1024, 600);
+  drawText(dynamicTexture, currentMsg, 750, "italic 68px Simplicity", 1024);
 }
 
 // The main boxController function
