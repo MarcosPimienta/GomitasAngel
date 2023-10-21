@@ -215,6 +215,14 @@ function candiesLoader(scene: Scene, position: Vector3){
       candiesInstances[2].object.meshes[0].translate(new Vector3(-0.29, 0, 0), 1, Space.WORLD);
       candiesInstances[1].object.meshes[0].translate(new Vector3(-0.91, 0, 0), 1, Space.WORLD);
       candiesInstances[0].object.meshes[0].translate(position, 1, Space.WORLD);
+
+      // Fixed scale for candies
+      candiesInstances[5].object.meshes[0].scaling.y = 0.91;
+      candiesInstances[4].object.meshes[0].scaling.y = 0.91;
+      candiesInstances[3].object.meshes[0].scaling.y = 0.91;
+      candiesInstances[2].object.meshes[0].scaling.y = 0.91;
+      candiesInstances[1].object.meshes[0].scaling.y = 0.91;
+      candiesInstances[0].object.meshes[0].scaling.y = 0.91;
       animationHandler(candiesInstances);
     } catch (error) {
   }
