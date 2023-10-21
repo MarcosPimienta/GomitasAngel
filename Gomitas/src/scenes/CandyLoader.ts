@@ -224,131 +224,107 @@ function candiesLoader(scene: Scene, position: Vector3){
 
 // const path = `static/models/${candy.name}.glb`;
 
-// Function to draw text with a custom font on the dynamic texture
-const drawTextWithCustomFont = (dynamicTexture: DynamicTexture, text: string, positionY: number, font: string, textureResolution: number) => {
+let dynamicTexture: DynamicTexture | null = null;
+let currentNameText = '';
+let currentMessageText = '';
+const textureResolution = 1024;
+
+function initializeDynamicTexture(newMeshes: AbstractMesh[], scene: Scene) {
+  const innerCover = newMeshes.find((mesh) => mesh.name === "Inner_Cover");
+  if (innerCover && innerCover.material) {
+    const pbrMaterial = innerCover.material as PBRMaterial;
+    dynamicTexture = new DynamicTexture("dynamic texture", textureResolution, scene);
+
+    pbrMaterial.albedoTexture = dynamicTexture;
+
+    const img = new Image();
+    img.src = './textures/Outer_Box_Texture.png';
+    img.onload = () => {
+      dynamicTexture!.getContext().drawImage(img, 0, 0, textureResolution, textureResolution);
+      dynamicTexture!.update();
+    };
+  } else {
+    console.log("Inner_Cover mesh or material not found");
+  }
+}
+
+function drawText(text: string, positionY: number) {
+  if (!dynamicTexture) return;
+
   const textureContext = dynamicTexture.getContext();
   const x = 400;
   const y = positionY;
 
-  // Redraw the background texture
+  const drawTextWithCustomFont = () => {
+    const font = "bold 88px Simplicity";
+    textureContext.save();
+    textureContext.translate(x, textureResolution - y);
+    textureContext.scale(1, -1);  // Flip the text
+    dynamicTexture?.drawText(text, 0, 0, font, "white", null, true, true);
+    textureContext.restore();
+
+    // Reset the transformation to draw other elements normally
+    textureContext.setTransform(1, 0, 0, 1, 0, 0);
+  };
+
+  if (document.fonts) {
+    document.fonts.load('1em Simplicity').then(drawTextWithCustomFont);
+  } else {
+    drawTextWithCustomFont();
+  }
+}
+
+function redrawTexts() {
+  if (!dynamicTexture) return;
+
+  const textureContext = dynamicTexture.getContext();
+
   const img = new Image();
   img.src = './textures/Outer_Box_Texture.png';
+
   img.onload = () => {
-      textureContext.clearRect(0, 0, textureResolution, textureResolution);
-      textureContext.drawImage(img, 0, 0, textureResolution, textureResolution);
+    textureContext.drawImage(img, 0, 0, textureResolution, textureResolution);
 
-      textureContext.save();
-      textureContext.translate(x, textureResolution - y);
-      textureContext.scale(1, -1);
-      dynamicTexture.drawText(text, 0, 0, font, "white", null, true, true);
-      textureContext.restore();
-
-      // Reset the transformation to draw other elements normally
-      textureContext.setTransform(1, 0, 0, 1, 0, 0);
-      dynamicTexture.update();
+    drawText(currentNameText, 600);
+    drawText(currentMessageText, 800);
+    dynamicTexture?.update();
   };
-};
-
-// Updated drawText function to remove maxWidth parameter
-const drawText = (
-  dynamicTexture: DynamicTexture,
-  text: string,
-  positionY: number,
-  font: string,
-  textureResolution: number
-) => {
-  if (document.fonts) {
-    document.fonts.load(`1em ${font.split(' ')[2]}`).then(() => {
-      drawTextWithCustomFont(dynamicTexture, text, positionY, font, textureResolution);
-    });
-  } else {
-    drawTextWithCustomFont(dynamicTexture, text, positionY, font, textureResolution);
-  }
-};
-
-const initializeDynamicTexture = (newMeshes: AbstractMesh[], scene: Scene) => {
-  const innerCover = newMeshes.find((mesh) => mesh.name === "Inner_Cover");
-  let dynamicTexture: DynamicTexture | null = null;
-
-  if (innerCover && innerCover.material) {
-      const pbrMaterial = innerCover.material as PBRMaterial;
-
-      // Create a dynamic texture
-      const textureResolution = 1024;
-      dynamicTexture = new DynamicTexture("dynamic texture", textureResolution, scene);
-      const textureContext = dynamicTexture.getContext();
-
-      pbrMaterial.albedoTexture = dynamicTexture;
-
-      const img = new Image();
-      img.src = './textures/Outer_Box_Texture.png';
-
-      img.onload = () => {
-          // Add image to dynamic texture
-          textureContext.drawImage(img, 0, 0, textureResolution, textureResolution);
-          dynamicTexture?.update();
-      };
-  } else {
-      console.log("Inner_Cover mesh or material not found");
-  }
-
-  return dynamicTexture;
-};
-
-// Storing the current values of both text fields
-let currentText = "";
-let currentMsg = "";
-
-// Function to update the text on the dynamic texture
-function updateText(dynamicTexture: DynamicTexture | null, newText: string) {
-  if (!dynamicTexture) return;
-  currentText = newText; // Update the current text
-  drawText(dynamicTexture, currentText, 600, "bold 88px Simplicity", 1024);// Also redraw the message to ensure it isn't cleared
 }
 
-// Function to update the message on the dynamic texture
-function updateMsg(dynamicTexture: DynamicTexture | null, newMsg: string) {
-  if (!dynamicTexture) return;
-  currentMsg = newMsg; // Update the current message
-  drawText(dynamicTexture, currentMsg, 750, "italic 68px Simplicity", 1024);
+function updateText(newText: string) {
+  currentNameText = newText;
+  redrawTexts();
 }
 
-// The main boxController function
+function updateMsg(newText: string) {
+  currentMessageText = newText;
+  redrawTexts();
+}
+
 function boxController(
-meshNames: string[],
-meshPath: string,
-meshFile: string,
-scene: Scene
+  meshNames: string[],
+  meshPath: string,
+  meshFile: string,
+  scene: Scene
 ) {
-  let dynamicTexture: DynamicTexture | null = null;
-
   SceneLoader.ImportMesh(
-      meshNames,
-      meshPath,
-      meshFile,
-      scene,
-      (newMeshes, particleSystems, skeletons, animationGroups) => {
-          dynamicTexture = initializeDynamicTexture(newMeshes, scene);
+    meshNames,
+    meshPath,
+    meshFile,
+    scene,
+    (newMeshes, particleSystems, skeletons, animationGroups) => {
+      initializeDynamicTexture(newMeshes, scene);
 
-           // Log the names of the animation groups
-          if (animationGroups && animationGroups.length > 0) {
-            console.log('Animation Groups:');
-            animationGroups.forEach((group) => console.log(group.name));
-          } else {
-            console.log('No animation groups found.');
-          }
-
-          const box = newMeshes[0];
-          const startBox = animationGroups[0];
-
-          // Start the animation groups
-          box.translate(new Vector3(0, 0, 0), 1, Space.WORLD);
-          startBox.play(false);
-      }
+      const box = newMeshes[0];
+      const startBox = animationGroups[0];
+      box.translate(new Vector3(0, 0, 0), 1, Space.WORLD);
+      startBox.play(false);
+    }
   );
+
   return {
-    updateText: (newText: string) => updateText(dynamicTexture, newText), // Expose the updateText method
-    updateMsg: (newText: string) => updateMsg(dynamicTexture, newText) // Expose the updateMessage method
+    updateText,
+    updateMsg
   };
 }
 
