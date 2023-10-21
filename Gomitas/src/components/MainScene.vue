@@ -152,16 +152,24 @@ function animSwitch(item: any) {
 function IlePlus() {
   if (IleSelector.getIndex() < 5) {
     IleSelector.setIndex(IleSelector.getIndex() + 1);
-    IleSelector.ileSelect(IleSelector.getIndex(), bjsScene.ilesCone);
-    currentIleIndex.value = IleSelector.getIndex();
+    if (bjsScene.value && bjsScene.value.ilesCone) {
+      IleSelector.ileSelect(IleSelector.getIndex(), bjsScene.value.ilesCone);
+      currentIleIndex.value = IleSelector.getIndex();
+    } else {
+      console.error('bjsScene.value or bjsScene.value.ilesCone is undefined');
+    }
   }
 }
 
 function IleMinus() {
   if (IleSelector.getIndex() > 0) {
     IleSelector.setIndex(IleSelector.getIndex() - 1);
-    IleSelector.ileSelect(IleSelector.getIndex(), bjsScene.ilesCone);
-    currentIleIndex.value = IleSelector.getIndex();
+    if (bjsScene.value && bjsScene.value.ilesCone) {
+      IleSelector.ileSelect(IleSelector.getIndex(), bjsScene.value.ilesCone);
+      currentIleIndex.value = IleSelector.getIndex();
+    } else {
+      console.error('bjsScene.value or bjsScene.value.ilesCone is undefined');
+    }
   }
 }
 
