@@ -286,7 +286,7 @@ function redrawTexts() {
     textureContext.drawImage(img, 0, 0, textureResolution, textureResolution);
 
     drawText(currentNameText, 600);
-    drawText(currentMessageText, 800);
+    drawText(currentMessageText, 750);
     dynamicTexture?.update();
   };
 }
