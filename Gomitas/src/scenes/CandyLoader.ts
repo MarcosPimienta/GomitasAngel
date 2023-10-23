@@ -47,19 +47,20 @@ const config: CandyConfig[] = [{
 
 function resetAllAnimations(candiesInstances: Candy[]) {
   candiesInstances.forEach(candyInstance => {
-    if (candyInstance.object) {
-      // Reset animations
-      if (candyInstance.object.animationGroups) {
-        candyInstance.object.animationGroups.forEach(anim => {
-          anim.reset();
-        });
-      }
+    if (candyInstance?.object?.animationGroups) {
+      candyInstance.object.animationGroups.forEach(anim => {
+        anim.reset();
+      });
+    } else {
+      console.error('candyInstance.object.animationGroups is undefined for', candyInstance);
+    }
 
-      if (candyInstance.object.transformNodes) {
-        candyInstance.object.transformNodes.forEach(mesh => {
-          mesh.setEnabled(false);
-        });
-      }
+    if (candyInstance?.object?.transformNodes) {
+      candyInstance.object.transformNodes.forEach(mesh => {
+        mesh.setEnabled(false);
+      });
+    } else {
+      console.error('candyInstance.object.transformNodes is undefined for', candyInstance);
     }
   });
 }
@@ -227,6 +228,7 @@ function candiesLoader(scene: Scene, position: Vector3){
     } catch (error) {
   }
 })
+  console.log('candiesInstances:', candiesInstances);
   return candiesInstances
 }
 

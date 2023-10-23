@@ -135,7 +135,7 @@ function enableCart() {
 
 function resetAllCandies() {
   selectedCandies.value = [null, null, null, null, null, null];
-  CandyLoader.resetAllAnimations(bjsScene.candiesInstances);
+  CandyLoader.resetAllAnimations(bjsScene.value.candiesInstances);
   showModal.value = false
   modalKey.value++;
 }
