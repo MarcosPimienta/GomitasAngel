@@ -1,10 +1,14 @@
 <template>
   <div class="ile-holder">
-    <button class="arrow-btn" type="button" @click="IlePlus"> {{'<'}} </button>
-    <button class="arrow-btn" type="button" @click="IleMinus"> {{'>'}} </button>
+    <button :disabled="disabled" class="arrow-btn" type="button" @click="IlePlus"> {{'<'}} </button>
+    <button :disabled="disabled" class="arrow-btn" type="button" @click="IleMinus"> {{'>'}} </button>
   </div>
 </template>
 <script setup lang="ts">
+
+  const props = defineProps({
+    disabled: Boolean,
+  });
 
   const emits = defineEmits<{
   (e: 'plus'): void

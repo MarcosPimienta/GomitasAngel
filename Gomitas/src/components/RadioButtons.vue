@@ -3,6 +3,7 @@
     <div v-for="item in animState" :key="item.id">
       <input
         class="radio-btn"
+        :disabled="disabled"
         :value="item.id"
         :checked="item.id === selectedCandyId"
         @input="updateSelectedCandy(item.id)"
@@ -41,6 +42,7 @@ const animState: AnimState[] = [
 
 // Define the new prop for the currently selected candy ID
 const props = defineProps({
+  disabled: Boolean,
   selectedCandyId: {
     type: [Number, Object] as PropType<number | null>,
     default: null

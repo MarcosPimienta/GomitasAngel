@@ -11,7 +11,7 @@
 </template>
 
 <script lang="ts">
-import { ref, defineComponent, PropType } from 'vue';
+import { ref, defineComponent, PropType} from 'vue';
 
 export default defineComponent({
   name: 'CloseSwitch',
@@ -24,17 +24,22 @@ export default defineComponent({
       type: Function as PropType<(direction: number) => void>,
       required: true,
     },
+    isBoxOpen: {
+      type: Boolean,
+      required: true,
+    },
   },
-  setup(props) {
+  setup(props, {emit}) {
     const renderKey = ref(0);
-    const isOn = ref(false); // state to track whether the switch is on or off
+    const isOn = ref(props.isBoxOpen);
 
     // Function to toggle the animation state
     const toggleAnimation = () => {
-      props.playCloseAnimation(isOn.value ? -1 : 1);
-      console.log('Toggle Animation:', isOn.value); // Log to console for debugging
-      renderKey.value++;
-    };
+    props.playCloseAnimation(isOn.value ? 1 : -1);
+    emit('update:isBoxOpen', isOn.value);
+    console.log('Toggle Animation:', isOn.value); // Log to console for debugging
+    renderKey.value++;
+  };
 
     return { isOn, toggleAnimation, renderKey };
   },
