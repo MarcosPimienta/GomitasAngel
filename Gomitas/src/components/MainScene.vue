@@ -4,13 +4,14 @@
     <div class="btn-holder">
       <CartButton :isEnabled="allCandiesSelected" @showModal="displayModal"/>
       <RadioButtons
+      :disabled="!isBoxOpen"
       :key="currentIleIndex ?? 0"
       :selectedCandyId="selectedCandies[IleSelector.getIndex()]"
       @animationPlay="animSwitch"
       @candySelected="selectCandyForIle(IleSelector.getIndex(), $event)" />
       <NameField @text-updated="handleUpdatedText" />
       <MessageField @text-updated="handleUpdatedMsg" />
-      <CloseSwitch id="closeSwitch" :playCloseAnimation="playCloseAnimation"/>
+      <CloseSwitch id="closeSwitch" :playCloseAnimation="playCloseAnimation" :isBoxOpen="isBoxOpen" @update:isBoxOpen="isBoxOpen = $event"/>
       <IleButtons @plus="IlePlus" @minus="IleMinus"/>
       <ResetButton @reset="resetAllCandies"/>
     </div>
@@ -21,7 +22,7 @@
 
 <script setup lang="ts">
 import type { Scene, Engine, Mesh } from "@babylonjs/core";
-import { ref, computed, onMounted, onUpdated } from "vue";
+import { ref, computed, onMounted, watch } from "vue";
 import { createScene } from "../scenes/Scene";
 import * as CandyLoader from "../scenes/CandyLoader";
 import * as IleSelector from "../scenes/IleSelector";
@@ -39,6 +40,7 @@ import CloseSwitch from "./CloseSwitch.vue";
 const selectedCandies = ref([null, null, null, null, null, null]);
 const showModal = ref(false);
 const isAuthenticated = ref(false); // This should be set based on your authentication status
+const isBoxOpen = ref(true);
 
 const allCandies = [
   { id: 0, name:"ChocoMellows"},
@@ -172,6 +174,12 @@ function IleMinus() {
     }
   }
 }
+
+watch(isBoxOpen, (newValue, oldValue) => {
+  if (newValue !== oldValue) {
+    console.log('Box state changed:', newValue ? 'Open' : 'Closed');
+  }
+});
 
 </script>
 <style>
