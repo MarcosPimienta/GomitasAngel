@@ -72,7 +72,7 @@ const createScene = function (canvas:HTMLCanvasElement, onIleSelected: (index: n
   console.log('Box:', box);
   console.log('Box updateText:', box.updateText);
   console.log('createScene is returning:', result);
-  return result;
+    return result;
 };
 
 export { createScene };
