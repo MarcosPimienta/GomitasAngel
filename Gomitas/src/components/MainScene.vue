@@ -12,8 +12,8 @@
       <NameField @text-updated="handleUpdatedText" />
       <MessageField @text-updated="handleUpdatedMsg" />
       <CloseSwitch id="closeSwitch" :playCloseAnimation="playCloseAnimation" :isBoxOpen="isBoxOpen" @update:isBoxOpen="isBoxOpen = $event"/>
-      <IleButtons @plus="IlePlus" @minus="IleMinus"/>
-      <ResetButton @reset="resetAllCandies"/>
+      <IleButtons :disabled="!isBoxOpen" @plus="IlePlus" @minus="IleMinus"/>
+      <ResetButton :disabled="!isBoxOpen" @reset="resetAllCandies"/>
     </div>
     <CartModal class="modal" :key="modalKey" :show="showModal" :selectedCandies="selectedCandies" :allCandies="allCandies" @close="showModal = false"/>
     <canvas class="bjsCanvas" ref="bjsCanvas"/>
