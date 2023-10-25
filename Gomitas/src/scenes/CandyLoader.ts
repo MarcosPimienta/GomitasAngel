@@ -338,5 +338,24 @@ function boxController(
   };
 }
 
-export { boxController, candiesLoader, candiesPlay, resetAllAnimations };  export type { Candy };
+function knotController(
+  meshNames: string[],
+  meshPath: string,
+  meshFile: string,
+  scene: Scene
+) {
+  SceneLoader.ImportMesh(
+    meshNames,
+    meshPath,
+    meshFile,
+    scene,
+    (newMeshes, particleSystems, skeletons, animationGroups) => {
+      initializeDynamicTexture(newMeshes, scene);
 
+      const knot = animationGroups[0];
+      knot.play(false);
+    }
+  );
+}
+
+export { boxController, knotController, candiesLoader, candiesPlay, resetAllAnimations };  export type { Candy };
