@@ -34,7 +34,8 @@ const createScene = function (canvas:HTMLCanvasElement, onIleSelected: (index: n
 
   //load candy box with open animation
   let box = CandyLoader.boxController(["CandyBox"], "./", "CandyBox.gltf", scene);
-  console.log(box);
+  let knot = CandyLoader.boxController(["Cinta"], "./", "Nudo_Cinta00.gltf", scene);
+  console.log(box,);
 
   //load cone for selection display
   let ilesCone = IleSelector.ileCone(scene);

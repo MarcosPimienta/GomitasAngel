@@ -12,6 +12,7 @@
       <NameField @text-updated="handleUpdatedText" />
       <MessageField @text-updated="handleUpdatedMsg" />
       <CloseSwitch id="closeSwitch" :playCloseAnimation="playCloseAnimation" :isBoxOpen="isBoxOpen" @update:isBoxOpen="isBoxOpen = $event"/>
+      <KnotSwitch :playKnotAnimation="playKnotAnimation" :isBoxOpen="isBoxOpen" @update:isBoxOpen="isBoxOpen = $event"/>
       <IleButtons :disabled="!isBoxOpen" @plus="IlePlus" @minus="IleMinus"/>
       <ResetButton :disabled="!isBoxOpen" @reset="resetAllCandies"/>
     </div>
@@ -35,6 +36,7 @@ import IleButtons from "./IleButtons.vue";
 import NameField from "./NameField.vue";
 import MessageField from "./MessageField.vue";
 import CloseSwitch from "./CloseSwitch.vue";
+import KnotSwitch from "./KnotSwitch.vue";
 
 // Tracking selected candies for each 'ile'
 const selectedCandies = ref([null, null, null, null, null, null]);
@@ -104,6 +106,20 @@ const handleUpdatedMsg = (updatedText: string) => {
 const playCloseAnimation = (direction: number) => {
   if (bjsScene.value && bjsScene.value.scene && bjsScene.value.candiesInstances) {
     const animationGroup = bjsScene.value.scene.getAnimationGroupByName("Close");
+    if (animationGroup) {
+      animationGroup.speedRatio = direction;
+      animationGroup.play(false);
+    } else {
+      console.error('Close animation not found');
+    }
+  } else {
+    console.error('Scene or candiesInstances is not defined');
+  }
+};
+
+const playKnotAnimation = (direction: number) => {
+  if (bjsScene.value && bjsScene.value.scene && bjsScene.value.candiesInstances) {
+    const animationGroup = bjsScene.value.scene.getAnimationGroupByName("Cinta");
     if (animationGroup) {
       animationGroup.speedRatio = direction;
       animationGroup.play(false);
