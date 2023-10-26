@@ -12,7 +12,7 @@
 </template>
 
 <script lang="ts">
-import { ref, defineComponent, PropType} from 'vue';
+import { ref, defineComponent, PropType, watch} from 'vue';
 
 export default defineComponent({
   name: 'KnotSwitch',
@@ -38,6 +38,10 @@ export default defineComponent({
   setup(props, {emit}) {
     const renderKey = ref(0);
     const knotOn = ref(props.isKnotOn);
+
+    watch(() => props.isKnotOn, (newValue) => {
+      knotOn.value = newValue;
+    });
 
     // Function to toggle the animation state
     const knotAnimation = () => {

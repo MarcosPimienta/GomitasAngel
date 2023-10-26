@@ -105,6 +105,13 @@ const handleUpdatedMsg = (updatedText: string) => {
 };
 
 const playCloseAnimation = (direction: number) => {
+  // If the box is being closed and the knot is on
+  if (!isBoxOpen.value && isKnotOn.value) {
+    playKnotAnimation(-1); // Play the knot animation in reverse
+    isKnotOn.value = false; // Revert the state of the knot
+  }
+
+  // Rest of the function for the Close animation
   if (bjsScene.value && bjsScene.value.scene && bjsScene.value.candiesInstances) {
     const animationGroup = bjsScene.value.scene.getAnimationGroupByName("Close");
     if (animationGroup) {
