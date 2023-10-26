@@ -350,10 +350,10 @@ function knotController(
     meshFile,
     scene,
     (newMeshes, particleSystems, skeletons, animationGroups) => {
-      initializeDynamicTexture(newMeshes, scene);
-
+      const bow = newMeshes[0];
       const knot = animationGroups[0];
-      knot.play(false);
+      bow.translate(new Vector3(0, 0, 0), 1, Space.WORLD);
+      knot.stop();
     }
   );
 }
