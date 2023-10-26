@@ -12,7 +12,7 @@
       <NameField @text-updated="handleUpdatedText" />
       <MessageField @text-updated="handleUpdatedMsg" />
       <CloseSwitch id="closeSwitch" :playCloseAnimation="playCloseAnimation" :isBoxOpen="isBoxOpen" @update:isBoxOpen="isBoxOpen = $event"/>
-      <KnotSwitch :playKnotAnimation="playKnotAnimation" :isBoxOpen="isBoxOpen" @update:isBoxOpen="isBoxOpen = $event"/>
+      <KnotSwitch :disabled="isBoxOpen" id="knotSwitch" :playKnotAnimation="playKnotAnimation" :isKnotOn="isKnotOn" @update:isKnotOn="isKnotOn = $event"/>
       <IleButtons :disabled="!isBoxOpen" @plus="IlePlus" @minus="IleMinus"/>
       <ResetButton :disabled="!isBoxOpen" @reset="resetAllCandies"/>
     </div>
@@ -43,6 +43,7 @@ const selectedCandies = ref([null, null, null, null, null, null]);
 const showModal = ref(false);
 const isAuthenticated = ref(false); // This should be set based on your authentication status
 const isBoxOpen = ref(true);
+const isKnotOn = ref(false);
 
 const allCandies = [
   { id: 0, name:"ChocoMellows"},
@@ -118,16 +119,16 @@ const playCloseAnimation = (direction: number) => {
 };
 
 const playKnotAnimation = (direction: number) => {
-  if (bjsScene.value && bjsScene.value.scene && bjsScene.value.candiesInstances) {
-    const animationGroup = bjsScene.value.scene.getAnimationGroupByName("Cinta");
-    if (animationGroup) {
-      animationGroup.speedRatio = direction;
-      animationGroup.play(false);
+  if (bjsScene.value && bjsScene.value.scene) {
+    const animationKnot = bjsScene.value.scene.getAnimationGroupByName("Cinta");
+    if (animationKnot) {
+      animationKnot.speedRatio = direction;
+      animationKnot.play(false);
     } else {
-      console.error('Close animation not found');
+      console.error('Cinta animation not found');
     }
   } else {
-    console.error('Scene or candiesInstances is not defined');
+    console.error('Scene is not defined');
   }
 };
 
@@ -191,10 +192,8 @@ function IleMinus() {
   }
 }
 
-watch(isBoxOpen, (newValue, oldValue) => {
-  if (newValue !== oldValue) {
-    console.log('Box state changed:', newValue ? 'Open' : 'Closed');
-  }
+watch(isBoxOpen, (newValue) => {
+    console.log('Parent: isBoxOpen updated:', newValue);
 });
 
 </script>

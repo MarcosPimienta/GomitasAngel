@@ -1,10 +1,11 @@
 <template>
+  <span>Knot</span>
   <div class="switch">
-    <input class="toggle" type="checkbox" v-model="isOn" @change="toggleAnimation" />
-    <label>
-      <span :class="{ slider: true, round: true, on: isOn }">
-        <span class="slider-text" v-if="isOn">Knot on</span>
-        <span class="slider-text" v-else>Knot off</span>
+    <input class="toggle" type="checkbox" :id="id" v-model="knotOn" @change="knotAnimation" :disabled="disabled" />
+    <label :for="id">
+      <span :class="{ slider: true, round: true, on: knotOn }">
+        <span class="slider-text" v-if="knotOn">ON</span>
+        <span class="slider-text" v-else>OFF</span>
       </span>
     </label>
   </div>
@@ -16,28 +17,37 @@ import { ref, defineComponent, PropType} from 'vue';
 export default defineComponent({
   name: 'KnotSwitch',
   props: {
+    id: {
+      type: String,
+      required: true,
+    },
     playKnotAnimation: {
       type: Function as PropType<(direction: number) => void>,
       required: true,
     },
-    isBoxOpen: {
+    isKnotOn: {
       type: Boolean,
       required: true,
     },
+
+    disabled: {
+      type: Boolean,
+      required: true,
+    }
   },
   setup(props, {emit}) {
     const renderKey = ref(0);
-    const isOn = ref(props.isBoxOpen);
+    const knotOn = ref(props.isKnotOn);
 
     // Function to toggle the animation state
-    const toggleAnimation = () => {
-    props.playKnotAnimation(isOn.value ? -1 : 1);
-    emit('update:isBoxOpen', isOn.value);
-    console.log('Toggle Animation:', isOn.value); // Log to console for debugging
+    const knotAnimation = () => {
+    props.playKnotAnimation(knotOn.value ? 1 : -1);
+    emit('update:isKnotOn', knotOn.value);
+    console.log('Toggle Animation:', knotOn.value); // Log to console for debugging
     renderKey.value++;
   };
 
-    return { isOn, toggleAnimation, renderKey };
+    return { knotOn, knotAnimation, renderKey };
   },
 });
 </script>
