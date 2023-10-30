@@ -350,6 +350,8 @@ function knotController(
     meshFile,
     scene,
     (newMeshes, particleSystems, skeletons, animationGroups) => {
+      // Make all meshes invisible initially
+      newMeshes.forEach(mesh => mesh.isVisible = false);
       const bow = newMeshes[0];
       const knot = animationGroups[0];
       bow.translate(new Vector3(0, 0, 0), 1, Space.WORLD);
