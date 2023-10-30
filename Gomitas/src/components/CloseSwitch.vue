@@ -11,7 +11,7 @@
 </template>
 
 <script lang="ts">
-import { ref, defineComponent, PropType} from 'vue';
+import { ref, defineComponent, PropType, watch} from 'vue';
 
 export default defineComponent({
   name: 'CloseSwitch',
@@ -40,6 +40,10 @@ export default defineComponent({
     console.log('Toggle Animation:', isOn.value); // Log to console for debugging
     renderKey.value++;
   };
+  // ... inside the setup function
+  watch(() => props.isBoxOpen, (newVal) => {
+    isOn.value = newVal;
+  });
 
     return { isOn, toggleAnimation, renderKey };
   },
