@@ -105,18 +105,18 @@ const handleUpdatedMsg = (updatedText: string) => {
 };
 
 const playCloseAnimation = (direction: number) => {
-  // If the box is being closed and the knot is on
-  if (!isBoxOpen.value && isKnotOn.value) {
-    playKnotAnimation(-1); // Play the knot animation in reverse
-    isKnotOn.value = false; // Revert the state of the knot
-  }
-
-  // Rest of the function for the Close animation
   if (bjsScene.value && bjsScene.value.scene && bjsScene.value.candiesInstances) {
     const animationGroup = bjsScene.value.scene.getAnimationGroupByName("Close");
     if (animationGroup) {
-      animationGroup.speedRatio = direction;
-      animationGroup.play(false);
+      if (direction == 1 && !isBoxOpen.value && isKnotOn.value) { // If trying to open the box when it's closed and the knot is on
+        playKnotAnimation(-1, () => {  // Play knot animation in reverse
+          animationGroup.speedRatio = direction;
+          animationGroup.play(false);
+        });
+      } else {
+        animationGroup.speedRatio = direction;
+        animationGroup.play(false);
+      }
     } else {
       console.error('Close animation not found');
     }
@@ -125,14 +125,32 @@ const playCloseAnimation = (direction: number) => {
   }
 };
 
-const playKnotAnimation = (direction: number) => {
+const playKnotAnimation = (direction: number, callback?: () => void) => {
   if (bjsScene.value && bjsScene.value.scene) {
     const animationKnot = bjsScene.value.scene.getAnimationGroupByName("Cinta");
-    if (animationKnot) {
+    const knotTransformNode = bjsScene.value.scene.getTransformNodeByName("Cinta"); // Replace with the actual name of your TransformNode
+
+    if (animationKnot && knotTransformNode) {
+      // Enable the mesh visibility when starting the animation
+      knotTransformNode.getChildMeshes().forEach(mesh => mesh.isVisible = true);
+
       animationKnot.speedRatio = direction;
       animationKnot.play(false);
+
+      if (callback) {
+        // Execute the callback when the animation finishes
+        animationKnot.onAnimationEndObservable.addOnce(callback);
+      }
+
+      // If playing the "off" animation, disable the mesh when animation finishes
+      if (direction == -1) {
+        animationKnot.onAnimationEndObservable.addOnce(() => {
+          knotTransformNode.getChildMeshes().forEach(mesh => mesh.isVisible = false);
+        });
+      }
+
     } else {
-      console.error('Cinta animation not found');
+      console.error('Cinta animation or knot TransformNode not found');
     }
   } else {
     console.error('Scene is not defined');
