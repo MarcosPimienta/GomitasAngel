@@ -28,43 +28,37 @@ function ileCone(scene:Scene): Mesh {
   return cone;
 }
 
-function ileLoad(scene: Scene){
-  const iles :Ile[] = [];
-  const plane: any = MeshBuilder.CreatePlane('parent',{size: 1, width: 0.5, height: 2.7, sideOrientation: 2});
+function ileLoad(scene: Scene) {
+  const iles: Ile[] = [];
+  const plane: any = MeshBuilder.CreatePlane('parent', { size: 1, width: 0.6, height: 2.7, sideOrientation: 2 });
   let mat1 = new StandardMaterial("mat1", scene);
   mat1.alpha = 0;
   plane.material = mat1;
-  plane.rotation.x = Math.PI/2;
+  plane.rotation.x = Math.PI / 2;
   plane.rotate(new Vector3(1, 1, 1), 90 * Math.PI, Space.WORLD);
   plane.translate(new Vector3(-1.56, 0.3, 0), 1, Space.WORLD)
   plane.setEnabled(false);
 
-  iles.push(
-      { id: 0,
-        object: plane.createInstance(`plane${0}`),
-      },
-      { id: 1,
-        object: plane.createInstance(`plane${1}`),
-      },
-      { id: 2,
-        object: plane.createInstance(`plane${2}`),
-      },
-      { id: 3,
-        object: plane.createInstance(`plane${3}`),
-      },
-      { id: 4,
-        object: plane.createInstance(`plane${4}`),
-      },
-      { id: 5,
-        object: plane.createInstance(`plane${5}`),
-      },
-    )
-      iles[0].object?.translate(new Vector3(0, 0, 0), 1, Space.WORLD);
-      iles[1].object?.translate(new Vector3(0.64, 0, 0), 1, Space.WORLD);
-      iles[2].object?.translate(new Vector3(1.28, 0., 0), 1, Space.WORLD);
-      iles[3].object?.translate(new Vector3(1.88, 0, 0), 1, Space.WORLD);
-      iles[4].object?.translate(new Vector3(2.5, 0, 0), 1, Space.WORLD);
-      iles[5].object?.translate(new Vector3(3.15, 0, 0), 1, Space.WORLD);
+  for (let i = 0; i < 6; i++) {
+    iles.push({
+      id: i,
+      object: plane.createInstance(`plane${i}`)
+    });
+  }
+
+  const coordinates = [
+    new Vector3(-1.6, 0.3, 0),
+    new Vector3(-0.95, 0.3, 0),
+    new Vector3(-0.32, 0.3, 0),
+    new Vector3(0.32, 0.3, 0),
+    new Vector3(0.95, 0.3, 0),
+    new Vector3(1.6, 0.3, 0)
+  ];
+
+  // Update the translation of each ile
+  for (let i = 0; i < iles.length; i++) {
+    iles[i].object!.position = coordinates[i];
+  }
 
   return iles;
 }
@@ -72,12 +66,12 @@ function ileLoad(scene: Scene){
 function ileSelect( index: number, cone: Mesh){
 
   let ilePositions: Array<number> = [
-    -1.56,
-    -0.93,
-    -0.31,
-    0.31,
-    0.93,
-    1.56,
+    -1.6,
+    -0.95,
+    -0.32,
+    0.32,
+    0.95,
+    1.6,
   ];
   cone.position.x = ilePositions[index];
 
