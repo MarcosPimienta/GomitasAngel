@@ -105,18 +105,30 @@ const handleUpdatedMsg = (updatedText: string) => {
 };
 
 const playCloseAnimation = (direction: number) => {
+  if (bjsScene.value && bjsScene.value.scene) {
+    if (isKnotOn.value && direction === 1) { // If trying to close the box with knot on
+      playKnotAnimation(-1); // Reverse the knot animation
+      isKnotOn.value = false; // Set the knot switch to off
+      // Wait for the knot animation to finish before proceeding with the box close animation
+      setTimeout(() => {
+        playActualCloseAnimation(direction);
+        isBoxOpen.value = false; // Set the box to closed
+      }, 1000); // assuming the knot animation lasts 1 second
+    } else {
+      playActualCloseAnimation(direction);
+      isBoxOpen.value = direction === 1; // Update the box state based on the direction
+    }
+  } else {
+    console.error('Scene is not defined');
+  }
+};
+
+const playActualCloseAnimation = (direction: number) => {
   if (bjsScene.value && bjsScene.value.scene && bjsScene.value.candiesInstances) {
     const animationGroup = bjsScene.value.scene.getAnimationGroupByName("Close");
     if (animationGroup) {
-      if (direction == 1 && !isBoxOpen.value && isKnotOn.value) { // If trying to open the box when it's closed and the knot is on
-        playKnotAnimation(-1, () => {  // Play knot animation in reverse
-          animationGroup.speedRatio = direction;
-          animationGroup.play(false);
-        });
-      } else {
-        animationGroup.speedRatio = direction;
-        animationGroup.play(false);
-      }
+      animationGroup.speedRatio = direction;
+      animationGroup.play(false);
     } else {
       console.error('Close animation not found');
     }
