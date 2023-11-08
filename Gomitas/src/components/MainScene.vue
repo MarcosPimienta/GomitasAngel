@@ -16,7 +16,7 @@
       <IleButtons :disabled="!isBoxOpen" @plus="IlePlus" @minus="IleMinus"/>
       <ResetButton :disabled="!isBoxOpen" @reset="resetAllCandies"/>
     </div>
-    <CartModal class="modal" :key="modalKey" :show="showModal" :selectedCandies="selectedCandies" :allCandies="allCandies" @close="showModal = false"/>
+    <CartModal class="modal" :show="showModal" :selectedCandies="selectedCandies" :allCandies="allCandies" @close="showModal = false"/>
     <canvas class="bjsCanvas" ref="bjsCanvas"/>
   </div>
 </template>
@@ -180,8 +180,13 @@ function selectCandyForIle(ileIndex, candyId) {
 }
 
 function displayModal() {
-    showModal.value = true;  // This will show the modal when CartButton is clicked
+  if (allCandiesSelected.value) {
+    showModal.value = true;  // This will show the modal when all candies are selected
+  }
 }
+/* function displayModal() {
+    showModal.value = true;  // This will show the modal when CartButton is clicked
+} */
 
 function enableCart() {
   if (allCandiesSelected.value) {
@@ -190,13 +195,9 @@ function enableCart() {
 }
 
 function resetAllCandies() {
-  selectedCandies.value = [null, null, null, null, null, null];
-  nextTick(() => {
-    // Any other logic you want to run after the DOM has been updated
-    CandyLoader.resetAllAnimations(bjsScene.value.candiesInstances);
-    showModal.value = false
-    modalKey.value++;
-  });
+  selectedCandies.value.fill(null);
+  CandyLoader.resetAllAnimations(bjsScene.value.candiesInstances);
+  showModal.value = false;
 }
 
 function animSwitch(item: any) {
