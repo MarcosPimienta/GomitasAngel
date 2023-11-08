@@ -1,9 +1,9 @@
 <template>
-  <div v-show="show" class="modal">
+  <div v-show="show && !isIncomplete" class="modal">
     <div class="modal-content">
       <h2>Shopping Cart</h2>
       <ul>
-        <li v-for="name in candyNames" :key="name">{{ name }}</li>
+        <li v-for="name in candyNames">{{ name }}</li>
       </ul>
     <button @click="closeModal">Close</button>
     </div>
@@ -11,8 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, watch } from 'vue';
-
+import { computed, watch, ref } from 'vue';
 
 interface SimpleCandy {
   id: number | string;
@@ -20,35 +19,45 @@ interface SimpleCandy {
 }
 
 // Define props
-const { show, selectedCandies, allCandies } = defineProps({
-    show: Boolean,
-    selectedCandies: Array as () => (number | null)[],
-    allCandies: Array as () => SimpleCandy[]
+const props = defineProps({
+  show: Boolean,
+  selectedCandies: {
+    type: Array,
+    default: () => [] // Provide a default value to ensure it's always an array
+  },
+  allCandies: Array
 });
 
-watch(selectedCandies, (newVal, oldVal) => {
-  console.log('Selected candies changed:', newVal);
-});
-
+// Using props.selectedCandies here to access the prop
 const candyNames = computed(() => {
-  return selectedCandies?.map(candyId => {
-    const candy = allCandies?.find(c => c.id === candyId);
+  return props.selectedCandies.map(candyId => {
+    const candy = props.allCandies?.find(c => c.id === candyId);
     return candy ? candy.name : "Unknown Candy";
   });
+});
+
+// Using props.selectedCandies here to check for completeness
+const isIncomplete = computed(() => {
+  return props.selectedCandies.includes(null);
+});
+
+const hasCandies = ref(props.selectedCandies.some(candy => candy !== null));
+
+watch(() => props.selectedCandies, (newVal) => {
+  // When newVal is an array of all nulls, reset hasCandies to false
+  hasCandies.value = newVal.some(candy => candy !== null);
+  if (!hasCandies.value) {
+    // Perform additional reset logic if needed
+  }
 });
 
 // Define emits
 const emit = defineEmits(['close']);
 
-// Computed property to check if candies are selected for all Iles
-const TOTAL_ILES = 6;  // Adjust this based on your requirement
-const isIncomplete = computed(() => (selectedCandies?.length ?? 0) < TOTAL_ILES);
-
 // Methods
 const closeModal = () => {
-    emit('close');
+  emit('close');
 }
-
 </script>
 
 <style scoped>
