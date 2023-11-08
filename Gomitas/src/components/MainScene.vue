@@ -23,7 +23,7 @@
 
 <script setup lang="ts">
 import type { Scene, Engine, Mesh } from "@babylonjs/core";
-import { ref, computed, onMounted, watch } from "vue";
+import { ref, computed, onMounted, watch, nextTick } from "vue";
 import { createScene } from "../scenes/Scene";
 import * as CandyLoader from "../scenes/CandyLoader";
 import * as IleSelector from "../scenes/IleSelector";
@@ -112,7 +112,7 @@ const playCloseAnimation = (direction: number) => {
       // Wait for the knot animation to finish before proceeding with the box close animation
       setTimeout(() => {
         playActualCloseAnimation(direction);
-        isBoxOpen.value = false; // Set the box to closed
+        //!isBoxOpen.value;
       }, 1000); // assuming the knot animation lasts 1 second
     } else {
       playActualCloseAnimation(direction);
@@ -191,9 +191,12 @@ function enableCart() {
 
 function resetAllCandies() {
   selectedCandies.value = [null, null, null, null, null, null];
-  CandyLoader.resetAllAnimations(bjsScene.value.candiesInstances);
-  showModal.value = false
-  modalKey.value++;
+  nextTick(() => {
+    // Any other logic you want to run after the DOM has been updated
+    CandyLoader.resetAllAnimations(bjsScene.value.candiesInstances);
+    showModal.value = false
+    modalKey.value++;
+  });
 }
 
 function animSwitch(item: any) {

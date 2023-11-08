@@ -1,25 +1,33 @@
 <template>
-    <div v-if="show" class="modal">
-        <div class="modal-content">
-            <h2>Shopping Cart</h2>
-            <p v-if="isIncomplete">Please select candies for each Ile to fill the box!</p>
-            <ul v-else>
-              <li v-for="name in candyNames" :key="name">{{ name }}</li>
-            </ul>
-        <button @click="closeModal">Close</button>
-        </div>
+  <div v-show="show" class="modal">
+    <div class="modal-content">
+      <h2>Shopping Cart</h2>
+      <ul>
+        <li v-for="name in candyNames" :key="name">{{ name }}</li>
+      </ul>
+    <button @click="closeModal">Close</button>
     </div>
+  </div>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
-import type { Candy } from "../scenes/CandyLoader"
+import { computed, watch } from 'vue';
+
+
+interface SimpleCandy {
+  id: number | string;
+  name: string;
+}
 
 // Define props
 const { show, selectedCandies, allCandies } = defineProps({
     show: Boolean,
-    selectedCandies: Array as () => number[], // if it's just an array of ids
-    allCandies: Array as () => Candy[]
+    selectedCandies: Array as () => (number | null)[],
+    allCandies: Array as () => SimpleCandy[]
+});
+
+watch(selectedCandies, (newVal, oldVal) => {
+  console.log('Selected candies changed:', newVal);
 });
 
 const candyNames = computed(() => {
