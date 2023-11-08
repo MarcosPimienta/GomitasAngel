@@ -17,7 +17,9 @@ export default {
   emits: ['showModal'],
   setup(props, { emit }) {
     const openModal = () => {
-      emit('showModal');
+      setTimeout(() => {
+        emit('showModal');
+      }, 50);  // delay of 50ms
     };
 
     return {
