@@ -13,8 +13,7 @@
       <MessageField @text-updated="handleUpdatedMsg" />
       <CloseSwitch id="closeSwitch" :playCloseAnimation="playCloseAnimation" :isBoxOpen="isBoxOpen" @update:isBoxOpen="isBoxOpen = $event"/>
       <KnotSwitch :disabled="isBoxOpen" id="knotSwitch" :playKnotAnimation="playKnotAnimation" :isKnotOn="isKnotOn" @update:isKnotOn="isKnotOn = $event"/>
-      <IleButtons :disabled="!isBoxOpen" @plus="IlePlus" @minus="IleMinus"/>
-      <ResetButton :disabled="!isBoxOpen" @reset="resetAllCandies"/>
+      <IleButtons :disabled="!canResetCandies" @reset="resetAllCandies"/>
     </div>
     <CartModal class="modal" :show="showModal" :selectedCandies="selectedCandies" :allCandies="allCandies" @close="showModal = false"/>
     <canvas class="bjsCanvas" ref="bjsCanvas"/>
@@ -65,6 +64,11 @@ interface SceneReturnType {
 // Computed property to check if all 'iles' have candies selected
 const allCandiesSelected = computed(() => {
   return selectedCandies.value.every(candy => candy !== null);
+});
+
+// Modified computed property that also checks if the box is open
+const canResetCandies = computed(() => {
+  return isBoxOpen.value && selectedCandies.value.some(candy => candy !== null);
 });
 
 const bjsCanvas = ref(null);
