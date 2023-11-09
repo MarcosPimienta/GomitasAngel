@@ -16,7 +16,7 @@
   </div>
 </template> -->
 <template>
-  <div>
+  <div class="radio-parent">
     <div v-for="item in animState" :key="item.id" class="radio-container">
       <input
         class="radio-btn"
