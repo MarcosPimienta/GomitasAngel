@@ -1,4 +1,5 @@
 <template>
+  <span>Box</span>
   <div class="switch">
     <input class="toggle" type="checkbox" :id="id" v-model="isOn" @change="toggleAnimation" />
     <label :for="id">

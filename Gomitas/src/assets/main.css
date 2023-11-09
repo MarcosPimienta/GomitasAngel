@@ -65,11 +65,37 @@
 
 .arrow-btn {
   display: flex;
-  }
+}
 
 .radio-btn {
-  display: flex;
-  }
+  opacity: 0; /* Hide the default radio button */
+  position: absolute;
+  z-index: -1; /* Place it behind the label */
+}
+
+.radio-label {
+  display: flex; /* Use flexbox to align children */
+  align-items: center; /* Center children vertically */
+  justify-content: center; /* Center children horizontally */
+  padding-bottom: 1em;
+  width: 150px; /* Adjust as needed to match SVG size */
+  height: 2em; /* Adjust as needed to match SVG size */
+  background-image: url('../../public/svgs/Ribbon_Label.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  text-align: center;
+  line-height: 50px; /* Align text vertically, adjust to match label height */
+  cursor: pointer;
+  font-family: 'Simplicity';
+  font-size: 1.35em;
+  font-weight: bold;
+  color: #66c7c7; /* Adjust text color as needed */
+}
+
+/* Adjust label styles when the radio is checked */
+.radio-btn:checked + .radio-label {
+  /* Style changes for when the radio button is checked */
+}
 
 .name-field {
   display: flex;
