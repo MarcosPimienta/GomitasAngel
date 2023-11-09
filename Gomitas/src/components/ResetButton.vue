@@ -1,5 +1,5 @@
 <template>
-  <button :disabled="disabled" class="cart-btn" @click="resetCandies">Reset Candies</button>
+  <button :disabled="disabled" class="reset-btn" @click="resetCandies"></button>
 </template>
 
 <script setup lang="ts">

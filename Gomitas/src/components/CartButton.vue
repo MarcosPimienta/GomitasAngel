@@ -1,6 +1,5 @@
 <template>
   <button class="cart-btn" type="button" @click="openModal" :disabled="!isEnabled">
-    Add to Cart
   </button>
 </template>
 
@@ -28,3 +27,6 @@ export default {
   },
 };
 </script>
+<style lang="css">
+@import "../assets/main.css";
+</style>

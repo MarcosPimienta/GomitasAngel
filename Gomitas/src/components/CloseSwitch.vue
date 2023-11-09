@@ -1,11 +1,11 @@
 <template>
-  <span>Box</span>
+  <span class="label-text">Box</span>
   <div class="switch">
     <input class="toggle" type="checkbox" :id="id" v-model="isOn" @change="toggleAnimation" />
     <label :for="id">
       <span :class="{ slider: true, round: true, on: isOn }">
-        <span class="slider-text" v-if="isOn">Open</span>
-        <span class="slider-text" v-else>Close</span>
+        <span class="slider-text" v-if="isOn">OPEN</span>
+        <span class="slider-text" v-else>CLOSE</span>
       </span>
     </label>
   </div>

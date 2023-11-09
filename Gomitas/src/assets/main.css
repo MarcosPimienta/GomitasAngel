@@ -64,8 +64,52 @@
   flex-direction: row;
 }
 
-.arrow-btn {
+.left-arrow-btn {
   display: flex;
+  width: 50px; /* Set the width to the width of your SVG */
+  height: 35px; /* Set the height to the height of your SVG */
+  background-color: transparent;
+  background-image: url('/svgs/Left_Arrow.svg'); /* Adjust path as necessary */
+  background-size: contain; /* Or 'cover' or specific dimensions */
+  background-repeat: no-repeat;
+  border: none;
+  margin-top: 5%;
+  margin-right: 25%;
+  cursor: pointer; /* Change cursor to pointer to indicate it's clickable */
+}
+
+.left-arrow-btn:active {
+  background-image: url('/svgs/Left_Arrow_Click.svg');
+}
+
+.left-arrow-btn:disabled {
+  opacity: 0;
+}
+
+.right-arrow-btn {
+  display: flex;
+  width: 50px; /* Set the width to the width of your SVG */
+  height: 35px; /* Set the height to the height of your SVG */
+  background-color: transparent;
+  background-image: url('/svgs/Right_Arrow.svg'); /* Adjust path as necessary */
+  background-size: contain; /* Or 'cover' or specific dimensions */
+  background-repeat: no-repeat;
+  border: none;
+  margin-top: 5%;
+  margin-left: 25%;
+  cursor: pointer; /* Change cursor to pointer to indicate it's clickable */
+}
+
+.right-arrow-btn:active {
+  background-image: url('/svgs/Right_Arrow_Click.svg');
+}
+
+.right-arrow-btn:disabled {
+  opacity: 0;
+}
+
+.radio-parent {
+  padding-top: 0.1em;
 }
 
 .radio-btn {
@@ -73,14 +117,13 @@
   width: 0;
   height: 0;
   position: absolute;
-  /* z-index: -1; */ /* Place it behind the label */
 }
 
 .radio-label {
   display: flex; /* Use flexbox to align children */
   align-items: center; /* Center children vertically */
   justify-content: center; /* Center children horizontally */
-  padding-bottom: 1em;
+  padding: 0.1em 0em 0.1em 0em;
   width: 150px; /* Adjust as needed to match SVG size */
   height: 2em; /* Adjust as needed to match SVG size */
   background-image: url('../../public/svgs/Ribbon_Label.svg');
@@ -104,7 +147,7 @@
 
 .name-field {
   display: flex;
-  width: 8%;
+  width: 100%;
   background: transparent;
   border-radius: 2rem;
   border-color: white;
@@ -112,15 +155,52 @@
   color: white;
 }
 
+
 .cart-btn {
   display: flex;
-  width: 5%;
-  }
+  width: 50px; /* Set the width to the width of your SVG */
+  height: 50px; /* Set the height to the height of your SVG */
+  background-color: transparent;
+  background-image: url('/svgs/Cart_Button.svg'); /* Adjust path as necessary */
+  background-size: contain; /* Or 'cover' or specific dimensions */
+  border: none;
+  cursor: pointer; /* Change cursor to pointer to indicate it's clickable */
+}
+
+.cart-btn:active {
+  background-image: url('/svgs/Cart_Button_Click.svg');
+}
+
+.cart-btn:disabled {
+  opacity: 0;
+}
 
 .label-text {
   display: flex;
   color: white;
-  }
+  font-family: 'Simplicity';
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.reset-btn {
+  display: flex;
+  width: 50px; /* Set the width to the width of your SVG */
+  height: 50px; /* Set the height to the height of your SVG */
+  background-color: transparent;
+  background-image: url('/svgs/Reset_Button.svg'); /* Adjust path as necessary */
+  background-size: contain; /* Or 'cover' or specific dimensions */
+  border: none;
+  cursor: pointer; /* Change cursor to pointer to indicate it's clickable */
+}
+
+.reset-btn:active {
+  background-image: url('/svgs/Reset_Button_Click.svg');
+}
+
+.reset-btn:disabled {
+  opacity: 0;
+}
 
 .switch {
   position: relative;
@@ -142,7 +222,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ccc;
+  background-color: #d7a6b4;
   -webkit-transition: .4s;
   transition: .4s;
   z-index: 2;
@@ -153,7 +233,7 @@
   content: "";
   height: 25px;
   width: 25px;
-  left: 4px;
+  left: 0px;
   bottom: 4px;
   background-color: white;
   -webkit-transition: .4s;
@@ -166,9 +246,9 @@
 }
 
 .slider.on:before {
-  -webkit-transform: translateX(65px);
-  -ms-transform: translateX(65px);
-  transform: translateX(65px);
+  -webkit-transform: translateX(74px);
+  -ms-transform: translateX(74px);
+  transform: translateX(74px);
 }
 
 .slider.round {
@@ -184,14 +264,16 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  font-family: "Simplicity";
   color: white;
   z-index: 1;
 }
 
 /* Adjust the color for better visibility when the switch is on */
 .slider.on .slider-text {
-  color: black;
+  color: #d7a6b4;
 }
 
 /* @media (hover: hover) {

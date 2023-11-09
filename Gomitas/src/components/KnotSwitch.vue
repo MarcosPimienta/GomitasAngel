@@ -1,11 +1,11 @@
 <template>
-  <span>Knot</span>
+  <span class="label-text">Knot</span>
   <div class="switch">
     <input class="toggle" type="checkbox" :id="id" v-model="knotOn" @change="knotAnimation" :disabled="disabled" />
     <label :for="id">
       <span :class="{ slider: true, round: true, on: knotOn }">
-        <span class="slider-text" v-if="knotOn">ON</span>
-        <span class="slider-text" v-else>OFF</span>
+        <span class="slider-text" v-if="knotOn">On</span>
+        <span class="slider-text" v-else>Off</span>
       </span>
     </label>
   </div>

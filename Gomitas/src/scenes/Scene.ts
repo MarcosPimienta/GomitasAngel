@@ -55,9 +55,9 @@ const createScene = function (canvas:HTMLCanvasElement, onIleSelected: (index: n
 
   scene.clearColor = new Color4(0.40, 0.78, 0.78);
 
-  scene.debugLayer.show({
+  /* scene.debugLayer.show({
     embedMode: true,
-  });
+  }); */
 
   engine.runRenderLoop(() => {
     scene.render();
