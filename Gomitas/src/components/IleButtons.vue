@@ -1,7 +1,7 @@
 <template>
   <div class="ile-holder">
-    <button :disabled="disabled" class="left-arrow-btn" type="button" @click="IlePlus"></button>
-    <button :disabled="disabled" class="right-arrow-btn" type="button" @click="IleMinus"></button>
+    <button class="left-arrow-btn" type="button" :disabled="disabled" @click="IlePlus"></button>
+    <button class="right-arrow-btn" type="button" :disabled="disabled" @click="IleMinus"></button>
   </div>
 </template>
 <script setup lang="ts">

@@ -16,7 +16,7 @@
   font-weight: normal;
 }
 
-/* .modal {
+.modal {
   position: fixed;
   top: 0;
   left: 0;
@@ -30,12 +30,13 @@
 }
 
 .modal-content {
-  background-color: white;
-  padding: 20px;
-  border-radius: 10px;
-  max-width: 80%;
-  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
-} */
+  display: flex;
+  flex-direction: column;
+  background-image: url('/svgs/Modal_Content.svg');
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
 
 .auth_login {
   position: fixed;
@@ -82,10 +83,6 @@
   background-image: url('/svgs/Left_Arrow_Click.svg');
 }
 
-.left-arrow-btn:disabled {
-  opacity: 0;
-}
-
 .right-arrow-btn {
   display: flex;
   width: 50px; /* Set the width to the width of your SVG */
@@ -104,8 +101,8 @@
   background-image: url('/svgs/Right_Arrow_Click.svg');
 }
 
-.right-arrow-btn:disabled {
-  opacity: 0;
+.left-arrow-btn:disabled, .right-arrow-btn:disabled {
+  opacity: 0.5;
 }
 
 .radio-parent {
@@ -120,29 +117,31 @@
 }
 
 .radio-label {
-  display: flex; /* Use flexbox to align children */
-  align-items: center; /* Center children vertically */
-  justify-content: center; /* Center children horizontally */
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 0.1em 0em 0.1em 0em;
-  width: 150px; /* Adjust as needed to match SVG size */
-  height: 2em; /* Adjust as needed to match SVG size */
+  width: 150px;
+  height: 2em;
   background-image: url('../../public/svgs/Ribbon_Label.svg');
   background-size: contain;
   background-repeat: no-repeat;
   text-align: center;
-  line-height: 50px; /* Align text vertically, adjust to match label height */
+  line-height: 50px;
   cursor: pointer;
   font-family: 'Simplicity';
   font-size: 1.35em;
   font-weight: bold;
-  color: #66c7c7; /* Adjust text color as needed */
+  color: #66c7c7;
 }
 
-/* Adjust label styles when the radio is checked */
 .radio-btn:checked + .radio-label {
-  /* Style changes for when the radio button is checked */
   background-image: url('../../public/svgs/Ribbon_Label_Click.svg');
   color: white;
+}
+
+.radio-btn:disabled + .radio-label {
+  opacity: 0.5;
 }
 
 .name-field {
@@ -155,6 +154,30 @@
   color: white;
 }
 
+.close-btn {
+  position: relative;
+  left: -10%;
+  top: -1em;
+  width: 50px; /* Set the width to the width of your SVG */
+  height: 50px; /* Set the height to the height of your SVG */
+  background-color: transparent;
+  background-image: url('/svgs/Close_Button.svg'); /* Adjust path as necessary */
+  background-size: contain; /* Or 'cover' or specific dimensions */
+  border: none;
+  cursor: pointer; /* Change cursor to pointer to indicate it's clickable */
+}
+
+.close-btn:active {
+  background-image: url('/svgs/Close_Button_Click.svg'); /* Adjust path as necessary */
+}
+
+.cart-title {
+  font-family: "Simplicity";
+  font-size: 2em;
+  color:#66c7c7;
+  font-weight: bold;
+  margin: 0;
+}
 
 .cart-btn {
   display: flex;
