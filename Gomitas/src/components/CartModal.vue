@@ -1,11 +1,14 @@
 <template>
   <div v-show="show && !isIncomplete" class="modal">
     <div class="modal-content">
-      <button class="close-btn" @click="closeModal"></button>
-      <p class="cart-title">Shopping Cart</p>
-      <ul>
-        <li v-for="name in candyNames">{{ name }}</li>
-      </ul>
+      <div class="overlay-content">
+        <button class="close-btn" @click="closeModal"></button>
+        <p class="cart-title">Shopping Cart</p>
+        <ul>
+          <li v-for="name in candyNames">{{ name }}</li>
+        </ul>
+      </div>
+      <img src="/svgs/Modal_Content.svg" alt="Modal Content">
     </div>
   </div>
 </template>
