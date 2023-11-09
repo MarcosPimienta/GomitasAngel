@@ -13,7 +13,8 @@
       <MessageField @text-updated="handleUpdatedMsg" />
       <CloseSwitch id="closeSwitch" :playCloseAnimation="playCloseAnimation" :isBoxOpen="isBoxOpen" @update:isBoxOpen="isBoxOpen = $event"/>
       <KnotSwitch :disabled="isBoxOpen" id="knotSwitch" :playKnotAnimation="playKnotAnimation" :isKnotOn="isKnotOn" @update:isKnotOn="isKnotOn = $event"/>
-      <IleButtons :disabled="!canResetCandies" @reset="resetAllCandies"/>
+      <IleButtons :disabled="!isBoxOpen" @plus="IlePlus" @minus="IleMinus"/>
+      <ResetButton :disabled="!canResetCandies" @reset="resetAllCandies"/>
     </div>
     <CartModal class="modal" :show="showModal" :selectedCandies="selectedCandies" :allCandies="allCandies" @close="showModal = false"/>
     <canvas class="bjsCanvas" ref="bjsCanvas"/>
