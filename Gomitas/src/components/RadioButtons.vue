@@ -1,20 +1,3 @@
-<!-- <template>
-  <div>
-    <div v-for="item in animState" :key="item.id">
-      <input
-        class="radio-btn"
-        :disabled="disabled"
-        :value="item.id"
-        :checked="item.id === selectedCandyId"
-        @input="updateSelectedCandy(item.id)"
-        type="radio"
-        :name="'ds_' + item.id"
-        @click="handleClick(item)"
-      />
-      <label class="label-text" :for="'ds_' + item.id">{{ item.name }}</label>
-    </div>
-  </div>
-</template> -->
 <template>
   <div class="radio-parent">
     <div v-for="item in animState" :key="item.id" class="radio-container">
@@ -28,7 +11,7 @@
         :id="'radio_' + item.id"
         @click="handleClick(item)"
       />
-      <label class="radio-label" :for="'radio_' + item.id">{{ item.name }}</label>
+      <label class="radio-label" :disabled="disabled" :for="'radio_' + item.id">{{ item.name }}</label>
     </div>
   </div>
 </template>

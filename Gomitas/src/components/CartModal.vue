@@ -1,11 +1,11 @@
 <template>
   <div v-show="show && !isIncomplete" class="modal">
     <div class="modal-content">
-      <h2>Shopping Cart</h2>
+      <button class="close-btn" @click="closeModal"></button>
+      <p class="cart-title">Shopping Cart</p>
       <ul>
         <li v-for="name in candyNames">{{ name }}</li>
       </ul>
-    <button @click="closeModal">Close</button>
     </div>
   </div>
 </template>
@@ -60,29 +60,6 @@ const closeModal = () => {
 }
 </script>
 
-<style scoped>
-  .modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.7); /* semi-transparent black */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-}
-
-.modal-content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    max-width: 80%; /* You can adjust this as needed */
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
-}
-
-button {
-    margin-top: 20px;
-}
+<style lang="css">
+@import "../assets/main.css";
 </style>

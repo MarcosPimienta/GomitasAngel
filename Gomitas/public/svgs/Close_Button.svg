@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="17.684mm" height="17.684mm" viewBox="0 0 50.127 50.127">
+  <title>Close_Button</title>
+  <g id="a312c377-c1e4-4bf6-b0f2-87d03747fd19" data-name="Capa 2">
+    <g id="bcb9209f-1f0b-4e28-a290-4adcfc25aed0" data-name="Capa 3">
+      <circle cx="25.064" cy="25.064" r="23.064" fill="#fdfbfc" stroke="#d7a6b4" stroke-miterlimit="10" stroke-width="4"/>
+      <g>
+        <rect x="6.352" y="21.971" width="37.25" height="6.026" rx="3.013" ry="3.013" transform="translate(-10.35 24.979) rotate(-45)" fill="#6bafaf"/>
+        <rect x="6.352" y="21.971" width="37.25" height="6.026" rx="3.013" ry="3.013" transform="translate(24.982 -10.344) rotate(45)" fill="#6bafaf"/>
+      </g>
+    </g>
+  </g>
+</svg>
