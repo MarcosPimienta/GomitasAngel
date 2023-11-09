@@ -158,6 +158,7 @@
 
 .cart-btn {
   display: flex;
+  margin: 0.25em 0.25em 0em 0em;
   width: 50px; /* Set the width to the width of your SVG */
   height: 50px; /* Set the height to the height of your SVG */
   background-color: transparent;
@@ -185,6 +186,7 @@
 
 .reset-btn {
   display: flex;
+  margin: 0.25em 0.25em 0em 0.25em;
   width: 50px; /* Set the width to the width of your SVG */
   height: 50px; /* Set the height to the height of your SVG */
   background-color: transparent;
@@ -200,6 +202,12 @@
 
 .reset-btn:disabled {
   opacity: 0;
+}
+
+.round-buttons {
+  padding-top: 2%;
+  display: flex;
+  justify-content: left;
 }
 
 .switch {
