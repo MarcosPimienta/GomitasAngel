@@ -40,7 +40,7 @@ interface CandyObject {
 const config: CandyConfig[] = [{
   id: 0,
   name: ['ChocoMellows', 'Cables', 'LifeSavers', 'Ribbons', 'Strawberries', 'Worms'],
-  path: "./",
+  path: "./models/",
   file: "Gummies.gltf",
   row_position: new Vector3(0, 0, 0),
 }]
