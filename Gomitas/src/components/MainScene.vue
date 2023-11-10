@@ -2,6 +2,7 @@
   <!-- <AuthLogin v-if="!isAuthenticated" @loginSuccessful="handleLogin" /> -->
   <div>
     <div class="btn-holder">
+      <img src="/svgs/Gomitas_Logo.svg"/>
       <IleButtons :disabled="!isBoxOpen" @plus="IlePlus" @minus="IleMinus"/>
       <RadioButtons
       :disabled="!isBoxOpen"

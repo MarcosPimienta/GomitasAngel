@@ -28,7 +28,7 @@ const createScene = function (canvas:HTMLCanvasElement, onIleSelected: (index: n
     new Vector3(0, 5, 10),
     scene
   );
-  camera.setTarget(Vector3.Zero());
+  camera.setTarget(new Vector3(0, 1, 0));
   camera.attachControl(canvas, true);
   //camera.minZ = 0.1;
 
@@ -53,7 +53,7 @@ const createScene = function (canvas:HTMLCanvasElement, onIleSelected: (index: n
   let spotlight = new SpotLight("spotLight", new Vector3(0, 6, 0), new Vector3(0, -45, 0), Math.PI * 2, 2, scene);
   spotlight.intensity = 100;
 
-  scene.clearColor = new Color4(0.40, 0.78, 0.78);
+  scene.clearColor = new Color4(0.76, 0.93, 0.92);
 
   /* scene.debugLayer.show({
     embedMode: true,

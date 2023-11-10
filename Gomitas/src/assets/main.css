@@ -170,7 +170,7 @@
   border-radius: 2rem;
   border-color: white;
   outline: none;
-  color: white;
+  color: #339D92;
 }
 
 .close-btn {
@@ -220,7 +220,7 @@
 
 .label-text {
   display: flex;
-  color: white;
+  color: #339D92;
   font-family: 'Simplicity';
   font-size: 1.5em;
   font-weight: bold;
