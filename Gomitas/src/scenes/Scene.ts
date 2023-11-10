@@ -33,9 +33,9 @@ const createScene = function (canvas:HTMLCanvasElement, onIleSelected: (index: n
   //camera.minZ = 0.1;
 
   //load candy box with open animation
-  let box = CandyLoader.boxController(["CandyBox"], "./", "CandyBox.gltf", scene);
+  let box = CandyLoader.boxController(["CandyBox"], "./models/", "CandyBox.gltf", scene);
   // load knot with animation
-  let knot = CandyLoader.knotController(["Cinta"], "./", "Nudo_Cinta.gltf", scene);
+  let knot = CandyLoader.knotController(["Cinta"], "./models/", "Nudo_Cinta.gltf", scene);
   //console.log(box,);
 
   //load cone for selection display
