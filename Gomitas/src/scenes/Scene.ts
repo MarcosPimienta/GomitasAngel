@@ -1,11 +1,12 @@
 import {
   Engine,
   ArcRotateCamera,
-  Vector3,
+    Vector3,
   Color4,
   HemisphericLight,
   SpotLight,
   Scene,
+  VideoDome
 } from "@babylonjs/core";
 import "@babylonjs/inspector";
 import "babylonjs-loaders";
@@ -31,6 +32,16 @@ const createScene = function (canvas:HTMLCanvasElement, onIleSelected: (index: n
   camera.setTarget(new Vector3(0, 1, 0));
   camera.attachControl(canvas, true);
   //camera.minZ = 0.1;
+
+  let videoDome = new VideoDome(
+    "videoDome",
+    ["./video/Main360.mp4"],
+    {
+        resolution: 32,
+        clickToPlay: true,
+    },
+    scene
+  );
 
   //load candy box with open animation
   let box = CandyLoader.boxController(["CandyBox"], "./3d-models/", "CandyBox.gltf", scene);
@@ -60,7 +71,7 @@ const createScene = function (canvas:HTMLCanvasElement, onIleSelected: (index: n
   }); */
 
   engine.runRenderLoop(() => {
-        scene.render();
+    scene.render();
   });
   const result = {
     scene,
