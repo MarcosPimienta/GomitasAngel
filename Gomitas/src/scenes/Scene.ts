@@ -32,6 +32,14 @@ const createScene = function (canvas:HTMLCanvasElement, onIleSelected: (index: n
   camera.setTarget(new Vector3(0, 1, 0));
   camera.attachControl(canvas, true);
   //camera.minZ = 0.1;
+    //load cone for selection display
+  let ilesCone = IleSelector.ileCone(scene);
+
+  //load iles for selection and loading
+  let iles = IleSelector.ileLoad(scene);
+
+  //allows mouse to select within BabylonJS Scene with coordinates
+  IleSelector.mouseListener(scene, iles, camera, ilesCone, onIleSelected);
 
   let videoDome = new VideoDome(
     "videoDome",
@@ -43,20 +51,13 @@ const createScene = function (canvas:HTMLCanvasElement, onIleSelected: (index: n
     scene
   );
 
+  videoDome.rotation.y = 30;
+
   //load candy box with open animation
   let box = CandyLoader.boxController(["CandyBox"], "./3d-models/", "CandyBox.gltf", scene);
   // load knot with animation
   let knot = CandyLoader.knotController(["Cinta"], "./3d-models/", "Nudo_Cinta.gltf", scene);
   //console.log(box,);
-
-  //load cone for selection display
-  let ilesCone = IleSelector.ileCone(scene);
-
-  //load iles for selection and loading
-  let iles = IleSelector.ileLoad(scene);
-
-  //allows mouse to select within BabylonJS Scene with coordinates
-  IleSelector.mouseListener(scene, iles, camera, ilesCone, onIleSelected);
 
   //adds light into BabylonJS Scene
   let light = new HemisphericLight("light", new Vector3(0, 10, 0), scene);
@@ -64,7 +65,7 @@ const createScene = function (canvas:HTMLCanvasElement, onIleSelected: (index: n
   let spotlight = new SpotLight("spotLight", new Vector3(0, 6, 0), new Vector3(0, -45, 0), Math.PI * 2, 2, scene);
   spotlight.intensity = 100;
 
-  scene.clearColor = new Color4(0.76, 0.93, 0.92);
+  /* scene.clearColor = new Color4(0.76, 0.93, 0.92); */
 
   /* scene.debugLayer.show({
     embedMode: true,
