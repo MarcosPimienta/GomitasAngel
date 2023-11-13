@@ -1,5 +1,4 @@
 import { HighlightLayer, StandardMaterial, Vector3, Color3, Space, Matrix, type Scene, MeshBuilder, Mesh, Camera } from "@babylonjs/core";
-import { objectToString } from "@vue/shared";
 
 let selectedIndex: number = 0;
 let selectedCandiesForIles: (number | null)[] = [null, null, null, null, null, null];
@@ -10,7 +9,7 @@ interface Ile {
   object?: Mesh;
 }
 
-function ileCone(scene:Scene): Mesh {
+function ileCone(scene:Scene, initialVisibility: boolean): Mesh {
   const highlightLayer = new HighlightLayer("highlight", scene);
   const cone: Mesh = MeshBuilder.CreateCylinder("cone", {height: 0.15, diameterTop: 0, diameterBottom: 0.2, tessellation: 8, subdivisions: 24}, scene);
   highlightLayer.addMesh(cone, new Color3(0.40, 0.78, 0.78), true);
@@ -24,6 +23,7 @@ function ileCone(scene:Scene): Mesh {
   cone.rotation.x = Math.PI;
   cone.rotate(new Vector3(1, 1, 1), 180 * Math.PI, Space.WORLD);
   cone.translate(new Vector3(-1.56, 0.5, 1.5), 1, Space.WORLD);
+  cone.isVisible = initialVisibility;
 
   return cone;
 }

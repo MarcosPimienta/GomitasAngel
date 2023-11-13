@@ -80,16 +80,17 @@ const bjsCanvas = ref(null);
 const modalKey = ref(0);
 const currentIleIndex = ref<number | null>(null);
 let bjsScene: Ref<SceneReturnType | null> = ref(null)
+let ileConeMesh: Mesh | null = null;
 
   onMounted(async () => {
   console.log('bjsCanvas.value before createScene:', bjsCanvas.value);
   if (bjsCanvas.value) {
     const sceneObject = createScene(bjsCanvas.value, (selectedIndex) => {
       currentIleIndex.value = selectedIndex;
-    });
+    }, isBoxOpen);
     console.log('sceneObject after createScene:', sceneObject);
     bjsScene.value = sceneObject;
-  }
+      }
   console.log('bjsScene.value after assignment:', bjsScene.value);
 });
 
@@ -276,7 +277,9 @@ function IleMinus() {
 }
 
 watch(isBoxOpen, (newValue) => {
-    console.log('Parent: isBoxOpen updated:', newValue);
+  if (bjsScene.value) {
+    bjsScene.value.ilesCone.isVisible = newValue;
+  }
 });
 
 </script>
