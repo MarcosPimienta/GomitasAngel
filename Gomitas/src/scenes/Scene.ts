@@ -1,8 +1,7 @@
 import {
   Engine,
   ArcRotateCamera,
-    Vector3,
-  Color4,
+  Vector3,
   HemisphericLight,
   SpotLight,
   Scene,
@@ -13,7 +12,7 @@ import "babylonjs-loaders";
 import * as CandyLoader from "./CandyLoader";
 import * as IleSelector from "./IleSelector"
 
-const createScene = function (canvas:HTMLCanvasElement, onIleSelected: (index: number) => void) {
+const createScene = function (canvas:HTMLCanvasElement, onIleSelected: (index: number) => void, isBoxOpen: Ref<boolean>) {
   console.log('createScene called');
 
   const engine = new Engine(canvas);
@@ -32,8 +31,10 @@ const createScene = function (canvas:HTMLCanvasElement, onIleSelected: (index: n
   camera.setTarget(new Vector3(0, 1, 0));
   camera.attachControl(canvas, true);
   //camera.minZ = 0.1;
-    //load cone for selection display
-  let ilesCone = IleSelector.ileCone(scene);
+  //load cone for selection display
+  let ilesCone = IleSelector.ileCone(scene, (visible) => {
+    isBoxOpen.value = visible; // Set the visibility of the cone based on the box's open state
+  });
 
   //load iles for selection and loading
   let iles = IleSelector.ileLoad(scene);

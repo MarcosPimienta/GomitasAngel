@@ -1,4 +1,4 @@
-import { AnimationGroup, SceneLoader, Vector3, Tools, Space, DynamicTexture, Engine, PBRMaterial, Texture, type ISceneLoaderAsyncResult, Scene, StandardMaterial, Color3 } from "@babylonjs/core";
+import { AnimationGroup, SceneLoader, Vector3, Tools, Space, DynamicTexture, Engine, PBRMaterial, Texture, type ISceneLoaderAsyncResult, Scene, AbstractMesh, Color3 } from "@babylonjs/core";
 
 
 //This is my GUI engine
