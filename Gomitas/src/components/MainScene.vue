@@ -1,7 +1,7 @@
 <template>
   <!-- <AuthLogin v-if="!isAuthenticated" @loginSuccessful="handleLogin" /> -->
   <div>
-    <div class="btn-holder">
+    <div class="btn-holder" :class="{ disabled: isLoading }">
       <img src="/svgs/Gomitas_Logo.svg"/>
       <IleButtons :disabled="!isBoxOpen" @plus="IlePlus" @minus="IleMinus"/>
       <RadioButtons
@@ -81,17 +81,21 @@ const modalKey = ref(0);
 const currentIleIndex = ref<number | null>(null);
 let bjsScene: Ref<SceneReturnType | null> = ref(null)
 let ileConeMesh: Mesh | null = null;
+let isLoading = ref(true);
 
-  onMounted(async () => {
-  console.log('bjsCanvas.value before createScene:', bjsCanvas.value);
+onMounted(async () => {
   if (bjsCanvas.value) {
-    const sceneObject = createScene(bjsCanvas.value, (selectedIndex) => {
-      currentIleIndex.value = selectedIndex;
-    }, isBoxOpen);
-    console.log('sceneObject after createScene:', sceneObject);
-    bjsScene.value = sceneObject;
-      }
-  console.log('bjsScene.value after assignment:', bjsScene.value);
+    try {
+      const sceneObject = await createScene(bjsCanvas.value, (selectedIndex) => {
+        currentIleIndex.value = selectedIndex;
+      }, isBoxOpen);
+      bjsScene.value = sceneObject;
+      isLoading.value = false;
+    } catch (error) {
+      console.error("Error loading scene:", error);
+      // Handle the error appropriately
+    }
+  }
 });
 
 const handleUpdatedText = (updatedText: string) => {
