@@ -10,8 +10,10 @@
     </label>
   </div>
   <!-- Buttons to control knot color -->
-  <button :disabled="!knotOn" class="color-btn" @click="props.changeKnotColor('Red')">Red</button>
-  <button :disabled="!knotOn" class="color-btn" @click="props.changeKnotColor('Gold')">Gold</button>
+  <div class="material-button-container">
+    <button class="material-btn" :disabled="!knotOn" :style="{ backgroundColor: '#DC2C1B'}" @click="props.changeKnotColor('Red')"></button>
+    <button class="material-btn" :disabled="!knotOn" :style="{ backgroundColor: '#C09B6D'}" @click="props.changeKnotColor('Gold')"></button>
+  </div>
 </template>
 
 <script lang="ts">
