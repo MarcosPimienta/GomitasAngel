@@ -9,6 +9,9 @@
       </span>
     </label>
   </div>
+  <!-- Buttons to control knot color -->
+  <button :disabled="!knotOn" class="color-btn" @click="props.changeKnotColor('Red')">Red</button>
+  <button :disabled="!knotOn" class="color-btn" @click="props.changeKnotColor('Gold')">Gold</button>
 </template>
 
 <script lang="ts">
@@ -25,33 +28,33 @@ export default defineComponent({
       type: Function as PropType<(direction: number) => void>,
       required: true,
     },
+    changeKnotColor: {
+      type: Function as PropType<(color: string) => void>,
+      required: true,
+    },
     isKnotOn: {
       type: Boolean,
       required: true,
     },
-
     disabled: {
       type: Boolean,
       required: true,
     }
   },
   setup(props, {emit}) {
-    const renderKey = ref(0);
     const knotOn = ref(props.isKnotOn);
 
     watch(() => props.isKnotOn, (newValue) => {
       knotOn.value = newValue;
     });
 
-    // Function to toggle the animation state
     const knotAnimation = () => {
-    props.playKnotAnimation(knotOn.value ? 1 : -1);
-    emit('update:isKnotOn', knotOn.value);
-    console.log('Toggle Animation:', knotOn.value); // Log to console for debugging
-    renderKey.value++;
-  };
+      props.playKnotAnimation(knotOn.value ? 1 : -1);
+      emit('update:isKnotOn', knotOn.value);
+      console.log('Toggle Animation:', knotOn.value); // Log to console for debugging
+    };
 
-    return { knotOn, knotAnimation, renderKey };
+    return { knotOn, knotAnimation, props };
   },
 });
 </script>
