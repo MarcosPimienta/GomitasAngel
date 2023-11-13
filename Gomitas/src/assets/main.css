@@ -108,21 +108,19 @@
 }
 
 .material-btn{
-  border-radius: 50%;
-  margin: 0.25em 0.25em 0em 0.25em;
-  width: 40px; /* Set the width to the width of your SVG */
-  height: 40px; /* Set the height to the height of your SVG */
+  margin: 0.45em 0.45em 0em 0.5em;
+  width: 30px; /* Set the width to the width of your SVG */
+  height: 50px; /* Set the height to the height of your SVG */
   background-color: transparent;/* Or 'cover' or specific dimensions */
+  background-size: contain;
+  background-repeat: no-repeat;
+  border: none;
   cursor: pointer; /* Change cursor to pointer to indicate it's clickable */
-}
-
-.material-btn:active {
-  border-color: #339D92;
 }
 
 .material-btn:disabled{
   opacity: 0;
-  }
+}
 
 .right-arrow-btn {
   display: flex;
