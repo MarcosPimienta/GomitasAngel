@@ -11,8 +11,8 @@
   </div>
   <!-- Buttons to control knot color -->
   <div class="material-button-container">
-    <button class="material-btn" :disabled="!knotOn" :style="{ backgroundColor: '#DC2C1B'}" @click="props.changeKnotColor('Red')"></button>
-    <button class="material-btn" :disabled="!knotOn" :style="{ backgroundColor: '#C09B6D'}" @click="props.changeKnotColor('Gold')"></button>
+    <button class="material-btn" :disabled="!knotOn" :style="{backgroundImage: `url('/svgs/Red_Button.svg')`}" @click="props.changeKnotColor('Red')"></button>
+    <button class="material-btn" :disabled="!knotOn" :style="{backgroundImage: `url('/svgs/Gold_Button.svg')`}" @click="props.changeKnotColor('Gold')"></button>
   </div>
 </template>
 
