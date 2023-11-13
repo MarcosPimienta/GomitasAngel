@@ -13,7 +13,7 @@
       <NameField @text-updated="handleUpdatedText" />
       <MessageField @text-updated="handleUpdatedMsg" />
       <CloseSwitch id="closeSwitch" :playCloseAnimation="playCloseAnimation" :isBoxOpen="isBoxOpen" @update:isBoxOpen="isBoxOpen = $event"/>
-      <KnotSwitch :disabled="isBoxOpen" id="knotSwitch" :playKnotAnimation="playKnotAnimation" :isKnotOn="isKnotOn" @update:isKnotOn="isKnotOn = $event"/>
+      <KnotSwitch :disabled="isBoxOpen" id="knotSwitch" :playKnotAnimation="playKnotAnimation" :changeKnotColor="changeKnotColor" :isKnotOn="isKnotOn" @update:isKnotOn="isKnotOn = $event"/>
       <div class="round-buttons">
       <CartButton :isEnabled="allCandiesSelected" @showModal="displayModal"/>
       <ResetButton :disabled="!canResetCandies" @reset="resetAllCandies"/>
@@ -26,6 +26,7 @@
 
 <script setup lang="ts">
 import type { Scene, Engine, Mesh } from "@babylonjs/core";
+import { Color4, PBRMaterial } from '@babylonjs/core';
 import { ref, computed, onMounted, watch, nextTick } from "vue";
 import { createScene } from "../scenes/Scene";
 import * as CandyLoader from "../scenes/CandyLoader";
@@ -142,6 +143,39 @@ const playActualCloseAnimation = (direction: number) => {
     }
   } else {
     console.error('Scene or candiesInstances is not defined');
+  }
+};
+
+const changeKnotColor = (color: string, callback?: () => void) => {
+  console.log(`Attempting to change knot color to: ${color}`);
+
+  if (bjsScene.value && bjsScene.value.scene) {
+    const knotTransformNode = bjsScene.value.scene.getTransformNodeByName("Cinta");
+
+    if (knotTransformNode) {
+      console.log('Knot TransformNode found');
+      knotTransformNode.getChildMeshes().forEach(mesh => {
+        if (mesh.material && mesh.material instanceof PBRMaterial) {
+          console.log(`Changing color of mesh: ${mesh.name}`);
+          let pbrMaterial = mesh.material;
+          switch (color) {
+            case 'Red':
+              pbrMaterial.albedoColor = Color4.FromHexString("#DC2C1B")
+              break;
+            case 'Gold':
+              pbrMaterial.albedoColor = Color4.FromHexString("#C09B6D")
+              break;
+            // Add more cases for other colors as needed
+          }
+        } else {
+          console.log(`Mesh ${mesh.name} does not have a PBRMaterial`);
+        }
+      });
+    } else {
+      console.error('Knot TransformNode not found');
+    }
+  } else {
+    console.error('Scene is not defined');
   }
 };
 

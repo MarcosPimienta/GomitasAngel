@@ -1,4 +1,4 @@
-import { AnimationGroup, SceneLoader, Vector3, Tools, Space, DynamicTexture, Engine, PBRMaterial, Texture, type ISceneLoaderAsyncResult, Scene, StandardMaterial } from "@babylonjs/core";
+import { AnimationGroup, SceneLoader, Vector3, Tools, Space, DynamicTexture, Engine, PBRMaterial, Texture, type ISceneLoaderAsyncResult, Scene, StandardMaterial, Color3 } from "@babylonjs/core";
 
 
 //This is my GUI engine
@@ -338,12 +338,16 @@ function boxController(
   };
 }
 
-function knotController(
-  meshNames: string[],
-  meshPath: string,
-  meshFile: string,
-  scene: Scene
-) {
+function knotMaterial(knotMesh: AbstractMesh[]){
+  const knot = knotMesh.find((mesh) => mesh.name === "Cinta");
+  if (knot && knot.material) {
+    const pbrMaterial = knot.material as PBRMaterial;
+
+    pbrMaterial.albedoColor = new Color3()
+  }
+}
+
+function knotController(meshNames: string[], meshPath: string, meshFile: string, scene: Scene) {
   SceneLoader.ImportMesh(
     meshNames,
     meshPath,
@@ -351,7 +355,20 @@ function knotController(
     scene,
     (newMeshes, particleSystems, skeletons, animationGroups) => {
       // Make all meshes invisible initially
-      newMeshes.forEach(mesh => mesh.isVisible = false);
+      newMeshes.forEach(mesh => {
+        mesh.isVisible = false;
+
+        // Check if the mesh has a PBRMaterial and set the default albedoColor
+        if (mesh.material && mesh.material instanceof PBRMaterial) {
+          let pbrMaterial = mesh.material;
+          pbrMaterial.albedoColor = Color3.FromHexString("#DC2C1B"); // Set the default color here
+          // Adjust other properties
+          pbrMaterial.metallic = 0.5; // Adjust metallic property
+          pbrMaterial.directIntensity = 0.45; // Adjust direct light intensity
+          pbrMaterial.environmentIntensity = 0.1; // Adjust environment light intensity
+        }
+      });
+
       const bow = newMeshes[0];
       const knot = animationGroups[0];
       bow.translate(new Vector3(0, 0, 0), 1, Space.WORLD);
