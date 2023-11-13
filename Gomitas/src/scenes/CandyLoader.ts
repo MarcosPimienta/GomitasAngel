@@ -135,80 +135,31 @@ function createTextTexture(scene: Scene, text: string, engine: Engine) {
 
 function candiesLoader(scene: Scene, position: Vector3){
   const candiesInstances: Candy[] = [];
+  const configItem = config[0];
+
   config.forEach(async (candy) => {
   try {
-        candiesInstances.push({
-        id: candy.id,
-        name: candy.file,
-        object: await SceneLoader.ImportMeshAsync(
-          candy.name,
-          candy.path,
-          candy.file,
-          scene,
-        ),
-        mesh: "",
-        ilePos: position,
-      },
-      {
-        id: candy.id,
-        name: candy.file,
-        object: await SceneLoader.ImportMeshAsync(
-          candy.name,
-          candy.path,
-          candy.file,
-          scene,
-        ),
-        mesh: "",
-        ilePos: position,
-      },
-      {
-        id: candy.id,
-        name: candy.file,
-        object: await SceneLoader.ImportMeshAsync(
-          candy.name,
-          candy.path,
-          candy.file,
-          scene,
-        ),
-        mesh: "",
-        ilePos: position,
-      },
-      {
-        id: candy.id,
-        name: candy.file,
-        object: await SceneLoader.ImportMeshAsync(
-          candy.name,
-          candy.path,
-          candy.file,
-          scene,
-        ),
-        mesh: "",
-        ilePos: position,
-      },
-      {
-        id: candy.id,
-        name: candy.file,
-        object: await SceneLoader.ImportMeshAsync(
-          candy.name,
-          candy.path,
-          candy.file,
-          scene,
-        ),
-        mesh: "",
-        ilePos: position,
-      },
-      {
-        id: candy.id,
-        name: candy.file,
-        object: await SceneLoader.ImportMeshAsync(
-          candy.name,
-          candy.path,
-          candy.file,
-          scene,
-        ),
-        mesh: "",
-        ilePos: position,
-      })
+        for (let i = 0; i < configItem.name.length; i++){
+          candiesInstances.push({
+            id: candy.id,
+            name: candy.file,
+            object: await SceneLoader.ImportMeshAsync(
+              candy.name,
+              candy.path,
+              candy.file,
+              scene,
+            ),
+            mesh: "",
+            ilePos: position,
+          })
+          candiesInstances[i].object.transformNodes.forEach(mesh => {
+            mesh.setEnabled(false);
+          });
+          // Fixed scale for candies
+          candiesInstances[i].object.meshes.forEach(mesh => {
+            mesh.scaling.y = 0.91;
+          });
+        };
       console.log(candiesInstances);
       candiesInstances[5].object.meshes[0].translate(new Vector3(1.62, 0, 0), 1, Space.WORLD);
       candiesInstances[4].object.meshes[0].translate(new Vector3(0.98, 0, 0), 1, Space.WORLD);
@@ -217,13 +168,6 @@ function candiesLoader(scene: Scene, position: Vector3){
       candiesInstances[1].object.meshes[0].translate(new Vector3(-0.91, 0, 0), 1, Space.WORLD);
       candiesInstances[0].object.meshes[0].translate(position, 1, Space.WORLD);
 
-      // Fixed scale for candies
-      candiesInstances[5].object.meshes[0].scaling.y = 0.91;
-      candiesInstances[4].object.meshes[0].scaling.y = 0.91;
-      candiesInstances[3].object.meshes[0].scaling.y = 0.91;
-      candiesInstances[2].object.meshes[0].scaling.y = 0.91;
-      candiesInstances[1].object.meshes[0].scaling.y = 0.91;
-      candiesInstances[0].object.meshes[0].scaling.y = 0.91;
       animationHandler(candiesInstances);
     } catch (error) {
   }
