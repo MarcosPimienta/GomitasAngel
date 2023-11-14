@@ -16,6 +16,23 @@
   font-weight: normal;
 }
 
+.item-container {
+  display: flex;
+  flex-direction: row;
+  column-gap: 0.25em;
+  align-items: center;
+  padding: 0.25em;
+}
+
+.candy-image {
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 2.8125rem; /* Example width, adjust as needed */
+  height: 2.8125rem; /* Example height, adjust as needed */
+  background-size: cover;
+  background-position: center;
+}
+
 .disabled {
   pointer-events: none;
   opacity: 0.5;
@@ -35,31 +52,30 @@
 }
 
 .modal-content {
+  position: absolute;
   display: flex;
   flex-direction: column;
   background-color: transparent;
+  background-image: url('/svgs/Modal_Content.svg');
+  background-position: center center;
+  background-size: contain;
+  background-repeat: no-repeat;
   width: 100%; /* Adjust this as needed */
   height: 50%; /* Adjust this as needed */
   justify-content: center; /* Align children in the center vertically */
   align-items: center; /* Align children in the center horizontally */
 }
 
-.modal-content img {
-  max-width: 100%; /* Ensure it doesn't overflow its container */
-  max-height: 100%; /* Ensure it doesn't overflow its container */
-  width: 15%; /* Scale the width automatically to maintain aspect ratio */
-  height: auto; /* Scale the height automatically to maintain aspect ratio */
-}
-
 .overlay-content {
   position: relative;
-  top: 250px;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  max-width: 80%; /* Maximum width */
+  min-width: 300px; /* Minimum width to ensure usability */
+  margin: auto;
+  top: -3.125em;
   display: flex;
   flex-direction: column;
   z-index: 99;
+
 }
 
 .auth_login {
@@ -200,10 +216,10 @@
 
 .close-btn {
   position: relative;
-  left: -10%;
-  top: -1em;
-  width: 50px; /* Set the width to the width of your SVG */
-  height: 50px; /* Set the height to the height of your SVG */
+  left: 0;
+  top: 0;
+  width: 3.125em; /* Set the width to the width of your SVG */
+  height: 3.125em; /* Set the height to the height of your SVG */
   background-color: transparent;
   background-image: url('/svgs/Close_Button.svg'); /* Adjust path as necessary */
   background-size: contain; /* Or 'cover' or specific dimensions */
@@ -216,6 +232,7 @@
 }
 
 .cart-title {
+  text-align: center;
   font-family: "Simplicity";
   font-size: 2em;
   color:#66c7c7;

@@ -50,12 +50,12 @@ const isBoxOpen = ref(true);
 const isKnotOn = ref(false);
 
 const allCandies = [
-  { id: 0, name:"ChocoMellows"},
-  { id: 1, name:"Cables"},
-  { id: 2, name:"LifeSavers"},
-  { id: 3, name:"Ribbons"},
-  { id: 4, name:"Strawberries"},
-  { id: 5, name:"Worms"},
+  { id: 0, name:"ChocoMellows", imageUrl:"/svgs/Chocmellows.svg"},
+  { id: 1, name:"Cables", imageUrl:"/svgs/Cables.svg"},
+  { id: 2, name:"LifeSavers", imageUrl:"/svgs/LifeSavers.svg"},
+  { id: 3, name:"Ribbons", imageUrl:"/svgs/Ribbons.svg"},
+  { id: 4, name:"Strawberries", imageUrl:"/svgs/Strawberries.svg"},
+  { id: 5, name:"Worms", imageUrl:"/svgs/Worms.svg"},
   // ... add other candies
 ];
 
