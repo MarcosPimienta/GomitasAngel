@@ -5,10 +5,13 @@
         <button class="close-btn" @click="closeModal"></button>
         <p class="cart-title">Shopping Cart</p>
         <ul>
-          <li v-for="name in candyNames">{{ name }}</li>
+          <li v-for="item in candyItems" :key="item.name" class="item-container">
+            <div :style="{ backgroundImage: 'url(' + item.imageUrl + ')' }" class="candy-image"></div>
+            {{ item.name }}
+          </li>
         </ul>
       </div>
-      <img src="/svgs/Modal_Content.svg" alt="Modal Content">
+      <!-- <img src="/svgs/Modal_Content.svg" alt="Modal Content"> -->
     </div>
   </div>
 </template>
@@ -19,6 +22,7 @@ import { computed, watch, ref } from 'vue';
 interface SimpleCandy {
   id: number | string;
   name: string;
+  imageUrl: string;
 }
 
 // Define props
@@ -31,11 +35,19 @@ const props = defineProps({
   allCandies: Array
 });
 
+interface CandyItem {
+  name: string;
+  imageUrl: string;
+}
+
 // Using props.selectedCandies here to access the prop
-const candyNames = computed(() => {
+const candyItems = computed<CandyItem[]>(() => {
   return props.selectedCandies.map(candyId => {
     const candy = props.allCandies?.find(c => c.id === candyId);
-    return candy ? candy.name : "Unknown Candy";
+    return {
+      name: candy ? candy.name : "Unknown Candy",
+      imageUrl: candy ? candy.imageUrl : "/svgs/unknown.png"
+    };
   });
 });
 
