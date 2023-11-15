@@ -3,5 +3,9 @@
     "@babylonjs/inspector": "^5.57.1",
     "babylonjs": "^6.21.2",
     "babylonjs-gui": "^5.57.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1",
+    "ts-node": "^10.9.1"
   }
 }
