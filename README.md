@@ -1,4 +1,6 @@
 # Gomitas Angel
+![GomitasAngel02](https://github.com/MarcosPimienta/GomitasAngel/assets/60362847/8282eb8f-b86a-4d05-941f-90d7ca7ae17d)
+![GomitasAngel00](https://github.com/MarcosPimienta/GomitasAngel/assets/60362847/568c5f58-6e0a-49b2-84c0-69789e115419)
 
 ## Description
 
