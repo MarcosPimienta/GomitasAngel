@@ -41,7 +41,7 @@ Provide steps on how to install and run your application in the local environmen
 git clone <https://github.com/MarcosPimienta/GomitasAngel.git>
 
 # Navigate into the directory
-cd <repo-directory/Gomitas>
+cd <GomitasAngel>
 
 ## Project Setup
 
