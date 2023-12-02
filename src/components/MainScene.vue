@@ -28,9 +28,9 @@
 import type { Scene, Engine, Mesh } from "@babylonjs/core";
 import { Color4, PBRMaterial } from '@babylonjs/core';
 import { ref, computed, onMounted, watch, nextTick } from "vue";
-import { createScene } from "../scenes/Scene";
-import * as CandyLoader from "../scenes/CandyLoader";
-import * as IleSelector from "../scenes/IleSelector";
+import { createScene } from "../babylon/Scene";
+import * as CandyLoader from "../babylon/CandyLoader";
+import * as IleSelector from "../babylon/IleSelector";
 /* import AuthLogin from './AuthLogin.vue'; */
 import CartButton from "./CartButton.vue";
 import CartModal from "./CartModal.vue";

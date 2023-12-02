@@ -15,6 +15,6 @@
     "types": ["webpack-env", "jest"],
     "lib": ["esnext", "dom"]
   },
-  "include": ["env.d.ts", "src/**/*", "src/**/*.vue", "vue-shims.d.ts", "public/shaders/AnimatedBackground.ts", "src/scenes/LoadShaders.ts"],
+  "include": ["env.d.ts", "src/**/*", "src/**/*.vue", "vue-shims.d.ts"],
   "exclude": ["node_modules"]
 }
