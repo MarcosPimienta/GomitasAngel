@@ -16,6 +16,10 @@
   font-weight: normal;
 }
 
+.title_image {
+  filter: drop-shadow(1px 1px 1px rgb(0 0 0 / 0.4));
+}
+
 .item-container {
   display: flex;
   flex-direction: row;
@@ -64,6 +68,7 @@
   height: 50%; /* Adjust this as needed */
   justify-content: center; /* Align children in the center vertically */
   align-items: center; /* Align children in the center horizontally */
+  filter: drop-shadow(1px 1px 1px rgb(0 0 0 / 0.4));
 }
 
 .overlay-content {
@@ -117,10 +122,15 @@
   margin-top: 5%;
   margin-right: 25%;
   cursor: pointer; /* Change cursor to pointer to indicate it's clickable */
+  filter: drop-shadow(1px 1px 1px rgb(0 0 0 / 0.4));
 }
 
 .left-arrow-btn:active {
   background-image: url('/svgs/Left_Arrow_Click.svg');
+}
+
+.left-arrow-btn:hover, .right-arrow-btn:hover {
+  filter: drop-shadow(1px 1px 1px rgba(255, 255, 255, 1));
 }
 
 .material-btn_container {
@@ -155,6 +165,7 @@
   margin-top: 5%;
   margin-left: 25%;
   cursor: pointer; /* Change cursor to pointer to indicate it's clickable */
+  filter: drop-shadow(1px 1px 1px rgb(0 0 0 / 0.4));
 }
 
 .right-arrow-btn:active {
@@ -183,7 +194,7 @@
   padding: 0.1em 0em 0.1em 0em;
   width: 150px;
   height: 2em;
-  background-image: url('../../public/svgs/Ribbon_Label.svg');
+  background-image: url('/svgs/Ribbon_Label.svg');
   background-size: contain;
   background-repeat: no-repeat;
   text-align: center;
@@ -193,11 +204,17 @@
   font-size: 1.35em;
   font-weight: bold;
   color: #66c7c7;
+  filter: drop-shadow(1px 1px 1px rgb(0 0 0 / 0.4));
 }
 
 .radio-btn:checked + .radio-label {
-  background-image: url('../../public/svgs/Ribbon_Label_Click.svg');
+  background-image: url('/svgs/Ribbon_Label_Click.svg');
   color: white;
+  filter: drop-shadow(1px 1px 1px rgb(0 0 0 / 0.4));
+}
+
+.radio-label:hover {
+  filter: drop-shadow(1px 1px 1px rgba(255, 255, 255, 1));
 }
 
 .radio-btn:disabled + .radio-label {
@@ -225,10 +242,15 @@
   background-size: contain; /* Or 'cover' or specific dimensions */
   border: none;
   cursor: pointer; /* Change cursor to pointer to indicate it's clickable */
+  filter: drop-shadow(1px 1px 1px rgb(0 0 0 / 0.4));
 }
 
 .close-btn:active {
   background-image: url('/svgs/Close_Button_Click.svg'); /* Adjust path as necessary */
+}
+
+.close-btn:hover {
+  filter: drop-shadow(1px 1px 1px rgba(255, 255, 255, 1));
 }
 
 .cart-title {
@@ -250,10 +272,15 @@
   background-size: contain; /* Or 'cover' or specific dimensions */
   border: none;
   cursor: pointer; /* Change cursor to pointer to indicate it's clickable */
+  filter: drop-shadow(1px 1px 1px rgb(0 0 0 / 0.4));
 }
 
 .cart-btn:active {
   background-image: url('/svgs/Cart_Button_Click.svg');
+}
+
+.cart-btn:hover {
+  filter: drop-shadow(1px 1px 1px rgba(255, 255, 255, 1));
 }
 
 .cart-btn:disabled {
@@ -286,6 +313,10 @@
 
 .reset-btn:disabled {
   opacity: 0;
+}
+
+.reset-btn:hover {
+  filter: drop-shadow(1px 1px 1px rgba(255, 255, 255, 1));
 }
 
 .round-buttons {

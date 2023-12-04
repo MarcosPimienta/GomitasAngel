@@ -2,7 +2,7 @@
   <!-- <AuthLogin v-if="!isAuthenticated" @loginSuccessful="handleLogin" /> -->
   <div>
     <div class="btn-holder" :class="{ disabled: isLoading }">
-      <img src="/svgs/Gomitas_Logo.svg"/>
+      <img class="title_image" src="/svgs/Gomitas_Logo.svg"/>
       <IleButtons :disabled="!isBoxOpen" @plus="IlePlus" @minus="IleMinus"/>
       <RadioButtons
       :disabled="!isBoxOpen"

@@ -1,4 +1,4 @@
-import { HighlightLayer, StandardMaterial, Vector3, Color3, Space, Matrix, type Scene, MeshBuilder, Mesh, Camera } from "@babylonjs/core";
+import { HighlightLayer, StandardMaterial, Vector3, Color3, Space, Matrix, type Scene, MeshBuilder, Mesh, Camera, InstancedMesh, ActionManager, ExecuteCodeAction, } from "@babylonjs/core";
 
 let selectedIndex: number = 0;
 let selectedCandiesForIles: (number | null)[] = [null, null, null, null, null, null];
@@ -6,7 +6,7 @@ let allCandiesReference: { id: number; name: string }[] = [];
 
 interface Ile {
   id: number | string;
-  object?: Mesh;
+  object?: Mesh | InstancedMesh;
 }
 
 function ileCone(scene:Scene, initialVisibility: boolean): Mesh {
@@ -82,6 +82,34 @@ function setCandyForIle(ileIndex: number, candyId: number) {
   selectedCandiesForIles[ileIndex] = candyId;
 }
 
+function setupHighlighting(scene: Scene, iles: Ile[]) {
+  // Define the bounding box color
+  const boundingBoxColor = new Color3(0.40, 0.78, 0.78);
+
+  iles.forEach(ile => {
+    if (ile.object instanceof Mesh || ile.object instanceof InstancedMesh) {
+      ile.object.actionManager = ile.object.actionManager || new ActionManager(scene);
+
+      // On mouse enter
+      ile.object.actionManager.registerAction(new ExecuteCodeAction(ActionManager.OnPointerOverTrigger, () => {
+        scene.hoverCursor = "pointer";
+        if (ile.object) {
+          ile.object.showBoundingBox = true;
+          // Change the bounding box color
+          scene.getBoundingBoxRenderer().frontColor = boundingBoxColor;
+          scene.getBoundingBoxRenderer().backColor = boundingBoxColor;
+        }
+      }));
+      // On mouse exit
+      ile.object.actionManager.registerAction(new ExecuteCodeAction(ActionManager.OnPointerOutTrigger, () => {
+        if (ile.object) {
+          ile.object.showBoundingBox = false;
+        }
+      }));
+    }
+  });
+}
+
 function mouseListener(scene: Scene, Iles: Ile[], camera: Camera, cone: Mesh, onIleSelected: (index: number) => void){
   scene.onPointerDown = function castRay(){
     let ray = scene.createPickingRay(scene.pointerX, scene.pointerY, Matrix.Identity(), camera, false);
@@ -133,4 +161,4 @@ function getIndex():number{
   return selectedIndex;
 }
 
-export { ileSelect, ileMouseSelect, ileLoad, ileCone, mouseListener, setIndex, setCandyForIle, getIndex, setAllCandiesReference };
+export { ileSelect, ileMouseSelect, ileLoad, ileCone, mouseListener, setupHighlighting, setIndex, setCandyForIle, getIndex, setAllCandiesReference };

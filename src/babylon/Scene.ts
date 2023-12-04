@@ -37,6 +37,7 @@ const createScene = function (canvas: HTMLCanvasElement, onIleSelected: (index: 
     let iles = IleSelector.ileLoad(scene);
 
     IleSelector.mouseListener(scene, iles, camera, ilesCone, onIleSelected);
+    IleSelector.setupHighlighting(scene, iles);
 
     let videoDome = new VideoDome(
       "videoDome",
