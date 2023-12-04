@@ -208,22 +208,30 @@ function drawText(text: string, positionY: number, maxChars: number = 20) {
   const textureContext = dynamicTexture.getContext();
   const y = positionY;
 
-  // Truncate text if it exceeds the character limit
-  const displayedText = text.length > maxChars ? text.substring(0, maxChars) + "..." : text;
+  // Check if the text is in uppercase
+  const isUppercase = text === text.toUpperCase();
+
+  // Adjust font size based on text length and whether it's uppercase
+  let fontSize = 88; // Default font size
+  let decrementFactor = isUppercase ? 13 : 3; // Increment the decrement factor for uppercase
+
+  if (text.length > maxChars) {
+    fontSize -= (text.length - maxChars) * decrementFactor;
+    fontSize = Math.max(fontSize, 30); // Minimum font size
+  }
+
+  const font = `bold ${fontSize}px Simplicity`;
+  textureContext.font = font;
 
   // Calculate the width of the text
-  const font = "bold 88px Simplicity";
-  textureContext.font = font;
-  const textWidth = textureContext.measureText(displayedText).width;
-
-  // Position to start drawing text (centered)
+  const textWidth = textureContext.measureText(text).width;
   const x = (textureResolution - textWidth) / 2;
 
   const drawTextWithCustomFont = () => {
     textureContext.save();
     textureContext.translate(x, textureResolution - y);
     textureContext.scale(1, -1);  // Flip the text
-    dynamicTexture?.drawText(displayedText, 0, 0, font, "white", null, true, true);
+    dynamicTexture?.drawText(text, 0, 0, font, "white", null, true, true);
     textureContext.restore();
 
     // Reset the transformation to draw other elements normally
@@ -231,7 +239,7 @@ function drawText(text: string, positionY: number, maxChars: number = 20) {
   };
 
   if (document.fonts) {
-    document.fonts.load('1em Simplicity').then(drawTextWithCustomFont);
+    document.fonts.load(`1em Simplicity`).then(drawTextWithCustomFont);
   } else {
     drawTextWithCustomFont();
   }
