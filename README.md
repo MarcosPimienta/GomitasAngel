@@ -32,6 +32,7 @@ If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has a
 
 See [Vite Configuration Reference](https://vitejs.dev/config/).
 
+[!IMPORTANT]
 ## Installation
 
 Provide steps on how to install and run your application in the local environment.
@@ -60,11 +61,13 @@ npm run dev
 ```sh
 npm run build
 ```
+[!TIP]
 ## Usage
 In this application, you can interact with a 3D box model. Use the mouse to orbit around the box. You can select 'Ile' objects by clicking on them.
 
 To the left of the screen, there is a GUI made in Vue.js. This GUI includes arrow icons that you can click to control the selection of the 'Ile' box. It also includes radio buttons that allow you to control the 3D animations of the 'Candy' objects.
 
+[!NOTE]
 ## Contributors
 If you wish to contribute to this project, please fork this repository and submit a pull request.
 
