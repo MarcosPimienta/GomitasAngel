@@ -202,19 +202,28 @@ function initializeDynamicTexture(newMeshes: AbstractMesh[], scene: Scene) {
   }
 }
 
-function drawText(text: string, positionY: number) {
+function drawText(text: string, positionY: number, maxChars: number = 20) {
   if (!dynamicTexture) return;
 
   const textureContext = dynamicTexture.getContext();
-  const x = 400;
   const y = positionY;
 
+  // Truncate text if it exceeds the character limit
+  const displayedText = text.length > maxChars ? text.substring(0, maxChars) + "..." : text;
+
+  // Calculate the width of the text
+  const font = "bold 88px Simplicity";
+  textureContext.font = font;
+  const textWidth = textureContext.measureText(displayedText).width;
+
+  // Position to start drawing text (centered)
+  const x = (textureResolution - textWidth) / 2;
+
   const drawTextWithCustomFont = () => {
-    const font = "bold 88px Simplicity";
     textureContext.save();
     textureContext.translate(x, textureResolution - y);
     textureContext.scale(1, -1);  // Flip the text
-    dynamicTexture?.drawText(text, 0, 0, font, "white", null, true, true);
+    dynamicTexture?.drawText(displayedText, 0, 0, font, "white", null, true, true);
     textureContext.restore();
 
     // Reset the transformation to draw other elements normally
@@ -232,15 +241,14 @@ function redrawTexts() {
   if (!dynamicTexture) return;
 
   const textureContext = dynamicTexture.getContext();
-
   const img = new Image();
   img.src = './textures/Outer_Box_Texture.png';
 
   img.onload = () => {
     textureContext.drawImage(img, 0, 0, textureResolution, textureResolution);
 
-    drawText(currentNameText, 600);
-    drawText(currentMessageText, 750);
+    drawText(currentNameText, 600, 12); // Set character limit as needed
+    drawText(currentMessageText, 750, 20); // Set character limit as needed
     dynamicTexture?.update();
   };
 }
