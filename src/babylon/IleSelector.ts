@@ -82,7 +82,7 @@ function setCandyForIle(ileIndex: number, candyId: number) {
   selectedCandiesForIles[ileIndex] = candyId;
 }
 
-function setupHighlighting(scene: Scene, iles: Ile[]) {
+function setupHighlighting(scene: Scene, iles: Ile[], isBoxOpen: Ref<boolean>) {
   // Define the bounding box color
   const boundingBoxColor = new Color3(0.40, 0.78, 0.78);
 
@@ -93,7 +93,7 @@ function setupHighlighting(scene: Scene, iles: Ile[]) {
       // On mouse enter
       ile.object.actionManager.registerAction(new ExecuteCodeAction(ActionManager.OnPointerOverTrigger, () => {
         scene.hoverCursor = "pointer";
-        if (ile.object) {
+        if (ile.object && isBoxOpen.value) {
           ile.object.showBoundingBox = true;
           // Change the bounding box color
           scene.getBoundingBoxRenderer().frontColor = boundingBoxColor;
