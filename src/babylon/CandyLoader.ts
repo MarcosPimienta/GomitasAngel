@@ -213,7 +213,7 @@ function drawText(text: string, positionY: number, maxChars: number = 20) {
 
   // Adjust font size based on text length and whether it's uppercase
   let fontSize = 88; // Default font size
-  let decrementFactor = isUppercase ? 13 : 3; // Increment the decrement factor for uppercase
+  let decrementFactor = isUppercase ? 12.2 : 3;
 
   if (text.length > maxChars) {
     fontSize -= (text.length - maxChars) * decrementFactor;
