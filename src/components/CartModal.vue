@@ -10,7 +10,8 @@
             {{ item.name }}
           </li>
           <div class="knot-info">
-            <p>{{ knotInfo }}</p>
+            <div :style="{ backgroundImage: 'url(' + knotInfo.imageUrl + ')' }" class="candy-image"></div>
+            <p>{{ knotInfo.text }}</p>
           </div>
         </ul>
       </div>
@@ -33,6 +34,7 @@ const props = defineProps({
   show: Boolean,
   selectedKnotColor: String,
   knotPresent: Boolean,
+  knotUrl: String,
   selectedCandies: {
     type: Array,
     default: () => [] // Provide a default value to ensure it's always an array
@@ -45,8 +47,20 @@ interface CandyItem {
   imageUrl: string;
 }
 
+const ribbonSvgPaths = {
+  Red: "/svgs/Red_Knot.svg",
+  Gold: "/svgs/Gold_Knot.svg",
+};
+
 const knotInfo = computed(() => {
-  return props.knotPresent ? `Knot Color: ${props.selectedKnotColor}` : 'No Knot';
+  if (props.knotPresent) {
+    const knotColor = props.selectedKnotColor || "Default"; // Provide a default key if undefined
+    let knotText = `${knotColor}`;
+    let imageUrl = ribbonSvgPaths[knotColor] || '/svgs/default_knot.svg'; // Fallback image
+    return { text: knotText, imageUrl };
+  } else {
+    return { text: 'No Knot', imageUrl: '/svgs/default_knot.svg' };
+  }
 });
 
 // Using props.selectedCandies here to access the prop

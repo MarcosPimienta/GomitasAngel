@@ -111,6 +111,8 @@
 }
 
 .knot-info {
+  display: flex;
+  flex-direction: row;
   margin-top: 10px;
   font-size: 14px;
   color: #333;
