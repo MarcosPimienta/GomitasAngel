@@ -54,9 +54,12 @@ const ribbonSvgPaths = {
 
 const knotInfo = computed(() => {
   if (props.knotPresent) {
-    const knotColor = props.selectedKnotColor || "Default"; // Provide a default key if undefined
-    let knotText = `${knotColor}`;
-    let imageUrl = ribbonSvgPaths[knotColor] || '/svgs/default_knot.svg'; // Fallback image
+    // Type guard to ensure selectedKnotColor is a valid key
+    const knotColor = props.selectedKnotColor && props.selectedKnotColor in ribbonSvgPaths
+                      ? props.selectedKnotColor
+                      : "Default";
+    let knotText = `  ${knotColor}`;
+    let imageUrl = ribbonSvgPaths[knotColor as keyof typeof ribbonSvgPaths] || '/svgs/default_knot.svg'; // Fallback image for "Default"
     return { text: knotText, imageUrl };
   } else {
     return { text: 'No Knot', imageUrl: '/svgs/default_knot.svg' };
