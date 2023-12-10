@@ -10,7 +10,7 @@
             {{ item.name }}
           </li>
           <div class="knot-info">
-            <p>Knot Color: {{ props.selectedKnotColor }}</p>
+            <p>{{ knotInfo }}</p>
           </div>
         </ul>
       </div>
@@ -32,6 +32,7 @@ interface SimpleCandy {
 const props = defineProps({
   show: Boolean,
   selectedKnotColor: String,
+  knotPresent: Boolean,
   selectedCandies: {
     type: Array,
     default: () => [] // Provide a default value to ensure it's always an array
@@ -43,6 +44,10 @@ interface CandyItem {
   name: string;
   imageUrl: string;
 }
+
+const knotInfo = computed(() => {
+  return props.knotPresent ? `Knot Color: ${props.selectedKnotColor}` : 'No Knot';
+});
 
 // Using props.selectedCandies here to access the prop
 const candyItems = computed<CandyItem[]>(() => {
