@@ -19,7 +19,7 @@
       <ResetButton :disabled="!canResetCandies" @reset="resetAllCandies"/>
       </div>
     </div>
-    <CartModal class="modal" :show="showModal" :selectedCandies="selectedCandies" :allCandies="allCandies" @close="showModal = false"/>
+    <CartModal class="modal" :show="showModal" :selectedCandies="selectedCandies" :selectedKnotColor="selectedKnotColor" :allCandies="allCandies" @close="showModal = false"/>
     <canvas class="bjsCanvas" ref="bjsCanvas"/>
   </div>
 </template>
@@ -76,6 +76,7 @@ const canResetCandies = computed(() => {
   return isBoxOpen.value && selectedCandies.value.some(candy => candy !== null);
 });
 
+const selectedKnotColor = ref("None"); // Default to "None" or any default value
 const bjsCanvas = ref(null);
 const modalKey = ref(0);
 const currentIleIndex = ref<number | null>(null);
@@ -153,6 +154,7 @@ const playActualCloseAnimation = (direction: number) => {
 
 const changeKnotColor = (color: string, callback?: () => void) => {
   console.log(`Attempting to change knot color to: ${color}`);
+  selectedKnotColor.value = color;
 
   if (bjsScene.value && bjsScene.value.scene) {
     const knotTransformNode = bjsScene.value.scene.getTransformNodeByName("Cinta");

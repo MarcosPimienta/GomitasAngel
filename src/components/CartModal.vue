@@ -9,6 +9,9 @@
             <div :style="{ backgroundImage: 'url(' + item.imageUrl + ')' }" class="candy-image"></div>
             {{ item.name }}
           </li>
+          <div class="knot-info">
+            <p>Knot Color: {{ props.selectedKnotColor }}</p>
+          </div>
         </ul>
       </div>
       <!-- <img src="/svgs/Modal_Content.svg" alt="Modal Content"> -->
@@ -28,6 +31,7 @@ interface SimpleCandy {
 // Define props
 const props = defineProps({
   show: Boolean,
+  selectedKnotColor: String,
   selectedCandies: {
     type: Array,
     default: () => [] // Provide a default value to ensure it's always an array

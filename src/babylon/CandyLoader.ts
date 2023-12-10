@@ -213,7 +213,7 @@ function drawText(text: string, positionY: number, maxChars: number = 20) {
 
   // Adjust font size based on text length and whether it's uppercase
   let fontSize = 88; // Default font size
-  let decrementFactor = isUppercase ? 12.2 : 3;
+  let decrementFactor = isUppercase ? 10 : 3;
 
   if (text.length > maxChars) {
     fontSize -= (text.length - maxChars) * decrementFactor;
@@ -255,7 +255,7 @@ function redrawTexts() {
   img.onload = () => {
     textureContext.drawImage(img, 0, 0, textureResolution, textureResolution);
 
-    drawText(currentNameText, 600, 12); // Set character limit as needed
+    drawText(currentNameText, 600, 11); // Set character limit as needed
     drawText(currentMessageText, 750, 20); // Set character limit as needed
     dynamicTexture?.update();
   };

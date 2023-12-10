@@ -110,6 +110,12 @@
   flex-direction: row;
 }
 
+.knot-info {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #333;
+}
+
 .left-arrow-btn {
   display: flex;
   width: 50px; /* Set the width to the width of your SVG */
