@@ -31,8 +31,8 @@
 .candy-image {
   background-repeat: no-repeat;
   background-size: contain;
-  width: 2.8125rem; /* Example width, adjust as needed */
-  height: 2.8125rem; /* Example height, adjust as needed */
+  width: 2.8125rem;
+  height: 2.8125rem;
   background-size: cover;
   background-position: center;
 }
@@ -64,17 +64,17 @@
   background-position: center center;
   background-size: contain;
   background-repeat: no-repeat;
-  width: 100%; /* Adjust this as needed */
-  height: 55%; /* Adjust this as needed */
-  justify-content: center; /* Align children in the center vertically */
-  align-items: center; /* Align children in the center horizontally */
+  width: 100%;
+  height: 55%;
+  justify-content: center;
+  align-items: center;
   filter: drop-shadow(1px 1px 1px rgb(0 0 0 / 0.4));
 }
 
 .overlay-content {
   position: relative;
-  max-width: 80%; /* Maximum width */
-  min-width: 300px; /* Minimum width to ensure usability */
+  max-width: 80%;
+  min-width: 300px;
   top: -2.5em;
   display: flex;
   flex-direction: column;
@@ -90,8 +90,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black */
-  z-index: 1000; /* Ensure it's above other elements */
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
 }
 
 .btn-holder {
@@ -118,16 +118,16 @@
 
 .left-arrow-btn {
   display: flex;
-  width: 50px; /* Set the width to the width of your SVG */
-  height: 35px; /* Set the height to the height of your SVG */
+  width: 50px;
+  height: 35px;
   background-color: transparent;
-  background-image: url('/svgs/Left_Arrow.svg'); /* Adjust path as necessary */
-  background-size: contain; /* Or 'cover' or specific dimensions */
+  background-image: url('/svgs/Left_Arrow.svg');
+  background-size: contain;
   background-repeat: no-repeat;
   border: none;
   margin-top: 5%;
   margin-right: 25%;
-  cursor: pointer; /* Change cursor to pointer to indicate it's clickable */
+  cursor: pointer;
   filter: drop-shadow(1px 1px 1px rgb(0 0 0 / 0.4));
 }
 
@@ -146,13 +146,13 @@
 
 .material-btn{
   margin: 0.45em 0.45em 0em 0.5em;
-  width: 30px; /* Set the width to the width of your SVG */
-  height: 50px; /* Set the height to the height of your SVG */
-  background-color: transparent;/* Or 'cover' or specific dimensions */
+  width: 30px;
+  height: 50px;
+  background-color: transparent;
   background-size: contain;
   background-repeat: no-repeat;
   border: none;
-  cursor: pointer; /* Change cursor to pointer to indicate it's clickable */
+  cursor: pointer;
 }
 
 .material-btn:disabled{
@@ -161,16 +161,16 @@
 
 .right-arrow-btn {
   display: flex;
-  width: 50px; /* Set the width to the width of your SVG */
-  height: 35px; /* Set the height to the height of your SVG */
+  width: 50px;
+  height: 35px;
   background-color: transparent;
-  background-image: url('/svgs/Right_Arrow.svg'); /* Adjust path as necessary */
-  background-size: contain; /* Or 'cover' or specific dimensions */
+  background-image: url('/svgs/Right_Arrow.svg');
+  background-size: contain;
   background-repeat: no-repeat;
   border: none;
   margin-top: 5%;
   margin-left: 25%;
-  cursor: pointer; /* Change cursor to pointer to indicate it's clickable */
+  cursor: pointer;
   filter: drop-shadow(1px 1px 1px rgb(0 0 0 / 0.4));
 }
 
@@ -241,18 +241,18 @@
   position: relative;
   left: -25px;
   top: 15px;
-  width: 3.125em; /* Set the width to the width of your SVG */
-  height: 3.125em; /* Set the height to the height of your SVG */
+  width: 3.125em;
+  height: 3.125em;
   background-color: transparent;
-  background-image: url('/svgs/Close_Button.svg'); /* Adjust path as necessary */
-  background-size: contain; /* Or 'cover' or specific dimensions */
+  background-image: url('/svgs/Close_Button.svg');
+  background-size: contain;
   border: none;
-  cursor: pointer; /* Change cursor to pointer to indicate it's clickable */
+  cursor: pointer;
   filter: drop-shadow(1px 1px 1px rgb(0 0 0 / 0.4));
 }
 
 .close-btn:active {
-  background-image: url('/svgs/Close_Button_Click.svg'); /* Adjust path as necessary */
+  background-image: url('/svgs/Close_Button_Click.svg');
 }
 
 .close-btn:hover {
@@ -272,13 +272,13 @@
 .cart-btn {
   display: flex;
   margin: 0.25em 0.25em 0em 0em;
-  width: 50px; /* Set the width to the width of your SVG */
-  height: 50px; /* Set the height to the height of your SVG */
+  width: 50px;
+  height: 50px;
   background-color: transparent;
-  background-image: url('/svgs/Cart_Button.svg'); /* Adjust path as necessary */
-  background-size: contain; /* Or 'cover' or specific dimensions */
+  background-image: url('/svgs/Cart_Button.svg');
+  background-size: contain;
   border: none;
-  cursor: pointer; /* Change cursor to pointer to indicate it's clickable */
+  cursor: pointer;
   filter: drop-shadow(1px 1px 1px rgb(0 0 0 / 0.4));
 }
 
@@ -312,13 +312,13 @@
 .reset-btn {
   display: flex;
   margin: 0.25em 0.25em 0em 0.25em;
-  width: 50px; /* Set the width to the width of your SVG */
-  height: 50px; /* Set the height to the height of your SVG */
+  width: 50px;
+  height: 50px;
   background-color: transparent;
-  background-image: url('/svgs/Reset_Button.svg'); /* Adjust path as necessary */
-  background-size: contain; /* Or 'cover' or specific dimensions */
+  background-image: url('/svgs/Reset_Button.svg');
+  background-size: contain;
   border: none;
-  cursor: pointer; /* Change cursor to pointer to indicate it's clickable */
+  cursor: pointer;
 }
 
 .reset-btn:active {
@@ -408,7 +408,6 @@
   z-index: 1;
 }
 
-/* Adjust the color for better visibility when the switch is on */
 .slider.on .slider-text {
   color: #d7a6b4;
 }
