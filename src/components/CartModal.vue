@@ -7,11 +7,13 @@
         <ul>
           <li v-for="item in candyItems" :key="item.name" class="item-container">
             <div :style="{ backgroundImage: 'url(' + item.imageUrl + ')' }" class="candy-image"></div>
-            {{ item.name }}
+              <div class="item-info">
+                {{ item.name }}
+              </div>
           </li>
           <div class="knot-info">
             <div :style="{ backgroundImage: 'url(' + knotInfo.imageUrl + ')' }" class="candy-image"></div>
-            <p>{{ knotInfo.text }}</p>
+            <p class="item-info">{{ knotInfo.text }}</p>
           </div>
         </ul>
       </div>

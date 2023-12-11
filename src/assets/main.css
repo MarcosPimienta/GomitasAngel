@@ -75,8 +75,7 @@
   position: relative;
   max-width: 80%; /* Maximum width */
   min-width: 300px; /* Minimum width to ensure usability */
-  margin: auto;
-  top: -3.125em;
+  top: -2.5em;
   display: flex;
   flex-direction: column;
   z-index: 99;
@@ -240,8 +239,8 @@
 
 .close-btn {
   position: relative;
-  left: 0;
-  top: 0;
+  left: -25px;
+  top: 15px;
   width: 3.125em; /* Set the width to the width of your SVG */
   height: 3.125em; /* Set the height to the height of your SVG */
   background-color: transparent;
@@ -293,6 +292,13 @@
 
 .cart-btn:disabled {
   opacity: 0;
+}
+
+.item-info {
+  color: #339D92;
+  font-family: 'Simplicity';
+  font-size: 1.25em;
+  font-weight: bold;
 }
 
 .label-text {
