@@ -19,7 +19,17 @@
       <ResetButton :disabled="!canResetCandies" @reset="resetAllCandies"/>
       </div>
     </div>
-    <CartModal class="modal" :show="showModal" :selectedCandies="selectedCandies" :selectedKnotColor="selectedKnotColor" :knotPresent="knotPresent" :allCandies="allCandies" @close="showModal = false"/>
+    <CartModal
+      class="modal"
+      :show="showModal"
+      :selectedCandies="selectedCandies"
+      :selectedKnotColor="selectedKnotColor"
+      :knotPresent="knotPresent"
+      :allCandies="allCandies"
+      :nameText="nameText"
+      :messageText="messageText"
+      @close="showModal = false"
+    />
     <canvas class="bjsCanvas" ref="bjsCanvas"/>
   </div>
 </template>
@@ -50,6 +60,8 @@ const isBoxOpen = ref(true);
 const isKnotOn = ref(false);
 const selectedKnotColor = ref("Red"); // Default to "None" or any default value
 const knotPresent = ref(false);
+const nameText = ref('');  // Reactive property for the name text
+const messageText = ref('');  // Reactive property for the message text
 
 const allCandies = [
   { id: 0, name:"ChocoMellows", imageUrl:"/svgs/Chocmellows.svg"},
@@ -108,6 +120,7 @@ const handleUpdatedText = (updatedText: string) => {
   } else {
     console.log("updateText Function is Undefined");
   }
+  nameText.value = updatedText;
 };
 
 const handleUpdatedMsg = (updatedText: string) => {
@@ -118,6 +131,7 @@ const handleUpdatedMsg = (updatedText: string) => {
   } else {
     console.log("updateText Function is Undefined");
   }
+  messageText.value = updatedText;
 };
 
 const playCloseAnimation = (direction: number) => {

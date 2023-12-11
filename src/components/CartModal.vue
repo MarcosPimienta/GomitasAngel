@@ -17,6 +17,12 @@
           </div>
         </ul>
       </div>
+      <div class="name-overlay">
+        <p class="name-message-text">{{ props.nameText }}</p>
+      </div>
+      <div class="message-overlay">
+        <p class="name-message-text">{{ props.messageText }}</p>
+      </div>
       <!-- <img src="/svgs/Modal_Content.svg" alt="Modal Content"> -->
     </div>
   </div>
@@ -37,6 +43,8 @@ const props = defineProps({
   selectedKnotColor: String,
   knotPresent: Boolean,
   knotUrl: String,
+  nameText: String,
+  messageText: String,
   selectedCandies: {
     type: Array,
     default: () => [] // Provide a default value to ensure it's always an array
