@@ -65,7 +65,7 @@
   background-size: contain;
   background-repeat: no-repeat;
   width: 100%; /* Adjust this as needed */
-  height: 50%; /* Adjust this as needed */
+  height: 55%; /* Adjust this as needed */
   justify-content: center; /* Align children in the center vertically */
   align-items: center; /* Align children in the center horizontally */
   filter: drop-shadow(1px 1px 1px rgb(0 0 0 / 0.4));
@@ -80,7 +80,6 @@
   display: flex;
   flex-direction: column;
   z-index: 99;
-
 }
 
 .auth_login {
@@ -262,9 +261,10 @@
 }
 
 .cart-title {
+  padding-top: 0.5em;
   text-align: center;
   font-family: "Simplicity";
-  font-size: 2em;
+  font-size: 2.5em;
   color:#66c7c7;
   font-weight: bold;
   margin: 0;

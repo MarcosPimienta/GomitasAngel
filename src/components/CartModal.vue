@@ -58,7 +58,7 @@ const knotInfo = computed(() => {
     const knotColor = props.selectedKnotColor && props.selectedKnotColor in ribbonSvgPaths
                       ? props.selectedKnotColor
                       : "Default";
-    let knotText = `  ${knotColor}`;
+    let knotText = knotColor;
     let imageUrl = ribbonSvgPaths[knotColor as keyof typeof ribbonSvgPaths] || '/svgs/default_knot.svg'; // Fallback image for "Default"
     return { text: knotText, imageUrl };
   } else {
