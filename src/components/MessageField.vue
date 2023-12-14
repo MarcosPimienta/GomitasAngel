@@ -1,6 +1,6 @@
 <template>
   <label class="label-text">Message</label>
-  <input class="name-field" v-model="dynamicText" @input="updateTexture" />
+  <input class="name-field" v-model="dynamicText" @input="updateTexture" maxlength="25"/>
 </template>
 
 <script lang="ts">
