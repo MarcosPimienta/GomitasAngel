@@ -17,10 +17,10 @@
           </div>
         </ul>
       </div>
-      <div class="name-overlay">
+      <div v-if="nameText" class="name-overlay">
         <p class="name-message-text">{{ props.nameText }}</p>
       </div>
-      <div class="message-overlay">
+      <div v-if="messageText" class="message-overlay">
         <p class="name-message-text">{{ props.messageText }}</p>
       </div>
       <!-- <img src="/svgs/Modal_Content.svg" alt="Modal Content"> -->
