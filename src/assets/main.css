@@ -115,7 +115,7 @@
   position: relative;
   max-width: 80%;
   min-width: 300px;
-  top: -2.5em;
+  top: -3.5em;
   display: flex;
   flex-direction: column;
   z-index: 99;
@@ -279,8 +279,8 @@
 
 .close-btn {
   position: relative;
-  left: -25px;
-  top: 15px;
+  left: -8%;
+  top: 10%;
   width: 3.125em;
   height: 3.125em;
   background-color: transparent;
@@ -293,6 +293,24 @@
 
 .close-btn:active {
   background-image: url('/svgs/Close_Button_Click.svg');
+}
+
+.send-btn {
+  position: relative;
+  left: 80%;
+  top: 80%;
+  width: 3.125em;
+  height: 3.125em;
+  background-color: transparent;
+  background-image: url('/svgs/Send_Button.svg');
+  background-size: contain;
+  border: none;
+  cursor: pointer;
+  filter: drop-shadow(1px 1px 1px rgb(0 0 0 / 0.4));
+}
+
+.send-btn:active {
+  background-image: url('/svgs/Send_Button_Click.svg');
 }
 
 .close-btn:hover {

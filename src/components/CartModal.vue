@@ -2,7 +2,8 @@
   <div v-show="show && !isIncomplete" class="modal">
     <div class="modal-content">
       <div class="overlay-content">
-        <button class="close-btn" @click="closeModal"></button>
+        <button class="close-btn" @click="closeModal"/>
+        <button class="send-btn" @click="sendModal"/>
         <p class="cart-title">Shopping Cart</p>
         <ul>
           <li v-for="item in candyItems" :key="item.name" class="item-container">
@@ -103,11 +104,15 @@ watch(() => props.selectedCandies, (newVal) => {
 });
 
 // Define emits
-const emit = defineEmits(['close']);
+const emit = defineEmits(['close', 'send']);
 
 // Methods
 const closeModal = () => {
   emit('close');
+}
+
+const sendModal = () => {
+  emit('send');
 }
 </script>
 
