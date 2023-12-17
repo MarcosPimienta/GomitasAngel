@@ -20,6 +20,23 @@
   filter: drop-shadow(1px 1px 1px rgb(0 0 0 / 0.4));
 }
 
+.info-form {
+  /* Form styling */
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.5rem;
+}
+
 .item-container {
   display: flex;
   flex-direction: row;
