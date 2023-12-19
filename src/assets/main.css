@@ -21,20 +21,38 @@
 }
 
 .info-form {
-  /* Form styling */
+  position: relative;
+  top: -1.5em;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  z-index: 99;
 }
 
-.form-group {
-  margin-bottom: 1rem;
+.form-group-names {
+  margin-bottom: 0.01rem;
+}
+
+.form-group-rows {
+  margin-bottom: 0.01rem;
 }
 
 .form-group label {
   display: block;
+  font-family: 'Simplicity';
+  font-weight: bold;
+  font-size: 1rem;
+  color: #339D92;
+  letter-spacing: .1rem;
 }
 
 .form-group input {
   width: 100%;
-  padding: 0.5rem;
+  padding: 0.2rem;
+  border: none;
+  outline: none;
+  border-bottom: 2px solid #339D92;
+  background: transparent;
 }
 
 .item-container {
@@ -255,7 +273,7 @@
   align-items: center;
   justify-content: center;
   padding: 0.1em 0em 0.1em 0em;
-  width: 150px;
+  width: 165px;
   height: 2em;
   background-image: url('/svgs/Ribbon_Label.svg');
   background-size: contain;
@@ -267,6 +285,7 @@
   font-size: 1.35em;
   font-weight: bold;
   color: #66c7c7;
+  letter-spacing: 0.08rem;
   filter: drop-shadow(1px 1px 1px rgb(0 0 0 / 0.4));
 }
 
@@ -310,6 +329,50 @@
 
 .close-btn:active {
   background-image: url('/svgs/Close_Button_Click.svg');
+}
+
+.back-btn {
+  position: relative;
+  left: -8rem;
+  top: 3%;
+  width: 3.125em;
+  height: 3.125em;
+  background-color: transparent;
+  background-image: url('/svgs/Back_Button.svg');
+  background-size: contain;
+  border: none;
+  cursor: pointer;
+  filter: drop-shadow(1px 1px 1px rgb(0 0 0 / 0.4));
+}
+
+.back-btn:active {
+  background-image: url('/svgs/Back_Button_Click.svg');
+}
+
+.back-btn:hover {
+  filter: drop-shadow(1px 1px 1px rgba(255, 255, 255, 1));
+}
+
+.pay-btn {
+  position: relative;
+  left: 8.5rem;
+  top: 3%;
+  width: 3.125em;
+  height: 3.125em;
+  background-color: transparent;
+  background-image: url('/svgs/Pay_Button.svg');
+  background-size: contain;
+  border: none;
+  cursor: pointer;
+  filter: drop-shadow(1px 1px 1px rgb(0 0 0 / 0.4));
+}
+
+.pay-btn:active {
+  background-image: url('/svgs/Pay_Button_Click.svg');
+}
+
+.pay-btn:hover {
+  filter: drop-shadow(1px 1px 1px rgba(255, 255, 255, 1));
 }
 
 .send-btn {

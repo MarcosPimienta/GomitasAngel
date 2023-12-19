@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="17.684mm" height="17.684mm" viewBox="0 0 50.127 50.127">
+  <title>Back_Button_Click</title>
+  <g id="27d979ae-5cfc-4603-bc9c-1b9cbef1c09e" data-name="Capa 2">
+    <g id="ceff1ea7-d61e-408c-9832-02163fcaf45c" data-name="Capa 3">
+      <g>
+        <circle cx="25.064" cy="25.064" r="23.064" fill="#d7a6b4" stroke="#fdfbfc" stroke-miterlimit="10" stroke-width="4"/>
+        <g>
+          <path d="M15.212,28.066,26.573,39.524a3.022,3.022,0,0,0,4.26,0h0a3.021,3.021,0,0,0,0-4.261L19.473,23.805a3.021,3.021,0,0,0-4.261,0h0A3.021,3.021,0,0,0,15.212,28.066Z" fill="#fff"/>
+          <path d="M15.212,23.763,26.573,12.305a3.02,3.02,0,0,1,4.26,0h0a3.021,3.021,0,0,1,0,4.261L19.473,28.024a3.023,3.023,0,0,1-4.261,0h0A3.021,3.021,0,0,1,15.212,23.763Z" fill="#fff"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

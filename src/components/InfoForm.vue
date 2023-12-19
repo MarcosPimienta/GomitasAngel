@@ -1,48 +1,51 @@
 <template>
   <form class="info-form">
     <div class="form-group">
-      <label for="name">Name</label>
+      <label for="name">Name:</label>
       <input type="text" id="name" placeholder="Name">
     </div>
 
     <div class="form-group">
-      <label for="lastName">Last Name</label>
+      <label for="lastName">Last Name:</label>
       <input type="text" id="lastName" placeholder="Last Name">
     </div>
 
     <div class="form-group">
-      <label for="address">Address</label>
+      <label for="address">Address:</label>
       <input type="text" id="address" placeholder="Address">
     </div>
 
     <div class="form-group">
-      <label for="city">City</label>
+      <label for="city">City:</label>
       <input type="text" id="city" placeholder="City">
     </div>
 
     <div class="form-group">
-      <label for="state">State</label>
+      <label for="state">State:</label>
       <input type="text" id="state" placeholder="State">
     </div>
 
     <div class="form-group">
-      <label for="zipCode">Zip Code</label>
+      <label for="zipCode">Zip Code:</label>
       <input type="text" id="zipCode" placeholder="Zip Code">
     </div>
 
     <div class="form-group">
-      <label for="email">Email</label>
+      <label for="email">Email:</label>
       <input type="email" id="email" placeholder="Email">
     </div>
 
     <div class="form-group">
-      <label for="phone">Phone</label>
+      <label for="phone">Phone:</label>
       <input type="tel" id="phone" placeholder="Phone">
     </div>
 
     <!-- Add submit or action buttons here if needed -->
   </form>
-  <button @click="back">Back to Cart</button>
+  <div>
+    <button class="back-btn" @click="back"/>
+    <button class="pay-btn" @click="back"/>
+  </div>
 </template>
 
 <script setup lang="ts">

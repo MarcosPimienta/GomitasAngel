@@ -1,31 +1,33 @@
 <template>
   <div v-show="show && !isIncomplete" class="modal">
     <div class="modal-content">
-      <div class="overlay-content" v-show="!showInfoForm">
+      <div class="overlay-content">
         <button class="close-btn" @click="closeModal"/>
-        <button class="send-btn" @click="sendModal"/>
+        <button class="send-btn" @click="toggleInfoForm" v-show="!showInfoForm"/>
+
+        <!-- Cart Details Section -->
+        <div v-if="!showInfoForm">
           <p class="cart-title">Shopping Cart</p>
           <ul>
             <li v-for="item in candyItems" :key="item.name" class="item-container">
               <div :style="{ backgroundImage: 'url(' + item.imageUrl + ')' }" class="candy-image"></div>
-                <div class="item-info">
-                  {{ item.name }}
-                </div>
+              <div class="item-info">{{ item.name }}</div>
             </li>
             <div class="knot-info">
               <div :style="{ backgroundImage: 'url(' + knotInfo.imageUrl + ')' }" class="candy-image"></div>
               <p class="item-info">{{ knotInfo.text }}</p>
             </div>
           </ul>
+          <div v-if="nameText" class="name-overlay">
+            <p class="name-message-text">{{ props.nameText }}</p>
+          </div>
+          <div v-if="messageText" class="message-overlay">
+            <p class="name-message-text">{{ props.messageText }}</p>
+          </div>
         </div>
-        <div v-if="nameText" class="name-overlay">
-          <p class="name-message-text">{{ props.nameText }}</p>
-        </div>
-        <div v-if="messageText" class="message-overlay">
-          <p class="name-message-text">{{ props.messageText }}</p>
-        </div>
+      </div>
+      <InfoForm v-if="showInfoForm" @back="toggleInfoForm" />
     </div>
-    <InfoForm v-show="showInfoForm" @back="backToCart" />
   </div>
 </template>
 
@@ -107,9 +109,8 @@ watch(() => props.selectedCandies, (newVal) => {
   }
 });
 
-const backToCart = () => {
-  // Switch back to cart view
-  showInfoForm.value = false;
+const toggleInfoForm = () => {
+  showInfoForm.value = !showInfoForm.value;
 };
 
 const sendModal = () => {
