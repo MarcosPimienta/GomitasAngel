@@ -1,32 +1,29 @@
 <template>
   <div v-show="show && !isIncomplete" class="modal">
     <div class="modal-content">
-      <div class="overlay-content">
-        <button class="close-btn" @click="closeModal"/>
-        <button class="send-btn" @click="toggleInfoForm" v-show="!showInfoForm"/>
+      <div class="responsive-container">
+        <!-- Button Section -->
+        <div class="button-container">
+          <button class="close-btn" @click="closeModal"/>
+          <button class="send-btn" @click="toggleInfoForm" v-show="!showInfoForm && !showPaymentForm"/>
+          <button class="back-btn" @click="handleBack" v-show="showInfoForm || showPaymentForm"/>
+          <button class="pay-btn" @click="showPayment" v-show="showInfoForm && !showPaymentForm"/>
+        </div>
+        <div class="overlay-content">
+          <!-- Cart Details Section -->
+          <CartDetails v-if="!showInfoForm && !showPaymentForm"
+            :candyItems="candyItems"
+            :knotInfo="knotInfo"
+            :nameText="nameText"
+            :messageText="messageText"/>
 
-        <!-- Cart Details Section -->
-        <div v-if="!showInfoForm">
-          <p class="cart-title">Shopping Cart</p>
-          <ul>
-            <li v-for="item in candyItems" :key="item.name" class="item-container">
-              <div :style="{ backgroundImage: 'url(' + item.imageUrl + ')' }" class="candy-image"></div>
-              <div class="item-info">{{ item.name }}</div>
-            </li>
-            <div class="knot-info">
-              <div :style="{ backgroundImage: 'url(' + knotInfo.imageUrl + ')' }" class="candy-image"></div>
-              <p class="item-info">{{ knotInfo.text }}</p>
-            </div>
-          </ul>
-          <div v-if="nameText" class="name-overlay">
-            <p class="name-message-text">{{ props.nameText }}</p>
-          </div>
-          <div v-if="messageText" class="message-overlay">
-            <p class="name-message-text">{{ props.messageText }}</p>
-          </div>
+          <!-- Info Form Section -->
+          <InfoForm v-if="showInfoForm && !showPaymentForm" @back="toggleInfoForm" />
+
+          <!-- Payment Form Section -->
+          <PaymentForm v-if="showPaymentForm"/>
         </div>
       </div>
-      <InfoForm v-if="showInfoForm" @back="toggleInfoForm" />
     </div>
   </div>
 </template>
@@ -34,7 +31,9 @@
 <script setup lang="ts">
 import { computed, watch, ref } from 'vue';
 
+import CartDetails from './CartDetails.vue';
 import InfoForm from './InfoForm.vue';
+import PaymentForm from './PaymentForm.vue';
 
 interface SimpleCandy {
   id: number | string;
@@ -58,6 +57,7 @@ const props = defineProps({
 });
 
 const showInfoForm = ref(false);
+const showPaymentForm = ref(false);
 
 interface CandyItem {
   name: string;
@@ -113,18 +113,39 @@ const toggleInfoForm = () => {
   showInfoForm.value = !showInfoForm.value;
 };
 
+// Define emits
+const emit = defineEmits(['close', 'send', 'back', 'pay']);
+
+// Methods
+const resetStates = () => {
+  showInfoForm.value = false;
+  showPaymentForm.value = false;
+};
+
+const handleBack = () => {
+  if (showPaymentForm.value) {
+    showPaymentForm.value = false;
+    showInfoForm.value = true;
+  } else if (showInfoForm.value) {
+    resetStates();
+  }
+};
+
+const closeModal = () => {
+  resetStates();
+  // Emit 'close' event for parent component to handle
+  emit('close');
+};
+
+const showPayment = () => {
+  showInfoForm.value = false;
+  showPaymentForm.value = true;
+};
+
 const sendModal = () => {
   showInfoForm.value = true;
   emit('send');
 };
-
-// Define emits
-const emit = defineEmits(['close', 'send']);
-
-// Methods
-const closeModal = () => {
-  emit('close');
-}
 
 </script>
 

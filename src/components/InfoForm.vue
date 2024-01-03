@@ -42,10 +42,6 @@
 
     <!-- Add submit or action buttons here if needed -->
   </form>
-  <div>
-    <button class="back-btn" @click="back"/>
-    <button class="pay-btn" @click="back"/>
-  </div>
 </template>
 
 <script setup lang="ts">
