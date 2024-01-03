@@ -24,7 +24,7 @@
       </div>
     </div>
 
-    <button type="submit">Proceed to Pay</button>
+    <input type="button" class="submit-btn" value="Pay"/>
   </form>
 </template>
 
