@@ -1,0 +1,7 @@
+{
+        "vscode-corda.isCordaProject": false,
+        "workbench.editorAssociations": {
+                "*.ipynb": "jupyter-notebook",
+                "*.gltf": "default"
+        }
+}

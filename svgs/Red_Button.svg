@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="9.616mm" height="16.4mm" viewBox="0 0 27.259 46.489">
+  <defs>
+    <linearGradient id="8bed3f5d-f2b0-4828-8fbf-cba898fe9e2f" data-name="Degradado sin nombre 230" y1="23.244" x2="27.259" y2="23.244" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#c3382a"/>
+      <stop offset="0.155" stop-color="#c33a2d"/>
+      <stop offset="0.251" stop-color="#c44235"/>
+      <stop offset="0.33" stop-color="#c54e44"/>
+      <stop offset="0.401" stop-color="#c76058"/>
+      <stop offset="0.465" stop-color="#c97772"/>
+      <stop offset="0.5" stop-color="#ca8784"/>
+      <stop offset="0.516" stop-color="#c9817d"/>
+      <stop offset="0.597" stop-color="#c7675f"/>
+      <stop offset="0.682" stop-color="#c55248"/>
+      <stop offset="0.773" stop-color="#c44337"/>
+      <stop offset="0.873" stop-color="#c33b2d"/>
+      <stop offset="1" stop-color="#c3382a"/>
+    </linearGradient>
+  </defs>
+  <title>Red_Button</title>
+  <g id="401dde12-0ff7-407c-a16e-abaf95e7b352" data-name="Capa 2">
+    <g id="4be53d70-07c0-42c8-81ce-9f6a875ca730" data-name="Capa 3">
+      <path d="M26.125.255c1.308.584.433,10.137.545,20.829.123,11.688,1.191,24.022.109,24.069-2.071.09-10.247-3.374-12.209-3.329S1.707,47.987,1.707,46.142-1.127,1.2.508.7,24.817-.33,26.125.255Z" fill="url(#8bed3f5d-f2b0-4828-8fbf-cba898fe9e2f)"/>
+    </g>
+  </g>
+</svg>

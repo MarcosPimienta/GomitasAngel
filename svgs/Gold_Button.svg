@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="9.616mm" height="16.4mm" viewBox="0 0 27.259 46.489">
+  <defs>
+    <linearGradient id="94a2ee4e-6d74-4a9c-aa18-63ba76618428" data-name="Degradado sin nombre 219" y1="23.244" x2="27.259" y2="23.244" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#bb986c"/>
+      <stop offset="0.195" stop-color="#be9a6e"/>
+      <stop offset="0.315" stop-color="#c6a275"/>
+      <stop offset="0.415" stop-color="#d4af81"/>
+      <stop offset="0.5" stop-color="#e8c091"/>
+      <stop offset="0.579" stop-color="#d9b284"/>
+      <stop offset="0.699" stop-color="#c8a477"/>
+      <stop offset="0.831" stop-color="#be9b6f"/>
+      <stop offset="1" stop-color="#bb986c"/>
+    </linearGradient>
+  </defs>
+  <title>Gold_Button</title>
+  <g id="9f03e985-b376-403d-9aea-82335e0a3449" data-name="Capa 2">
+    <g id="f5a68265-aaee-4a39-aaa9-b3b2691cc1cd" data-name="Capa 3">
+      <path d="M26.125.255c1.308.584.433,10.137.545,20.829.123,11.688,1.191,24.022.109,24.069-2.071.09-10.247-3.374-12.209-3.329S1.707,47.987,1.707,46.142-1.127,1.2.508.7,24.817-.33,26.125.255Z" fill="url(#94a2ee4e-6d74-4a9c-aa18-63ba76618428)"/>
+    </g>
+  </g>
+</svg>
