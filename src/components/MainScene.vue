@@ -64,12 +64,12 @@ const nameText = ref('');  // Reactive property for the name text
 const messageText = ref('');  // Reactive property for the message text
 
 const allCandies = [
-  { id: 0, name:"ChocoMellows", imageUrl:"/svgs/Chocmellows.svg"},
-  { id: 1, name:"Cables", imageUrl:"/svgs/Cables.svg"},
-  { id: 2, name:"LifeSavers", imageUrl:"/svgs/LifeSavers.svg"},
-  { id: 3, name:"Ribbons", imageUrl:"/svgs/Ribbons.svg"},
-  { id: 4, name:"Strawberries", imageUrl:"/svgs/Strawberries.svg"},
-  { id: 5, name:"Worms", imageUrl:"/svgs/Worms.svg"},
+  { id: 0, name:"ChocoMellows", imageUrl:"/GomitasAngel/svgs/Chocmellows.svg"},
+  { id: 1, name:"Cables", imageUrl:"/GomitasAngel/svgs/Cables.svg"},
+  { id: 2, name:"LifeSavers", imageUrl:"/GomitasAngel/svgs/LifeSavers.svg"},
+  { id: 3, name:"Ribbons", imageUrl:"/GomitasAngel/svgs/Ribbons.svg"},
+  { id: 4, name:"Strawberries", imageUrl:"/GomitasAngel/svgs/Strawberries.svg"},
+  { id: 5, name:"Worms", imageUrl:"/GomitasAngel/svgs/Worms.svg"},
   // ... add other candies
 ];
 

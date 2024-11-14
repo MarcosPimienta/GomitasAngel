@@ -65,8 +65,8 @@ interface CandyItem {
 }
 
 const ribbonSvgPaths = {
-  Red: "/svgs/Red_Knot.svg",
-  Gold: "/svgs/Gold_Knot.svg",
+  Red: "/GomitasAngel/svgs/Red_Knot.svg",
+  Gold: "/GomitasAngel/svgs/Gold_Knot.svg",
 };
 
 const knotInfo = computed(() => {
