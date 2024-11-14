@@ -6,7 +6,7 @@
     "start:backend": "cd back_end && npm run dev",
     "dev": "concurrently \"npm run start:frontend\" \"npm run start:backend\"",
     "deploy": "gh-pages -d dist",
-    "build": "run-p type-check build-only",
+    "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview --port 4173",
     "build-only": "vite build",
     "type-check": "vue-tsc --noEmit"

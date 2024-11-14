@@ -2,7 +2,7 @@
 
 @font-face {
   font-family: 'Simplicity';
-  src: url('./fonts/Simplicity.ttf') format('truetype');
+  src: url('/fonts/Simplicity.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }

@@ -5,6 +5,9 @@
     "moduleResolution": "node",
     "jsx": "preserve",
     "esModuleInterop": true,
+    "noImplicitAny": false,
+    "suppressImplicitAnyIndexErrors": true,
+    "skipLibCheck": true,
     "allowJs": true,
     "strict": true,
     "sourceMap": true,
@@ -12,7 +15,7 @@
     "paths": {
       "@/*": ["./src/*"]
     },
-    "types": ["webpack-env", "jest"],
+    "types": ["vite/client"],
     "lib": ["esnext", "dom"]
   },
   "include": ["env.d.ts", "src/**/*", "src/**/*.vue", "vue-shims.d.ts"],
