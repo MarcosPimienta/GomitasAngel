@@ -76,10 +76,10 @@ const knotInfo = computed(() => {
                       ? props.selectedKnotColor
                       : "Default";
     let knotText = knotColor;
-    let imageUrl = ribbonSvgPaths[knotColor as keyof typeof ribbonSvgPaths] || '/svgs/default_knot.svg'; // Fallback image for "Default"
+    let imageUrl = ribbonSvgPaths[knotColor as keyof typeof ribbonSvgPaths] || '/GomitasAngel/svgs/default_knot.svg'; // Fallback image for "Default"
     return { text: knotText, imageUrl };
   } else {
-    return { text: 'No Knot', imageUrl: '/svgs/default_knot.svg' };
+    return { text: 'No Knot', imageUrl: '/GomitasAngel/svgs/default_knot.svg' };
   }
 });
 
@@ -89,7 +89,7 @@ const candyItems = computed<CandyItem[]>(() => {
     const candy = props.allCandies?.find(c => c.id === candyId);
     return {
       name: candy ? candy.name : "Unknown Candy",
-      imageUrl: candy ? candy.imageUrl : "/svgs/unknown.png"
+      imageUrl: candy ? candy.imageUrl : "/GomitasAngel/svgs/unknown.png"
     };
   });
 });
